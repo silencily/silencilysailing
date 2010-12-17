@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+  <form-beans>
+ 	<!--角色管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.role.web.RoleForm" type="net.silencily.sailing.basic.sm.role.web.RoleForm"/>
+	<!--用户选择-->
+	<form-bean name="net.silencily.sailing.basic.sm.selectinfo.web.SelectInfoForm" type="net.silencily.sailing.basic.sm.selectinfo.web.SelectInfoForm"/>
+	<!--人员查询-->
+	<form-bean name="net.silencily.sailing.basic.sm.search.web.SmSearchForm" type="net.silencily.sailing.basic.sm.search.web.SmSearchForm"/>
+	<!--委托管理	-->
+	<form-bean name="net.silencily.sailing.basic.sm.consignManager.web.ConsignManagerForm" type="net.silencily.sailing.basic.sm.consignManager.web.ConsignManagerForm"/>
+	<!--用户管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.user.web.UserManageForm" type="net.silencily.sailing.basic.sm.user.web.UserManageForm"/>
+	<!--系统日志管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.log.web.LogManageForm" type="net.silencily.sailing.basic.sm.log.web.LogManageForm"/>
+	<!--系统参数管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.perameter.web.ParameterManageForm" type="net.silencily.sailing.basic.sm.perameter.web.ParameterManageForm"/>
+	<!--权限管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.permission.web.PermissionForm" type="net.silencily.sailing.basic.sm.permission.web.PermissionForm"/> 
+	<!--数据权限管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.datapermission.web.DataPermissionForm" type="net.silencily.sailing.basic.sm.datapermission.web.DataPermissionForm"/>
+	<!--实体成员管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.datapermission.web.DataMemberForm" type="net.silencily.sailing.basic.sm.datapermission.web.DataMemberForm"/>  
+	<!--工作流管理-->
+	<form-bean name="net.silencily.sailing.basic.sm.workflow.web.WFManageForm" type="net.silencily.sailing.basic.sm.workflow.web.WFManageForm"/> 
+	<!--dept-->
+	<form-bean name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptForm" type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptForm"/>
+	<form-bean name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptStatusRecForm" type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptStatusRecForm"/>
+	<form-bean name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptPareRecForm" type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptPareRecForm"/>
+	
+	<form-bean name="net.silencily.sailing.basic.sm.ctview.web.CommonTableScreenForm" type="net.silencily.sailing.basic.sm.ctview.web.CommonTableScreenForm"/>
+	
+	<!--dept-->
+	<!--定制显示管理-->
+	<form-bean name="CommonTableViewForm" type="org.apache.struts.action.DynaActionForm">
+		<form-property name="id" type="java.lang.String" />
+		<form-property name="tableName" type="java.lang.String" />
+		<form-property name="rowName" type="java.lang.String" />
+		<form-property name="rowDisplayname" type="java.lang.String" />
+		<form-property name="orderby" type="java.lang.String" />
+		<form-property name="ctview" type="net.silencily.sailing.common.crud.domain.CommonTableView" />
+		<form-property name="popLink" type="java.lang.String" />
+		<form-property name="style" type="java.lang.String" />
+		<form-property name="remark" type="java.lang.String" />
+		<form-property name="rowNames" type="java.lang.String" />
+		<form-property name="oidv" type="java.lang.String" />
+	</form-bean>
+	<!--
+	<form-bean name="CommonTableScreenForm" type="org.apache.struts.action.DynaActionForm">
+		<form-property name="id" type="java.lang.String" />
+		<form-property name="screenName" type="java.lang.String" />
+		<form-property name="tableName" type="java.lang.String" />
+		<form-property name="ctscreen" type="net.silencily.sailing.common.crud.domain.CommonTableScreen" />
+		<form-property name="screenNames" type="java.lang.String" />
+		<form-property name="tableNames" type="java.lang.String" />
+		<form-property name="sortNum" type="java.lang.String" />
+		<form-property name="orderAsc" type="java.lang.String"/>
+		<form-property name="isDbField" type="java.lang.String"/>
+	</form-bean>
+	-->
+</form-beans>
+  <action-mappings>
+	  <!--角色管理-->
+	<action path="/sm/RoleAction"
+		name="net.silencily.sailing.basic.sm.role.web.RoleForm"
+		type="net.silencily.sailing.basic.sm.role.web.RoleAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<forward name="entry" path="/jsp/sm/role/roleEntry.jsp"/>
+		<forward name="directoryEntry" path="/jsp/sm/role/directoryEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/role/roleSearchLst.jsp"/>
+		<forward name="directoryList" path="/jsp/sm/role/directoryList.jsp"/>
+		<forward name="permissionShow" path="/jsp/sm/role/rolePermissionInfo.jsp"/>
+		<forward name="userShow" path="/jsp/sm/role/roleUser.jsp"/>
+		<forward name="detail" path="/jsp/sm/role/role_Menu_Edit.jsp"/>
+		<forward name="selectMenu" path="/jsp/sm/role/select_menu.jsp"/>
+		<forward name="userPermissionDetailed" path="/jsp/sm/role/rolePerDetailed.jsp"/>
+		<forward name="selectEntry" path="/jsp/sm/selectInfo/roleInfoEntry2.jsp"/>
+		<forward name="selectInfo" path="/jsp/sm/selectInfo/roleInfoListForSelect.jsp"/>
+		<forward name="selectInfoForMulu" path="/jsp/sm/selectInfo/selectInfoForMulu2.jsp"/>		
+		<forward name="roleOrgSearch" path="/jsp/sm/role/directoryList.jsp"/>
+		<forward name="selectRoleEntry" path="/jsp/sm/role/selectRoleEntry.jsp"/>
+		<forward name="selectRoleInfoList" path="/jsp/sm/role/roleInfoListForSelect.jsp"/>
+		<forward name="error" path="/jsp/sm/role/error.jsp"/>
+		<forward name="rolePerDetailed" path="/jsp/sm/role/rolePerDetailed.jsp"/>
+		<forward name="selectMultipleRoleEntry" path="/jsp/sm/selectInfo/selectMultipleRoleEntry.jsp"/>
+		<forward name="selectMultipleRoleList" path="/jsp/sm/selectInfo/multipleRoleListForSelect.jsp"/>
+	</action>
+	
+	<!--用户管理-->
+	  	<action path="/sm/userManageAction"
+		name="net.silencily.sailing.basic.sm.user.web.UserManageForm"
+		type="net.silencily.sailing.basic.sm.user.web.UserManageAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/user/userEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/user/userList.jsp"/>
+		<forward name="info" path="/jsp/sm/user/userInfo.jsp"/>
+		<forward name="dataPermission" path="/jsp/sm/user/dataPermission.jsp"/>
+		<forward name="role" path="/jsp/sm/user/userRole.jsp"/>
+		<forward name="msg" path="/jsp/sm/user/userMsg.jsp"/>
+		<forward name="dataPerDetailed" path="/jsp/sm/user/dataPerDetailed.jsp"/>
+		<forward name="achieveRolePermission" path="/jsp/sm/user/achieveRolePermission.jsp"/>
+		<forward name="achieveRoleUser" path="/jsp/sm/user/achieveRoleUser.jsp"/>
+		<forward name="selectInfo" path="/jsp/sm/user/selectInfo.jsp"/>
+		<forward name="rolePerUserEntry" path="/jsp/sm/user/rolePerUserEntry.jsp"/>
+		<forward name="selectInfoForConsign" path="/jsp/sm/user/selectInfoForConsign.jsp"/>
+		<forward name="password" path="/jsp/sm/user/passwordManage.jsp"/>
+		<forward name="selectUser" path="/jsp/sm/user/selectUserlist.jsp"/>
+		<forward name="selectCurUser" path="/jsp/sm/user/selectcurlist.jsp"/>
+		<forward name="selectDataEntry" path="/jsp/sm/selectInfo/selectDataEntry.jsp"/>
+		<forward name="selectDataInfo" path="/jsp/sm/selectInfo/selectDataInfo.jsp"/>		
+	</action>
+	
+	<!--权限管理	-->
+	  	<action path="/sm/permissionAction"
+  			name="net.silencily.sailing.basic.sm.permission.web.PermissionForm"
+  			type="net.silencily.sailing.basic.sm.permission.web.PermissionAction"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true">
+  		<forward name="entry" path="/jsp/sm/permission/permissionEntry.jsp"/>
+  		<forward name="list" path="/jsp/sm/permission/permissionLst.jsp"/>
+  		<forward name="edit" path="/jsp/sm/permission/permissionEdit.jsp"/>
+  		<forward name="selectMenu" path="/jsp/sm/permission/select_permission.jsp"/>
+		<forward name="selEntry" path="/jsp/sm/selectInfo/permissionInfoEntry.jsp"/>
+		<forward name="permissionInfo" path="/jsp/sm/selectInfo/permissionDetail.jsp"/>
+		<forward name="permissionRole" path="/jsp/sm/permission/permissionRole.jsp"/>
+		<forward name="permissionUser" path="/jsp/sm/permission/permissionUser.jsp"/>
+		<forward name="perAchieveRoleUser" path="/jsp/sm/permission/PerachieveRoleUser.jsp"/>
+		
+  	</action>
+	<!--委托管理	-->
+	  	<action path="/sm/ConsignManagerAction"
+  			name="net.silencily.sailing.basic.sm.consignManager.web.ConsignManagerForm"
+  			type="net.silencily.sailing.basic.sm.consignManager.web.ConsignManagerAction"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true">
+		<forward name="entry" path="/jsp/sm/consignManager/considerEntry.jsp"/>
+		<forward name="roleUpdate" path="/jsp/sm/consignManager/roleDetailed.jsp"/>	
+		<forward name="permissionUpdate" path="/jsp/sm/consignManager/permissionDetailed.jsp"/>
+		<forward name="list" path="/jsp/sm/consignManager/consignlist.jsp"/>
+		<forward name="consignPermissionList" path="/jsp/sm/consignManager/consignpermission.jsp"/>
+		<forward name="consignRoleList" path="/jsp/sm/consignManager/consignrole.jsp"/>
+  	</action>
+		<!--系统日志管理-->
+	  	<action path="/sm/logManageAction"
+		name="net.silencily.sailing.basic.sm.log.web.LogManageForm"
+		type="net.silencily.sailing.basic.sm.log.web.LogManageAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/log/logEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/log/logList.jsp"/>
+		<forward name="clear" path="/jsp/sm/log/logClear.jsp"/>
+	</action>  
+		<!--系统参数管理-->
+	  	<action path="/sm/parameterManageAction"
+		name="net.silencily.sailing.basic.sm.perameter.web.ParameterManageForm"
+		type="net.silencily.sailing.basic.sm.perameter.web.ParameterManageAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/parameter/parameterEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/parameter/parameterList.jsp"/>
+		<forward name="info" path="/jsp/sm/parameter/parameterInfo.jsp"/>
+	</action> 
+		<!--工作流管理-->
+	<action path="/sm/wfManageAction"
+		name="net.silencily.sailing.basic.sm.workflow.web.WFManageForm"
+		type="net.silencily.sailing.basic.sm.workflow.web.WFManageAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/workflow/workflowManageEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/workflow/workflowManageList.jsp"/>
+	</action>  
+	<!-- 定制显示管理 -->
+	<action path="/sm/ctview"
+		name="CommonTableViewForm"
+		type="com.qware.sm.ctview.web.CommonTableViewAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/ctview/commonTableViewEntry.jsp"/>
+		<forward name="list" path="/sm/ctview.do?step=list"/>
+		<forward name="main" path="/jsp/sm/ctview/commonTableViewList.jsp"/>
+		<forward name="info" path="/jsp/sm/ctview/commonTableViewInfo.jsp"/>
+	</action> 
+	<action path="/sm/ctscreen"
+		name="net.silencily.sailing.basic.sm.ctview.web.CommonTableScreenForm"
+		type="net.silencily.sailing.basic.sm.ctview.web.CommonTableScreenAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--step-->
+		<forward name="entry" path="/jsp/sm/ctview/commonTableScreenEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/ctview/commonTableScreenList.jsp"/>
+		<forward name="info" path="/jsp/sm/ctview/commonTableScreenInfo.jsp"/>
+	</action> 
+	 <!--dept-->
+	<action path="/sm/TblSmDeptAction"
+		name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptForm"
+		type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<forward name="entry" path="/jsp/sm/dept/deptEntry.jsp"/>
+		<forward name="list" path="/jsp/sm/dept/deptList.jsp"/>
+		<forward name="edit" path="/jsp/sm/dept/deptInfo.jsp"/>
+		<!--??????-->
+		<forward name="deptEdit" path="/jsp/sm/dept/deptEdit.jsp"/>
+		<forward name="info" path="/jsp/sm/dept/deptEdit.jsp"/>
+		<forward name="showDeptTree" path="/jsp/sm/dept/showDeptTree.jsp">
+			
+		</forward>
+		<!--?????-->
+		<forward name="selectAllRadio" path="/jsp/sm/dept/deptList.jsp"/>
+		<forward name="selectRadio" path="/jsp/sm/dept/deptList.jsp"/>
+		<forward name="error" path="/jsp/sm/dept/error.jsp"/>
+		<forward name="detail" path="/jsp/sm/dept/detail.jsp"/>
+	</action>
+	<!--?????????-->
+	<action path="/sm/TblSmDeptStatusRecAction"
+		name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptStatusRecForm"
+		type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptStatusRecAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????-->
+		<forward name="edit" path="/jsp/sm/dept/deptStatusInfo.jsp"/>
+		<forward name="error" path="/jsp/sm/dept/error.jsp"/>
+	</action>
+	<!--?????????-->
+	<action path="/sm/TblSmDeptPareRecAction"
+		name="net.silencily.sailing.basic.sm.dept.web.TblSmDeptPareRecForm"
+		type="net.silencily.sailing.basic.sm.dept.web.TblSmDeptPareRecAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????????-->
+		<forward name="save" path="/jsp/sm/dept/deptPareRecInfo.jsp"/>
+		<forward name="info" path="/jsp/sm/dept/deptPareRecInfo.jsp"/>
+		<forward name="error" path="/jsp/sm/dept/error.jsp"/>
+	</action>
+		<action path="/sm/SelectInfoAction"
+		name="net.silencily.sailing.basic.sm.selectinfo.web.SelectInfoForm"
+		type="net.silencily.sailing.basic.sm.selectinfo.web.SelectInfoAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????????-->
+		<forward name="selectEntry" path="/jsp/sm/selectInfo/selectEntry.jsp"/>
+		<forward name="selectInfo" path="/jsp/sm/selectInfo/selectInfo.jsp"/>
+
+	</action>
+		<action path="/sm/SmSearchAction"
+		name="net.silencily.sailing.basic.sm.search.web.SmSearchForm"
+		type="net.silencily.sailing.basic.sm.search.web.SmSearchAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????????-->
+		<forward name="selectEntry" path="/jsp/sm/selectInfo/selectEntry.jsp"/>
+		<forward name="selectInfo" path="/jsp/sm/selectInfo/selectInfo.jsp"/>
+	</action>
+		<action path="/sm/DataPermissionAction"
+		name="net.silencily.sailing.basic.sm.datapermission.web.DataPermissionForm"
+		type="net.silencily.sailing.basic.sm.datapermission.web.DataPermissionAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????????-->
+		<forward name="entry" path="/jsp/sm/dataPermission/dataEntry.jsp"/>
+		<forward name="info" path="/jsp/sm/dataPermission/dataInfo.jsp"/>
+		<forward name="list" path="/jsp/sm/dataPermission/dataList.jsp"/>
+	</action>	
+	<action path="/sm/DataMemberAction"
+		name="net.silencily.sailing.basic.sm.datapermission.web.DataMemberForm"
+		type="net.silencily.sailing.basic.sm.datapermission.web.DataMemberAction"
+		attribute="theForm" 
+		parameter="step" 
+		scope="request" 
+		validate="true">
+		<!--?????????-->
+		<forward name="entry" path="/jsp/sm/selectInfo/dataPermissionEntry.jsp"/>
+		<forward name="info" path="/jsp/sm/selectInfo/dataPermissionInfo.jsp"/>
+
+	</action>	
+	<!--dept-->
+  </action-mappings>
+</struts-config>

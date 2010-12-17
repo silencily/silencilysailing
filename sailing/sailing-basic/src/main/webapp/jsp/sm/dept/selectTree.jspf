@@ -1,0 +1,48 @@
+<%-- 
+  @version:$Id: selectTree.jspf,v 1.1 2010/12/10 10:56:43 silencily Exp $
+  @since:$Date: 2010/12/10 10:56:43 $          
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<script type="text/javascript">
+  var parentId = '';
+  function CodeTree.initTreeList0(arr) {
+    var obj = new this.Node(0, '<c:out value="${theForm.bean.id}"/>', '<c:out value="${theForm.bean.deptName}"/>', 0, '', '', '', '', ''); 
+    return obj;
+  }
+
+  var codeTree = new CodeTree.CodeTree('codeTree','<c:out value="${initParam['publicResourceServer']}"/>/image/tree/column/');
+
+	//设置树的显示位置
+  codeTree.dispPlace = 'span_menu';
+  codeTree.hostUrl   = '<c:url value="/sm/TblSmDeptAction.do?step=filterTree&parentCode="/>';
+  codeTree.getDataID = '<c:out value="${theForm.bean.id}"/>';
+  //设置树的类型（单选，多选，无）
+  codeTree.TreeType = '<c:out value="${theForm.treeType}"/>';
+  codeTree.Load(0);
+  
+  /*
+  alert(codeTree.returnList);
+  alert("returnList.length="+codeTree.returnList.length);
+  for(i=0;i<codeTree.returnList.length;i++){
+  	alert("选中节点的id="+codeTree.returnList[i].selfId);
+  	alert("选中节点的名称="+codeTree.returnList[i].nodeName);
+  }
+  */
+  
+  function CodeTree.getPageUrl(cid) {
+  //alert("cid="+cid);
+    var selectedId = this.TreeList[cid].selfId;
+    var imageType = this.TreeList[cid].imgType;
+    var pat = new RegExp('([\?\&])parentCode=[^\&]*');
+    for (i = 0; i < panel.dataArr.length; i++) {
+	    var url = panel.dataArr[i][2];
+	    if (pat.test(url)) {
+	    	//标签切换时把参数parentCode设置为当前选中的项selectedId
+		    panel.dataArr[i][2]=url.replace(pat, RegExp.$1 + "parentCode=" + selectedId);
+	    }
+    }
+    //使第一个面板选中
+    //panel.click(0);
+  }
+</script>
+

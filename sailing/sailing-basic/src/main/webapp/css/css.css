@@ -1,0 +1,232 @@
+body, p, td, input { font-size:12px; color: #000000 }
+body{background-image: url(../images/tablebg.gif);
+	 scrollbar-base-color:#D2D8F2;
+
+}
+INPUT {
+	BACKGROUND: #FFFFFF; BORDER: #666666 1px solid;COLOR: #CCCCCCC; FONT-FAMILY: Verdana, Geneva, Arial, Helvetica, sans-serif; behavior: url(../../js/inputcss.htc)}
+.head{
+	 border-style:solid;
+	 border-width:1 1 1 1;
+	 border-color:#FFFFFF #041585 #C3C3C3 #FFFFFF;
+	 background:#E7EBFE;
+	 height:30px;
+}
+.headFt{
+		padding:4 0 0 5;
+		text-align:left;
+        color:#04269F;
+	    font-weight:bold ;
+}
+.headSelect{
+		padding:4 10 0 5;
+		text-align:right;
+        color:#04269F;
+}
+
+.headCont{
+	 border-style:solid;
+	 border-width:0 1 0 0;
+	 border-color:#FFFFFF #041585 #C3C3C3 #FFFFFF;
+}
+.title{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #FFFFFF;
+     background:#D1D6F0;
+	 color:#333333;
+	 text-align:center;
+	 height:25px;
+}
+.titleLeft{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #ACADB2;
+     background:#D1D6F0;
+	 color:#333333;
+	 text-align:left;
+	 padding:5 0 0 10;
+	 height:25px;
+}
+.cellsContent{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #FFFFFF;
+	 color:#000000;
+}
+.cellsContentChild{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #D1D6F0 #D1D6F0 #FFFFFF;
+	 color:#000000;
+}
+.cellsContentLastChild{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #D1D6F0 #ACADB2 #FFFFFF;
+	 color:#000000;
+}
+.cellsContent1{
+	 border-style:solid;
+	 border-width:1;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #ACADB2;
+	 color:#000000;
+}
+.units{
+     background:#ECEEF8;
+	 color:#333333;
+	 text-align:right;
+}
+.units2{
+     background:#ECEEF8;
+	 color:#333333;
+	 text-align:center;
+}
+.unitslist{
+	 color:#333333;
+	 text-align:right;
+	 padding:2 6 0 0;
+}
+.unitsTitle{
+     background:#BDC6E7;
+	 color:#333333;
+	 text-align:left;
+	 padding:5 0 0 10;
+	 height:25px;
+}
+.showModeDialogTrail{
+ BACKGROUND: url(../images/Dialogbg1.gif); 
+ color:#FFFFFF;
+ text-align : right;
+ padding:2 15 0 15;
+ border-style:solid;
+ border-width:0 0 0 0;
+ border-color:#FFFFFF;
+}
+.showModeDialog{
+ color:#333333;
+ BACKGROUND: #F8F8F8;  
+ text-align : center;
+ padding:20 15 12 15;
+ border-style:solid;
+ border-width:1 0 0 0;
+ border-color: #666666 #465ACB #465ACB #465ACB;
+}
+.showModeDialog1{
+ color:#333333;
+ BACKGROUND: #F8F8F8;  
+ text-align : right;
+ padding:0 30 0 0;
+ border-style:solid;
+ border-width:0 0 0 0;
+ border-color: #666666 #465ACB #465ACB #465ACB;
+}
+
+.showModeDialogHead{
+ BACKGROUND: url(../images/infBanner.gif); 
+ background-repeat:no-repeat;
+ BACKGROUND-color:#465BCE; 
+ font-weight:bold;
+ color:#2C4C9D;
+ text-align : left;
+ padding:2 15 0 45;
+ border-style:solid;
+ border-width:0 0 2px 0;
+ border-color:#FFFFFF;
+ height:32px;
+}
+.showModeDialogTree{
+ BACKGROUND: #F5F9FF;
+ padding:2 15 0 15;
+ border:1px solid #D6E7FC;
+}
+.treeCell{
+	 border-style:solid;
+	 border-width:1 1 1 1;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #FFFFFF;
+	 color:#333333;
+}
+.treeTitle{
+	 border-style:solid;
+	 border-width:0 0 1 0;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #FFFFFF;
+     background:#D1D6F0;
+	 color:#333333;
+}
+.treeTitle1{
+	 border-style:solid;
+	 border-width:0 0 1 0;
+	 border-color:#FFFFFF #ACADB2 #ACADB2 #FFFFFF;
+     background:#D0D8EF;
+	 color:#333333;
+	 text-align : left;
+	 padding:0 0 0 10;
+	 height:24px;
+  }
+ #treeBox{
+	background-color:#EEF0FE;
+}
+#treeBox .ec{
+	margin:0 5 0 5;
+}
+#treeBox .hasItems{
+	height:20px;
+	padding:3 6 0 6;
+	margin:2px;
+	cursor:hand;
+	color:#555555;
+	border:1px solid #EEF0FE;
+}
+#treeBox .Items{
+	height:20px;
+	padding:3 6 0 6;
+	margin:2px;
+	cursor:hand;
+	color:#555555;
+	border:1px solid #EEF0FE;
+}
+
+.detailTitle {
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 12pt; 
+	COLOR: #0625aa
+}
+.detailDate {
+	font-family: "Tahoma";
+	font-size: 12px;
+	color: #2C4C9D;
+}
+.detailContent {
+	background-color: #FFFFFF;
+	border: 1px solid #BDC6E7;
+	display: block;
+	FONT-SIZE: 14px;
+	COLOR: #000000; 
+	TEXT-INDENT: 28px;
+	LINE-HEIGHT: 16pt
+}
+.detailAuthor {
+	font-size: 14px;
+	font-style: italic;
+	color: #2C4C9D;
+	text-align: right;
+}
+.detailAttach {
+	color: #999999;
+	text-decoration: none;
+	padding-left: 16px;
+
+}
+.detailAttach:hover {
+	color: #FF9900;
+	text-decoration: none;
+	padding-left: 16px;
+
+}
+
+.inputFocus {  
+	text-align: left
+}
+.inputBlur {  
+	text-align: right
+}

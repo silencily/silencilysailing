@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  
+  <cell id="1" name="开始" type="Step"  x="200" y="300"/> 
+  <cell id="2" name="专工审批" type="Step"  x="350" y="180"/> 
+  <cell id="3" name="采购部门领导" type="Step"  x="500" y="300"/> 
+  <cell id="4" name="财务领导" type="Step"  x="680" y="300"/>   
+  <cell id="99" name="结束" type="Step"  x="850" y="300"/>
+  <action startId="4" nextId="1" name="" type="action" points="710,340 710,400 225,400 225,340"/> 
+  <action startId="3" nextId="1" name="" type="action" points="480,315 275,315"/>
+</layout>

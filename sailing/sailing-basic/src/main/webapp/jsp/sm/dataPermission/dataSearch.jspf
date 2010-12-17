@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<%@ include file="/decorators/edit.jspf" %>
+
+<div class="update_subhead" >
+    <span class="switch_close" onClick="StyleControl.switchDiv(this, $('supplierQuery'))" title="点击这里进行查询">查询条件</span>
+</div>
+
+<div id="supplierQuery" style="display:none">
+	<table width="100%"  border="0" cellpadding="0" cellspacing="0" class="Detail" id="listtable" style="display:">
+		<tr>
+
+		<td class="attribute" id="data_search_name">名称</td>
+		<td>
+			<search:text name="name" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	<tr>
+
+		<td class="attribute" id="data_search_className">类名</td>
+		<td>
+			<search:text name="className" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+		<tr>
+
+		<td class="attribute" id="data_search_fatherModule">所属模块</td>
+		<td>
+			<search:text name="fatherModule" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	
+	    	</table>
+    <div class="query_button">
+    	<input name="" type="button" value="" id="opera_query"  title="点击查询"  onClick="CurrentPage.query()"/>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="net.silencily.sailing.common.domain.CommonModuleCodeName" table="common_code_name">
+		<id column="code" type="string">
+			<generator class="assigned"/>
+		</id>
+		<property name="name" column="name" type="string" length="4000" not-null="true"/>
+		<many-to-one name="parent" class="net.silencily.sailing.common.domain.CommonModuleCodeName" column="parent_code"/>
+		<property name="description" type="string" column="description" length="4000"/>
+		<property name="sequenceNo" column="sequence_no" type="integer"/>
+	</class>
+</hibernate-mapping>

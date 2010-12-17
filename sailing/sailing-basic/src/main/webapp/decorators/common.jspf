@@ -1,0 +1,30 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%--@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"--%>
+<%@ include file = "/decorators/tablibs.jsp" %>
+
+<%--
+	这里是公用的代码，可以独立被页面引用，但注意已经被list.jspf、edit.jspf引入。
+--%>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<title>页面</title>
+
+<%-- if have update please reflash the file --%>
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style_page.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style_buttom.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/print.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="print" />
+
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/global.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/alt.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/contextInfo.js" />"></script>
+<script type="text/javascript">
+ContextInfo.contextPath = '<c:out value="${initParam['publicResourceServer']}"/>'
+</script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/styleControl.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/prototype.js" />"></script>
+</head>

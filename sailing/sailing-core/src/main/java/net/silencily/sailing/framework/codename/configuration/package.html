@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<title>基于模块的AbstractModuleCodeName实现(仅提供了HIBERNATE实现)</title>
+</head>
+<body>
+<pre style="font:12pt;line-height:12pt">
+这个包是基于应用模块的AbstractModuleCodeName实现, 目的是把各个应用系统的代码, 配置统一地管理起来, 并提供一
+个通用的解决方案, 各个应用模块都可以有自己的代码, 这些代码体现在应用中实际属于一种配置, 就像
+缺陷级别, 专业等. 一些配置我们经常称为"代码", 比如"计量单位", "民族"等等, 但把这些代码归类
+为配置信息也不算牵强, 因为它们是随源程序一起发布的配置信息, 我们仍然可以把它们称作"代码", 这
+取决于你的习惯, 但对于程序来讲这没有什么区别. 更多地在这组API中可以定义用于应用程序的配置, 
+像电厂名称, 最初和应用必需的信息栏目等, 后面针对这个概念我们使用"配置", 在这里"配置"和"代码"
+具有相同的概念
+操作基于AbstractModuleCodeName, 任何应用模块在定义自己的配置时需要继承这个类
+在应用代码比如Service实现中的任何操作之前首先要获得一个ConfigurationService实例
+<blockquote>
+  ConfigurationService service = (ConfigurationService) ServiceProvider
+    .getService(ConfigurationService.MODULE_NAME)
+    .service("你的应用模块名");
+</blockquote>
+但是更经常是IOC的风格
+<blockquote>
+  &lt;bean ............&gt;
+    &lt;property name="configurationService"&gt;
+       &lt;bean class="com.coheg.framework.codename.configuration.ConfigurationServiceImpl" factory-method="service"&gt;
+          &lt;constructor-arg&gt;&lt;value&gt;equipment&lt;/value&gt;&lt;/constructor-arg&gt;
+       &lt;/bean&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+</blockquote>
+总是应该用<code>ConfigurationService.getConfiguration(String moduleName);</code>的风格
+去获得一个ConfigurationService实例, 因为我们不需要检索出整个应用的配置, 而是我们当前关心(你所
+开发维护的应用)的配置, 获得这个实例后就可以列出所有的, 或者某一个配置
+<blockquote>
+   ConfigurationService configuration = ConfigurationService.getConfiguration("模块名");
+   List codes = configuration.list();
+   或者是
+   CodeName codename = configuration.load("代码");
+   还有
+   Map codenames = configuration.map();
+</blockquote>
+在一个模块中通常配置也是分层的: 比如缺陷管理中:<code>flaw.management</code>和<code>flaw.examine</code>
+, 那么应该这样去获得缺陷考核的所有配置:
+<blockquote>
+   ConfigurationService service = (ConfigurationService) ServiceProvider
+      .getService(ConfigurationService.SERVICE_NAME);
+   ConfigurationService subservice = ConfigurationService.configure("flaw.examine");
+</blockquote>
+这个新的<code>subservice</code>保证了在这个服务上执行的所有操作, 像检索, 删除, 更新, 创建都
+在"flaw.examine"的基础上
+代码的维护由commons模块统一地提供界面和操作, 每个模块可以按照自己的需要任意地添加属性, 但是仅仅
+适用于有自己的数据库表, 我们也提倡各个应用模块使用自己的数据库表而不是所有的配置集中使用一个数据
+库表, 当然这取决于hibernate的table配置
+一项配置可以定义"可删除", "可修改", "只读"属性, 对于某些配置来说只读是必需的, 因为程序的正确运
+行需要这些配置项的正确存在, 而某些就是用户可维护的, 比如计量单位
+<code>ConfigurationService</code>的实现类实现了应用初始化接口, 在应用启动时首先检查模块的
+代码类, 也就是<code>AbstractModuleCodeName</code>的子类是否已经初始化, 过程是检查数据库中
+是否有这个代码类型的数据存在, 如果有至少一条就认为已经执行了初始化过程, 否则检索META-INF下的
+以全路径类名命名的<code>xml</code>文件, 注意有后缀名, 如果存在这样的文件就执行初始化工作, 否
+则就跳过初始化过程, 初始化中发生的异常不会抛出, 仅仅LOG
+</pre>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<%@ page import="net.silencily.sailing.context.WorkFlowFormContextCommon" %>
+<%@ page import="net.silencily.sailing.context.CreateAndSaveButtonCtrlCommon" %>
+<% 
+try{
+    if("1".equals(WorkFlowFormContextCommon.getTag())){
+    	out.println("<input type=\"hidden\" id = \"formInTheWorkFlow\" value=\"true\"/>");
+    }else{
+    	out.println("<input type=\"hidden\" id = \"formInTheWorkFlow\" value=\"false\"/>");
+    }
+	//提交按钮的禁用的条件,必须读取实体BEAN中的状态,但是目前实体BEAN的名称
+	//不统一,共通无法处理,提交由业务自己去控制	
+    if(CreateAndSaveButtonCtrlCommon.disableCreateButton()){
+    	out.println("<input type=\"hidden\" id = \"disableCreateButton\" value=\"true\"/>");
+    }else{
+    	out.println("<input type=\"hidden\" id = \"disableCreateButton\" value=\"false\"/>");
+    }
+    if(CreateAndSaveButtonCtrlCommon.disableSaveButton()){
+    	out.println("<input type=\"hidden\" id = \"disableSaveButton\" value=\"true\"/>");
+    }else{
+    	out.println("<input type=\"hidden\" id = \"disableSaveButton\" value=\"false\"/>");
+    }
+}catch(Exception e){
+	out.println("<!-- 共通按纽控制出错，或者当前不需要进行共通按纽的控制 -->");
+	out.println("<input type=\"hidden\" id = \"formInTheWorkFlow\" value=\"false\"/>");
+	out.println("<input type=\"hidden\" id = \"disableCreateButton\" value=\"false\"/>");
+	out.println("<input type=\"hidden\" id = \"disableSaveButton\" value=\"false\"/>");
+}
+
+
+%>

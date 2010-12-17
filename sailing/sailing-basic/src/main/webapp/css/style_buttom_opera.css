@@ -1,0 +1,101 @@
+/**顶部操作按钮*/
+.top_opera_menu input{
+	background-repeat:no-repeat;
+	background-color:transparent;
+	height:20px;
+    border:0px; 
+	cursor:pointer;
+}
+
+.top_opera_create{
+	width:45px;
+	background-image: url(../image/maximo/btn_insert.gif); 
+}
+.top_opera_create_disabled{
+	width:45px;
+	background-image: url(../image/maximo/btn_insert1.gif); 
+}
+.top_opera_save{
+	width:48px;
+	background-image: url(../image/maximo/btn_save.gif);
+}
+.top_opera_save_disabled{
+	width:48px;
+	background-image: url(../image/maximo/btn_save1.gif);
+}
+.top_opera_submit{
+	width:45px;
+	background-image: url(../image/maximo/btn_submit.gif);
+}
+.top_opera_submit_disabled{
+	width:45px;
+	background-image: url(../image/maximo/btn_submit1.gif);
+}
+.top_opera_reset{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_reset.gif);
+}
+.top_opera_reset_disabled{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_reset1.gif);
+}
+
+/** 新界面*/
+.top_opera_create_new{
+	width:25px;
+	background-image: url(../image/maximo/nav_icon_insert.gif); 
+}
+.top_opera_create_new_disabled{
+	width:25px;
+	background-image: url(../image/maximo/nav_icon_insert1.gif); 
+}
+.top_opera_save_new{
+	width:28px;
+	background-image: url(../image/maximo/nav_icon_save.gif);
+}
+.top_opera_save_new_disabled{
+	width:28px;
+	background-image: url(../image/maximo/nav_icon_save1.gif);
+}
+.top_opera_submit_new{
+	width:25px;
+	background-image: url(../image/maximo/nav_icon_changestatus.gif);
+}
+.top_opera_submit_new_disabled{
+	width:25px;
+	background-image: url(../image/maximo/nav_icon_changestatus1.gif);
+}
+
+
+.top_opera_prePage{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_pre_page.gif);
+}
+.top_opera_prePage_disabled{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_pre_page1.gif);
+}
+.top_opera_nextPage{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_next_page.gif);
+}
+.top_opera_nextPage_disabled{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_next_page1.gif);
+}
+.top_opera_preLine{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_pre_line.gif);
+}
+.top_opera_preLine_disabled{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_pre_line1.gif);
+}
+.top_opera_nextLine{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_next_line.gif);
+}
+.top_opera_nextLine_disabled{
+	width:20px;
+	background-image: url(../image/maximo/nav_icon_next_line1.gif);
+}

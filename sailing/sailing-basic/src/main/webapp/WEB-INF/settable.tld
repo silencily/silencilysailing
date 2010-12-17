@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+         "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>settable</short-name>
+  <uri>http://www.coheg.com.cn/taglib/settable</uri>
+  <description>
+    
+  </description>
+
+  <!-- ========== table Control Tag ======================================== -->
+
+  <tag>
+
+    <name>settable</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SetTableTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     
+    </description>
+
+    <attribute>
+      <name>all</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+	<attribute>
+      <name>select</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+	<attribute>
+      <name>isSel</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+    
+
+  </tag>
+
+</taglib>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2007-12-6 10:41:12 by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="net.silencily.sailing.basic.uf.domain.TblUfSchedule" table="TBL_UF_SCHEDULE" optimistic-lock="version" dynamic-insert="true" dynamic-update="true">
+        <id name="id" type="string">
+            <column name="ID" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <version name="version" column="version" unsaved-value="undefined"></version>
+        <property name="empCd" type="string">
+            <column name="EMP_CD" length="50" not-null="true" />
+        </property>
+        <property name="messageId" type="string">
+            <column name="MESSAGE_ID" length="32" />
+        </property>
+        <property name="begTime" type="java.util.Date">
+            <column name="BEG_TIME" length="7" />
+        </property>
+        <property name="endTime" type="java.util.Date">
+            <column name="END_TIME" length="7" />
+        </property>
+        <property name="title" type="string">
+            <column name="TITLE" length="20" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="CONTENT" length="200" />
+        </property>
+        <property name="alertTyp" type="net.silencily.sailing.hibernate3.CodeWrapperType">
+            <column name="ALERT_TYP" length="32" />
+        </property>
+        <property name="alertTime" type="string">
+            <column name="ALERT_TIME" length="2" />
+        </property>
+        <property name="reptAlert" type="string">
+            <column name="REPT_ALERT" length="2" />
+        </property>
+        <property name="completeFlg" type="net.silencily.sailing.hibernate3.CodeWrapperType">
+            <column name="COMPLETE_FLG" length="32" not-null="true" />
+        </property>
+        <property name="sequenceNo" type="java.lang.Integer">
+            <column name="SEQUENCE_NO" precision="10" scale="0" />
+        </property>
+        <property name="creator" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="CREATOR" length="32" />
+        </property>
+        <property name="creatorDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="CREATOR_DEPT" length="32" />
+        </property>
+        <property name="createdTime" type="java.util.Date">
+            <column name="CREATED_TIME" length="7" />
+        </property>
+        <property name="modifier" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="MODIFIER" length="32" />
+        </property>
+        <property name="modifierDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="MODIFIER_DEPT" length="32" />
+        </property>
+        <property name="modifiedTime" type="java.util.Date">
+            <column name="MODIFIED_TIME" length="7" />
+        </property>
+        <property name="deleter" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="DELETER" length="32" />
+        </property>
+        <property name="deleterDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="DELETER_DEPT" length="32" />
+        </property>
+        <property name="deletedTime" type="java.util.Date">
+            <column name="DELETED_TIME" length="7" />
+        </property>
+        <property name="delFlg" type="string">
+            <column name="DEL_FLG" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

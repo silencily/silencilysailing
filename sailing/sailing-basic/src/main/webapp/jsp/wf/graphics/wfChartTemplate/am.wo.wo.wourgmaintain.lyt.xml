@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="检修人员录入缺陷" type="Step"  x="200" y="350"/> 
+  <cell id="2" name="缺陷验收" type="Step"  x="400" y="350"/> 
+  <cell id="3" name="检修汇报" type="Step"  x="400" y="200"/> 
+  <cell id="99" name="结束" type="Step"  x="600" y="350"/> 
+  <action startId="2" nextId="1" name="" type="action" points="380,365 275,365"/> 
+</layout>

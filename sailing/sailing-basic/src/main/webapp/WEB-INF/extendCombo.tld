@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>ec</short-name>
+	<uri>http://www.coheg.com.cn/ec</uri>
+	<description>
+        Coheg Extend Combo Tag Library
+		Author : java2enterprise
+		$Id: extendCombo.tld,v 1.1 2010/12/10 10:56:13 silencily Exp $
+	</description>
+	
+	<!-- 
+		<ec:text textName = "foo" value = "" textId = "foo" source = "${sourceCollection}" textExtra = " onclick=CurrentPage.alert() "  />
+		<ec:composite valueName = "foovalue" value = "" valueId = "foovalueid" valueType= "hidden" textName = "foo" textId = "fooid"  source = "${comboSupportList}" validate = "true" textExtra = " " />
+	 -->
+	
+	<tag>
+		<name>text</name>
+		<tag-class>net.silencily.sailing.framework.web.view.taglibs.ExtendComboTextTag</tag-class>
+		<description>
+			只包含文本域的扩展下拉框支持
+		</description>
+			
+		<attribute>
+			<name>textName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域的名称
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域的值
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>buttonName</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>
+				控制按钮的名称
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>source</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				下拉框的数据来源, 允许任何 Java 类型
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>textReadonly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域是否只读, 默认为 false
+			</description>
+		</attribute>
+				
+		<attribute>
+			<name>textExtra</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域的附加属性, 可以是一段 html 代码 或 JavaScript 代码
+			</description>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<name>composite</name>
+		<tag-class>net.silencily.sailing.framework.web.view.taglibs.ExtendComboCompositeTag</tag-class>
+		<description>
+			包含文本域和值域的扩展下拉框支持
+		</description>
+			
+		<attribute>
+			<name>textName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域的名称
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[
+					值域的值, 注意 : 为了与原来的下拉框保持兼容性, 下拉框的值将优先由 {@link ComboSupportList#getSelectedValues()} 中获取,
+					如果 {@link ComboSupportList#getSelectedValues()} 不为空, 此处的设置将失效, 改为取 {@link ComboSupportList#getSelectedValues()} 中的最后一个元素
+				]]>
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>valueName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				值域的名称
+			</description>
+		</attribute>		
+		
+		<attribute>
+			<name>valueType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				值域的类型, 不设置时的默认值为 hidden
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>buttonName</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>
+				控制按钮的名称
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>validate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				是否验证, 如果为 true, 当指定的 value 不存在于 source List 中时, value 将被置空, 默认为 true
+			</description>
+		</attribute>
+						
+		<attribute>
+			<name>source</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				下拉框的数据来源, 只允许 com.coheg.web.view.ComboSupportList 类型
+			</description>
+		</attribute>
+				
+		<attribute>
+			<name>textExtra</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				文本域的附加属性, 可以是一段 html 代码 或 JavaScript 代码
+			</description>
+		</attribute>
+	</tag>
+
+</taglib>

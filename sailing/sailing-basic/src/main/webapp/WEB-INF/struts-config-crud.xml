@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+  <form-beans>
+    <form-bean name="net.silencily.sailing.common.crud.web.CurdForm" type="net.silencily.sailing.common.crud.web.CurdForm"/>
+  </form-beans>
+  
+  <action-mappings>
+  	
+  <action    path="/curd/curdAction"
+               type="net.silencily.sailing.common.crud.web.CurdAction"
+               name="net.silencily.sailing.common.crud.web.CurdForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+        <forward name="entry" path="/jsp/curd/curdEntry.jsp" />       
+        <forward name="list" path="/jsp/curd/curdList.jsp" />
+        <forward name="info" path="/jsp/curd/curdInfo.jsp" />
+        <forward name="setView" path="/jsp/curd/setView.jsp" />
+    </action>
+  	
+  </action-mappings>
+</struts-config>

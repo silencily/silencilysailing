@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE workflow PUBLIC "-//OpenSymphony Group//DTD OSWorkflow 2.6//EN" "http://www.opensymphony.com/osworkflow/workflow_2_8.dtd">
+
+<workflow>
+  <initial-actions>
+    <action id="888888" name="进入工作流">
+      <pre-functions>
+        <function type="class">
+          <arg name="class.name">com.opensymphony.workflow.util.Caller</arg>
+        </function>
+      </pre-functions>
+      <results>
+        <unconditional-result old-status="finish" status="processing" step="1" owner="${caller}" />
+      </results>
+    </action>
+  </initial-actions>
+  <global-actions>
+    <action id="666666" name="取消本流程">
+      <restrict-to>
+        <conditions type="AND">
+          <condition type="class">
+            <arg name="class.name">net.silencily.sailing.basic.wf.condition.AvailableStepsCondition</arg>
+            <arg name="availableSteps">2,</arg>
+          </condition>
+          <condition type="class">
+            <arg name="class.name">net.silencily.sailing.basic.wf.condition.IsPointedEmpsCondition</arg>
+            <arg name="pointed.emp">systemRole,</arg>
+          </condition>
+        </conditions>
+      </restrict-to>
+      <results>
+        <unconditional-result old-status="finish" status="killed" step="99" />
+      </results>
+    </action>
+  </global-actions>
+  <steps>
+    <step id="1" name="开始，验收申请">
+      <external-permissions>
+        <permission name="开始，验收申请步骤权限">
+          <restrict-to>
+            <conditions>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.RoleCdCondition</arg>
+                <arg name="role.code">ZC.xmysy,</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+        </permission>
+      </external-permissions>
+      <actions>
+        <action name="提交到验收班长签字审批" id="10">
+          <restrict-to>
+            <conditions>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.StatusCondition</arg>
+                <arg name="status">retake,untread,processing</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+          <pre-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PreTaskFunction</arg>
+            </function>
+          </pre-functions>
+          <results>
+            <unconditional-result old-status="finish" status="processing" step="2" />
+          </results>
+          <post-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PostTaskFunction</arg>
+            </function>
+          </post-functions>
+        </action>
+      </actions>
+    </step>
+    <step id="2" name="验收班长签字">
+      <external-permissions>
+        <permission name="验收班长签字步骤权限">
+          <restrict-to>
+            <conditions>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.RoleCdCondition</arg>
+                <arg name="role.code">ZC.ysbz,ZC.xmysy,</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+        </permission>
+      </external-permissions>
+      <actions>
+        <action name="提交后结束流程" id="20">
+          <restrict-to>
+            <conditions type="AND">
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.StatusCondition</arg>
+                <arg name="status">retake,untread,processing</arg>
+              </condition>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.RoleCdCondition</arg>
+                <arg name="role.code">ZC.ysbz,</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+          <pre-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PreTaskFunction</arg>
+            </function>
+          </pre-functions>
+          <results>
+            <unconditional-result old-status="finish" status="processing" step="99" />
+          </results>
+          <post-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PostTaskFunction</arg>
+            </function>
+          </post-functions>
+        </action>
+        <action name="退回" id="21">
+          <restrict-to>
+            <conditions type="AND">
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.StatusCondition</arg>
+                <arg name="status">retake,untread,processing</arg>
+              </condition>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.RoleCdCondition</arg>
+                <arg name="role.code">ZC.ysbz,</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+          <pre-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PreTaskFunction</arg>
+            </function>
+          </pre-functions>
+          <results>
+            <unconditional-result old-status="finish" status="untread" step="1" />
+          </results>
+          <post-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PostTaskFunction</arg>
+              <arg name="untread">true</arg>
+            </function>
+          </post-functions>
+        </action>
+        <action name="开始，验收申请取回" id="22">
+          <restrict-to>
+            <conditions type="AND">
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.RoleCdCondition</arg>
+                <arg name="role.code">ZC.xmysy,</arg>
+              </condition>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.StatusCondition</arg>
+                <arg name="status">processing</arg>
+              </condition>
+              <condition type="class">
+                <arg name="class.name">net.silencily.sailing.basic.wf.condition.IsCanbeRetakeCondition</arg>
+              </condition>
+            </conditions>
+          </restrict-to>
+          <pre-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.PreTaskFunction</arg>
+            </function>
+          </pre-functions>
+          <results>
+            <unconditional-result old-status="finish" status="retake" step="1" />
+          </results>
+          <post-functions>
+            <function type="class">
+              <arg name="class.name">net.silencily.sailing.basic.wf.function.RetakePostTaskFunction</arg>
+            </function>
+          </post-functions>
+        </action>
+      </actions>
+    </step>
+    <step id="99" name="结束">
+      <actions>
+        <action name="结束" id="999999" finish="TRUE" auto="TRUE">
+          <results>
+            <unconditional-result old-status="finish" status="finish" />
+          </results>
+        </action>
+      </actions>
+    </step>
+  </steps>
+</workflow>
+

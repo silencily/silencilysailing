@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_role" name="net.silencily.sailing.security.entity.Role">
+    <id length="32" unsaved-value="null" name="id">
+      <generator class="uuid.hex"/>
+    </id>
+    <version unsaved-value="null" name="version"/>
+    <property name="name" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+    <property name="description" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+    <property name="level" column="role_level"/>
+    <property name="systemRole"/>
+    <many-to-one column="application_id" name="application"/>
+    <set table="security_permission" lazy="true" inverse="false" cascade="all" order-by="id" name="permissions">
+      <key column="role_id"/>
+      <one-to-many class="net.silencily.sailing.security.entity.Permission"/>
+    </set>
+    <set table="security_user_role" lazy="true" inverse="false" cascade="none" name="users">
+      <key column="role_id"/>
+      <many-to-many column="user_id" class="net.silencily.sailing.security.entity.User"/>
+    </set>
+  </class>
+</hibernate-mapping>

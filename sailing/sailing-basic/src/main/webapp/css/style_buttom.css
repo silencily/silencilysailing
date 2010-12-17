@@ -1,0 +1,650 @@
+
+/* 公用按钮 css 
+input.click{
+	border-right:1px solid #aaa;
+	border-bottom:1px solid #aaa;
+	background-color:#eee;
+}
+input.blur{
+	border:1px solid #eee;
+}
+*/
+
+
+
+/* 按钮普通状态 */
+.btns{
+	background: transparent url(../image/common/opera_normal.gif) no-repeat top left;
+	height:22px;
+	cursor:pointer;
+	background-color:#FFFFFF;
+	border:1px solid #D0EEFF;
+	width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*13:this.value.length*13+30  );
+	line-height: 18px;
+	color: #003366;
+}
+
+
+input {
+	background: transparent;
+	color: #000;
+}
+
+
+/* 日期按钮 */
+#input_date,.input_date{
+   border:0px;
+   cursor:pointer;
+   width:17px;
+   height:19px;
+   background-image:url(../image/date_bg.gif) !important;
+   background-repeat:no-repeat; 
+   background-color:transparent;
+}
+/* 普通可输入可选择控件 */
+#input_select,.input_select{
+   border:0px;
+   cursor:pointer;
+   width:17px;
+   height:19px;
+   background-image:url(../image/select_bg.gif) !important;
+   background-repeat:no-repeat; 
+   background-color:transparent;
+}
+
+/*控件输入框*/
+#input_text,.input_text{
+
+   width:110px;
+   border:1px solid #A2BEE6;
+   border-right:0px;
+}
+.input_long{
+	width:83%;
+	/** white-space:nowrap; */
+	font:12px verdana;
+	overflow:hidden;
+}
+
+/** 操作按钮的css */
+
+.opera_export{
+	background-image: url(../image/skin/0/opera_export.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:18px;
+	cursor:pointer;
+	border:1px solid #D0EEFF;
+	line-height:18px;
+}
+
+
+/*样式有些缺，我先加一些样式进去 by f*/
+.opera_display{
+	background-image: url(../image/common/opera_normal.gif);
+	background-color:#ffffff;
+		width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*13:(this.value.length>4?this.value.length*13+10:60)  );
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:18px;
+	line-height:18px;
+}
+/*查看附件按钮*/
+.look_file{
+	background-image: url(../image/common/look_file.gif);
+	background-color:#ffffff;
+	width:42px;
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:21px;
+}
+/*打印*/
+.print_data{
+	background-image: url(../image/common/print_data.gif);
+	background-color:#ffffff;
+	width:70px;
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:22px;
+}
+/*打印预览*/
+.print_view{
+	background-image: url(../image/common/print_view.gif);
+	background-color:#ffffff;
+	width:70px;
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:22px;
+}
+
+.opera_asc{
+	background-image: url(../image/common/opera_normal.gif);
+	background-color:#ffffff;
+	width:60px;
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:22px;
+
+}
+
+
+
+.opera_batchdelete{
+	background-image: url(../image/common/opera_normal.gif);
+	background-color:#ffffff;
+	width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*13:this.value.length*13+10  );
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:18px;
+	line-height:18px;
+}
+
+
+
+#opera_save,.opera_save{
+	background-image: url(../image/skin/0/opera_save.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+.opera_save1{
+	background-image: url(../image/skin/0/opera_save1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_approve{
+	background-image: url(../image/skin/0/opera_approve.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+.opera_approve1{
+	background-image: url(../image/skin/0/opera_approve1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+#opera_create,.opera_create{
+	background-image: url(../image/skin/0/opera_create.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+.opera_create1{
+	background-image: url(../image/skin/0/opera_create1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_pre{
+	background-image: url(../image/skin/0/opera_pre.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_pre1{
+	background-image: url(../image/skin/0/opera_pre1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_next{
+	background-image: url(../image/skin/0/opera_next.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_next1{
+	background-image: url(../image/skin/0/opera_next1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+#opera_query,.opera_query{
+	background-image: url(../image/skin/0/opera_query.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:20px;
+	cursor:pointer;
+		border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.opera_query1{
+	background-image: url(../image/skin/0/opera_query1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	cursor:pointer;
+}
+#opera_delete,.opera_delete{
+	background-image: url(../image/skin/0/opera_delete.gif);
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	cursor:pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.opera_delete1{
+	background-image: url(../image/skin/0/opera_delete1.gif);
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+	cursor:pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.opera_print,#opera_print{
+	background-image: url(../image/skin/0/opera_print.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_print1{
+	background-image: url(../image/skin/0/opera_print1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_select{
+	background-image: url(../image/skin/0/opera_select.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_default{
+	background-image: url(../image/skin/0/opera_def.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_default1{
+	background-image: url(../image/skin/0/opera_def1.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+#opera_submit,.opera_submit{
+	background-image: url(../image/skin/0/opera_submit.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+#opera_reset,.opera_reset{
+	background-image: url(../image/skin/0/opera_reset.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+
+
+#opera_delete_file,.opera_delete_file{
+	background-image: url(../image/common/oa_delete.gif); 
+	background-repeat:no-repeat;
+	background-color:#ffffff;
+	width:20px;
+	height:22px;
+	margin-top:2px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+
+/*关闭*/
+.opera_cancel{
+	background-image: url(../image/skin/0/opera_cancel.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF; 
+	cursor:pointer;
+}
+.opera_confirm{
+	background-image: url(../image/skin/0/opera_confirm.gif); 
+	background-color:#ffffff;
+	width:60px;
+	height:22px;
+    border:1px solid #D0EEFF;
+	cursor:pointer;
+}
+
+#select_fromtree,.select_fromtree{
+	background-image: url(../image/tree/tree.png); 
+	background-repeat:no-repeat;
+	width:20px;
+	height:18px;
+    border:0px; 
+	cursor:pointer;
+	background-color:transparent;	
+}
+/* 大文本编辑器 */
+#edit_longText,.edit_longText{
+	background-image: url(../image/common/edit_longtext.gif); 
+	width:20px;
+	height:22px;
+    border:0px #D0EEFF; 
+	cursor:pointer;
+	background-color:transparent;	
+}
+#edit_query,.edit_query{
+	background-image: url(../image/common/edit_query.gif); 
+	width:20px;
+	height:18px;
+    border:0px #D0EEFF; 
+	cursor:pointer;
+	background-color:transparent;	
+}
+
+
+
+/**列表上操作按钮*/
+/*查看详细*/
+.list_detail{
+	background-image: url(../image/common/edit_query.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:18px;
+	cursor:pointer;
+	background-color:transparent;
+	border:1px solid #D0EEFF;
+}
+/*编辑操作*/
+.list_update{
+	background-image: url(../image/common/oa_update.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+	border:1px solid #D0EEFF;
+}
+/*删除操作*/
+.list_delete{
+	background-image: url(../image/common/oa_delete.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+	border:1px solid #D0EEFF;
+}
+/*新增操作*/
+.list_create{
+	background-image: url(../image/common/opera_new.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+/*拷贝操作*/
+.list_copy{
+	background-image: url(../image/common/opera_copy.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+	border:1px solid #D0EEFF;
+}
+/*恢复操作*/
+.list_renew{
+	background-image: url(../image/common/opera_renew.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+	border:1px solid #D0EEFF;
+}
+
+/*特殊操作按钮*/
+.export_excel{
+	background-image: url(../image/main/export_excel_self.gif); 
+	width:72px;
+	height:22px;
+    border:1px solid #fff; 
+	cursor:pointer;
+	background-color:#FFFFFF;
+	border:1px solid #D0EEFF;
+}
+.export_excel_all{
+	background-image: url(../image/main/export_excel_all.gif);
+	width:72px;
+	height:22px;
+	border:1px solid #D0EEFF;
+	cursor:pointer;
+	background-color:#FFFFFF;
+}
+.query_extend{
+	background-image: url(../image/main/query_extend.gif); 
+	width:72px;
+	height:22px;
+    border:1px solid #fff;  
+	cursor:pointer;
+	background-color:#FFFFFF;	
+}
+
+/**有按钮效果 #F0C000 #666666*/
+#opera_normal,.opera_normal{
+	background: transparent url(../image/common/opera_normal.gif) no-repeat top left;
+	height:22px;
+    border:1px solid #fff; 
+	cursor:pointer;
+	background-color:#FFFFFF;
+	border:1px solid #D0EEFF;
+	width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*13:this.value.length*13+30  );
+}
+/**无按钮效果*/
+#opera_blank,.opera_blank{
+	background-image: url(../image/opera_normal.gif);
+	border:1px solid #D0EEFF;
+	height:18px;
+	color:#000000;
+	width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*10:this.value.length*10+18  );
+	cursor:pointer;
+
+}
+
+.more_out{
+	background-image: url(../image/common/more_out.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	background-color:transparent;
+}
+.opera_clear,#opera_clear{
+	background-image: url(../image/common/opera_clear.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:18px;
+	cursor:pointer;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#opera_paste,.opera_paste{
+	background-image: url(../image/common/opera_copy.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+	border:0px;
+}
+#opera_self,.opera_self{
+	background-image: url(../image/main/top_user.gif);
+	background-repeat:no-repeat;
+	width:20px;
+	height:22px;
+	cursor:pointer;
+    border:1px solid #D0EEFF; 
+	background-color:transparent;
+}
+
+
+/**去掉radio和checkbox的边框*/
+
+.nobd{
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+
+/**签字*/
+#signature_query,.signature_query
+{
+	cursor:pointer;
+	width:19px;
+	height:20px;
+	background-image:url(../image/signature_query.gif) !important;
+	background-repeat:no-repeat;
+	background-color:transparent;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+/** 特殊按钮*/
+.mybutton {
+
+	background-image: url(../image/common/opera_normal.gif);
+	background-color:#ffffff;
+	width:expression( ((/^[a-z0-9.]*$/gi).test(this.value))?this.value.length*13:this.value.length*13+30  );
+	cursor:pointer;
+	border:1px solid #D0EEFF;	
+	height:18px;
+	line-height:18px;
+
+}
+/** 原因按钮图片 */
+#reason_bg,.reason_bg
+{
+	background-image: url(../image/common/reason_bg.gif);
+	width: 18px;
+	height: 17px;
+	border:0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #d0eeff;
+	border-right-color: #d0eeff;
+	border-bottom-color: #d0eeff;
+	border-left-color: #d0eeff;
+	cursor: pointer;
+	background-color: transparent;
+}
+/** 原因文本框颜色 */
+#reason_text,.reason_text{
+
+   width:110px;
+   border:1px solid #A2BEE6;
+   border-right:0px;
+   background-color:#D0F5FF
+}
+
+/** 原因文本框颜色 */
+#reason_input,.reason_input{
+
+   width:130px;
+   border:1px solid #A2BEE6;
+   border-right:0px;
+   background-color:#D0F5FF
+}
+
+/** 物资执行情况 */
+#btn_material_exec, .btn_material_exec
+{
+	background-image: url(../image/common/btn_material_exec.gif);
+	width: 20px;
+	height: 22px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #d0eeff;
+	border-right-color: #d0eeff;
+	border-bottom-color: #d0eeff;
+	border-left-color: #d0eeff;
+	cursor: pointer;
+	background-color: transparent;
+}
+/** 关联需用计划 */
+#btn_relate_required, .btn_relate_required
+{
+	background-image: url(../image/common/btn_relate_required.gif);
+	width: 20px;
+	height: 22px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #d0eeff;
+	border-right-color: #d0eeff;
+	border-bottom-color: #d0eeff;
+	border-left-color: #d0eeff;
+	cursor: pointer;
+	background-color: transparent;
+}

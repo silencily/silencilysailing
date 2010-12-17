@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "../spring-beans.dtd" >
+<beans>
+	<bean class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="uf"/>
+		<property name="description" value="一体化框架"/>
+	</bean>
+	<!-- Desktop Display -->
+	<bean id="uf.columndisplayservice"
+		class="net.silencily.sailing.basic.uf.columndisplay.service.impl.TblColumnDisplayServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- Desktop Order -->
+	<bean id="uf.columnorderservice"
+		class="net.silencily.sailing.basic.uf.columnorder.service.impl.TblColumnOrderServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- Column Manage -->
+	<bean id="uf.ColumnManageService"
+		class="net.silencily.sailing.basic.uf.column.service.impl.ColumnManageServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- News Publish -->
+	<bean id="uf.NewsPublishService"
+		class="net.silencily.sailing.basic.uf.news.service.impl.NewsPublishServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- UF function tree begin add by Huxf-->
+	<bean id="uf.displayFunTree"
+		class="net.silencily.sailing.basic.uf.funtree.service.impl.DisplayFunTreeServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- UF function tree end by Huxf -->
+	
+	<!-- my  Schedule ,add by zhangwenqi-->
+	<bean id="uf.ScheduleService"
+		class="net.silencily.sailing.basic.uf.schedule.service.impl.ScheduleServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- UF single sign-on begin add by Tongjq -->
+	<bean id="uf.SingleSignOnService"
+		class="net.silencily.sailing.basic.uf.sso.service.impl.SingleSignOnServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- UF single sign-on begin add by Tongjq -->
+
+	<!-- UF IM begin add by Tongjq -->
+	<bean id="uf.IMService"
+		class="net.silencily.sailing.basic.uf.im.service.impl.IMServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0" value="common.hibernateTemplate"/>
+			</bean>
+		</property>
+	</bean>
+	<!-- UF IM begin add by Tongjq -->
+	
+</beans>

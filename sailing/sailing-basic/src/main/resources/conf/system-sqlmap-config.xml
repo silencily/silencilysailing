@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <typeHandler javaType="boolean" callback="com.coheg.persistent.ibatis.BooleanTypeHandlerCallback"/>
+    <typeHandler javaType="com.coheg.persistent.hibernate3.entity.UserWrapper" callback="com.coheg.persistent.ibatis.UserWrapperTypeHandlerCallback"/>
+    <typeHandler javaType="com.coheg.persistent.hibernate3.entity.CodeWrapper" callback="com.coheg.persistent.ibatis.CodeWrapperTypeHandlerCallback"/>
+    <!-- 
+    <typeHandler javaType="string"  callback="com.coheg.persistent.ibatis.MysqlStringTypeHandlerCallback"/>
+    -->
+    
+    <sqlMap resource="conf/framework-sqlmap-foo.xml"/>
+</sqlMapConfig>
+
+

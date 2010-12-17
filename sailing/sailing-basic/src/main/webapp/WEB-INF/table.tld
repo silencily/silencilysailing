@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+         "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>table</short-name>
+  <uri>http://www.coheg.com.cn/taglib/table</uri>
+  <description>
+    
+  </description>
+
+  <!-- ========== table Control Tag ======================================== -->
+
+  <tag>
+
+    <name>table</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.TableTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+      查询出的数据列表显示标签
+      支持个性化定制显示
+    </description>
+
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        request中的显示bean的名称
+      </description>
+    </attribute>
+    <attribute>
+      <name>del</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        是否需要删除图标,默认有。true->有，false->没有
+      </description>
+    </attribute>
+    <attribute>
+      <name>box</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        每列前面显示的box，check->checkbox radio->radiobox nobox->nobox null->checkbox
+      </description>
+    </attribute>
+      <attribute>
+      <name>formName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        form的el表达式
+      </description>
+    </attribute>
+	</tag>
+	 <tag>
+
+    <name>settable</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SetTableTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     
+    </description>
+
+    <attribute>
+      <name>all</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+	<attribute>
+      <name>select</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+	<attribute>
+      <name>isSel</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        
+      </description>
+    </attribute>
+  
+
+  </tag>
+	<tag>
+
+    <name>popSelect</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.PopSelectTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+    弹出选择画面的标签，自动判断是否是弹出画面
+    </description>
+
+    <attribute>
+      <name>formName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        form的el表达式
+      </description>
+    </attribute>
+   
+  </tag>
+
+</taglib>

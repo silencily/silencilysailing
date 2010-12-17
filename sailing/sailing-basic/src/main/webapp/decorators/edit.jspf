@@ -1,0 +1,37 @@
+
+<%--@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"--%>
+
+<%@ include file = "/decorators/common.jspf" %>
+
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/prototype.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/contextInfo.js" />"></script>
+<script type="text/javascript">
+ContextInfo.contextPath = '<c:out value="${initParam['publicResourceServer']}"/>'
+</script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/xmlhttp.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/formUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/dateUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/dateComponent.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/styleControl.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/staticTree.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/global.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/treeUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/validator.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/tableSort.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/alt.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/panel.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/print.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/editPage.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/extendCombo.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/definedWin.js" />"></script>
+
+
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/search.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/common.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/msgInfo.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/showMsg.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/form.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/univerify.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/choiceTbl.js" />"></script>
+<!-- TODO 暂时使用, 以后再重构 -->
+<%@ include file = "/decorators/messages.jsp" %>

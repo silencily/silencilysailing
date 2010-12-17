@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="工作负责人开票" type="Step"  x="100" y="100"/> 
+  <cell id="2" name="厂级负责人审核" type="Step"  x="250" y="100"/> 
+  <cell id="3" name="安全监察部门负责人审核" type="Step"  x="400" y="100"/> 
+  <cell id="4" name="签发人签发" type="Step"  x="550" y="100"/>  
+  <cell id="5" name="值长接票" type="Step"  x="700" y="100"/> 
+  <cell id="6" name="工作许可人补充安全措施" type="Step"  x="850" y="100"/> 
+  <cell id="7" name="动火工作负责人签字" type="Step"  x="1000" y="100"/> 
+  <cell id="8" name="消防监护人签字" type="Step"  x="1000" y="300"/>  
+  <cell id="9" name="运行许可人签字" type="Step"  x="850" y="300"/> 
+  <cell id="10" name="厂级负责人签字" type="Step"  x="700" y="300"/> 
+  <cell id="11" name="安全监察部门负责人签字" type="Step"  x="550" y="300"/> 
+  <cell id="12" name="动火部门负责人签字" type="Step"  x="400" y="300"/>  
+  <cell id="13" name="动火工作负责" type="Step"  x="250" y="300"/> 
+  <cell id="14" name="准备开工动火执行人签字" type="Step"  x="100" y="300"/> 
+  <cell id="15" name="工作结束动火执行人签字" type="Step"  x="100" y="450"/> 
+  <cell id="16" name="工作结束动火负责人签字" type="Step"  x="250" y="450"/>  
+  <cell id="17" name="工作结束消防监护人签字" type="Step"  x="400" y="450"/> 
+  <cell id="18" name="工作结束动火许可人签字" type="Step"  x="550" y="450"/> 
+  <cell id="19" name="许可人加盖执行章" type="Step"  x="700" y="450"/>  
+  <cell id="20" name="负责人汇报工作" type="Step"  x="850" y="450"/>
+  <cell id="21" name="签发人终结工作" type="Step"  x="1000" y="450"/>
+  <cell id="99" name="结束" type="Step"  x="1000" y="600"/>
+  <action startId="2" nextId="1" name="" type="action" points="230,115 175,115"/>
+  <action startId="3" nextId="1" name="" type="action" points="430,85 430,60 140,60 140,80"/>
+  <action startId="4" nextId="1" name="" type="action" points="580,85 580,40 120,40 120,80"/>   
+  <action startId="5" nextId="1" name="" type="action" points="730,80 730,50 130,50 130,80"/> 
+  <action startId="6" nextId="1" name="" type="action" points="880,80 880,30 150,30 150,80"/> 
+  <action startId="7" nextId="6" name="" type="action" points="980,115 925,115"/> 
+  <action startId="8" nextId="1" name="" type="action" points="1010,280 1010,165 160,165 160,140"/>
+  <action startId="9" nextId="1" name="" type="action" points="880,280 880,175 150,175 150,140"/>
+  <action startId="10" nextId="1" name="" type="action" points="730,280 730,185 140,185 140,140"/>
+  <action startId="11" nextId="1" name="" type="action" points="580,280 580,195 130,195 130,140"/>
+  <action startId="12" nextId="1" name="" type="action" points="430,280 430,205 110,205 110,140"/>
+  <action startId="14" nextId="1" name="" type="action" points="120,280 120,140"/>
+  <action startId="13" nextId="12" name="" type="action" points="325,315 380,315"/>
+  <action startId="21" nextId="20" name="" type="action" points="980,465 925,465"/>
+</layout>
+
+

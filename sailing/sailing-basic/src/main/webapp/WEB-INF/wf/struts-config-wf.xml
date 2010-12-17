@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+	    <form-bean name="net.silencily.sailing.basic.wf.web.CommonForm" type="net.silencily.sailing.basic.wf.web.CommonForm">
+	    </form-bean>
+	    <form-bean name="net.silencily.sailing.basic.wf.web.OperationForm" type="net.silencily.sailing.basic.wf.web.OperationForm">
+	    </form-bean>
+	    <form-bean name="com.qware.wf.web.ParticularFlowForm" type="com.qware.wf.web.ParticularFlowForm">
+	    </form-bean>
+		<form-bean name="net.silencily.sailing.basic.wf.search.web.PersonWfSearchForm" type="net.silencily.sailing.basic.wf.search.web.PersonWfSearchForm">
+	    </form-bean>
+	    <form-bean name="net.silencily.sailing.basic.wf.web.NapeEditForm" type="net.silencily.sailing.basic.wf.web.NapeEditForm">
+	    </form-bean>
+	    <form-bean name="net.silencily.sailing.basic.wf.web.PopedomEditForm" type="net.silencily.sailing.basic.wf.web.PopedomEditForm"/>
+	</form-beans>
+	<global-exceptions />
+	<global-forwards>
+		<!--<forward name="begin" path="login.jsp" redirect="false" />
+	--></global-forwards>
+	<action-mappings>
+		
+		<action 
+		     name="net.silencily.sailing.basic.wf.web.CommonForm" 
+		     path="/wf/CommonAction" 
+		     attribute="theForm" 
+		     parameter="step" 
+		     scope="request" 
+		     type="net.silencily.sailing.basic.wf.web.CommonAction">
+		   <forward name="querySigners" path="/jsp/wf/selectSigners/selectSignerPop.jsp" />
+		</action>
+		
+		<action 
+		     name="net.silencily.sailing.basic.wf.web.OperationForm" 
+		     path="/wf/operationlist" 
+		     attribute="theForm" 
+		     parameter="step" 
+		     validate="false"
+		     scope="request" 
+		     type="net.silencily.sailing.basic.wf.web.OperationAction">
+		   <forward name="entry" path="/jsp/wf/operationEntry.jsp" />
+		   <forward name="list" path="/jsp/wf/operationList.jsp" />
+		   <forward name="info" path="/jsp/wf/operationInfo.jsp"/>
+		   <forward name="partInfo" path="/jsp/wf/particularInfo.jsp"/>
+		</action>
+		
+		<action 
+		     name="com.qware.wf.web.ParticularFlowForm" 
+		     path="/wf/particularlist" 
+		     attribute="theForm"
+		     parameter="step" 
+		     scope="request"
+		     validate="false" 
+		     type="com.qware.wf.web.ParticularFlowAction">
+		   <forward name="list" path="/jsp/wf/particularList.jsp" />
+		   <forward name="main" path="/wf/particularlist.do?step=list"/>
+		   <forward name="info" path="/jsp/wf/partiocularInfo.jsp"/>
+		   <forward name="toplist" path="/wf/operationlist.do?step=list"/>
+		</action>
+		
+		<action 
+		     path="/wf/personWfSearchAction"
+		     name="net.silencily.sailing.basic.wf.search.web.PersonWfSearchForm"
+		     type="net.silencily.sailing.basic.wf.search.web.PersonWfSearchAction"
+		     attribute="theForm" 
+		     parameter="step" 
+		     scope="request" 
+		     validate="true">
+		   <forward name="entry" path="/jsp/wf/search/personWfEntry.jsp"/>
+		   <forward name="waitList" path="/jsp/wf/search/personWaitWfList.jsp"/>
+		   <forward name="alreadyList" path="/jsp/wf/search/personAlreadyWfList.jsp"/>
+	       <forward name="passroundList" path="/jsp/wf/search/personPassroundWfList.jsp"/>	       
+	    </action> 
+	   
+	    <action 
+	         path="/wf/GraphicsAction" 
+	         type="net.silencily.sailing.basic.wf.graphics.GraphicsAction" 
+	         parameter="step" 
+	         scope="request" 
+	         attribute="theForm">
+	       <forward name="graphics" path="/jsp/wf/graphics/graphics.jsp"/>
+	    </action>
+    
+        <action 
+             path="/wf/NapeEditAction" 
+    		 name="net.silencily.sailing.basic.wf.web.NapeEditForm" 
+    		 type="net.silencily.sailing.basic.wf.web.NapeEditAction" 
+    		 scope="request" 
+    		 validate="false" 
+    		 parameter="step" 
+    		 attribute="theForm">
+           <forward name="select" path="/jsp/wf/particularSelect.jsp"/>
+        </action>
+ 
+        <action 
+             validate="true" 
+             scope="request" 
+             parameter="step" 
+             attribute="theForm" 
+             path="/wf/PopedomEditAction" 
+             name="net.silencily.sailing.basic.wf.web.PopedomEditForm" 
+             type="net.silencily.sailing.basic.wf.web.PopedomEditAction"> 
+           <forward path="/jsp/wf/popedomEditList.jsp" name="list"/>  
+           <forward path="/jsp/wf/popedomEditInfo.jsp" name="info"/>  
+           <forward path="/jsp/wf/popedomEditEntry.jsp" name="entry"/>
+       </action>
+	</action-mappings>
+</struts-config>

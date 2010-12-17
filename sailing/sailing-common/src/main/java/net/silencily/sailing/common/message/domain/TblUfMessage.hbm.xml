@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2007-11-23 17:12:43 by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="net.silencily.sailing.common.message.domain.TblUfMessage" table="TBL_UF_MESSAGE" optimistic-lock="version" dynamic-insert="true" dynamic-update="true">
+        <id name="id" type="string">
+            <column name="ID" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <version name="version" column="version" unsaved-value="undefined">
+        </version>
+        <property name="messageId" type="string">
+            <column name="MESSAGE_ID" length="32" />
+        </property>
+        <property name="sendUserid" type="string">
+            <column name="SEND_USERID" length="32" />
+        </property>
+        <property name="receiverUserid" type="string">
+            <column name="RECEIVER_USERID" length="32" />
+        </property>
+        <property name="title" type="string">
+            <column name="TITLE" length="100" />
+        </property>
+        <property name="messageContent" type="string">
+            <column name="MESSAGE_CONTENT" length="2000" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="500" />
+        </property>
+        <property name="messageStatus" type="string">
+            <column name="MESSAGE_STATUS" length="1" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATE" length="7" />
+        </property>
+        <property name="scheduleDate" type="java.util.Date">
+            <column name="SCHEDULE_DATE" length="7" />
+        </property>
+        <property name="sendDate" type="java.util.Date">
+            <column name="SEND_DATE" length="7" />
+        </property>
+        <property name="intervalTime" type="java.lang.Integer">
+            <column name="INTERVAL_TIME" precision="10" scale="0" />
+        </property>
+        <property name="sendTime" type="java.lang.Integer">
+            <column name="SEND_TIME" precision="38" scale="0" />
+        </property>
+        <property name="sendCount" type="java.lang.Integer">
+            <column name="SEND_COUNT" precision="38" scale="0" />
+        </property>
+        <property name="endDate" type="java.util.Date">
+            <column name="END_DATE" length="7" />
+        </property>
+        <property name="delFlg" type="java.lang.String">
+            <column name="DEL_FLG" length="1" not-null="true" />
+        </property>
+        <property name="sequenceNo" type="java.lang.Integer">
+            <column name="SEQUENCE_NO" precision="22" scale="0" />
+        </property>
+        <property name="creator" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="CREATOR" length="32" />
+        </property>
+        <property name="creatorDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="CREATOR_DEPT" length="32" />
+        </property>
+        <property name="createdTime" type="java.util.Date">
+            <column name="CREATED_TIME" length="7" />
+        </property>
+        <property name="modifier" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="MODIFIER" length="32" />
+        </property>
+        <property name="modifierDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="MODIFIER_DEPT" length="32" />
+        </property>
+        <property name="modifiedTime" type="java.util.Date">
+            <column name="MODIFIED_TIME" length="7" />
+        </property>
+        <property name="deleter" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="DELETER" length="32" />
+        </property>
+        <property name="deleterDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="DELETER_DEPT" length="32" />
+        </property>
+        <property name="deletedTime" type="java.util.Date">
+            <column name="DELETED_TIME" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

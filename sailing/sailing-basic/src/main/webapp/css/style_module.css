@@ -1,0 +1,77 @@
+
+/* 组件使用的css
+ * 2006-09-21
+ */
+
+/** 日历 */
+
+.calendar_table{
+	border: 0px solid #b9cbf7;
+	background:#b9cbf7;
+	width : 100%;
+}
+.calendar_table td{
+
+}
+
+.calendar_opera_table{
+	width:100%;
+	height:25px;
+	background:#ffffff;
+}
+.calendar_opera_table td{
+	border-left  : 1px solid #eaeffd;
+}
+.calendar_opera{
+	width:18px;
+	background:#b9cbf7;
+	color:#ffffff;
+	font-size:13px;
+	border:1px solid #ffffff;
+	cursor:pointer;
+}
+.calendar_week{
+	border: 0px;
+	height: 25px;
+	width : 100%;
+}
+.calendar_week td{
+	border-bottom: 1px solid #ffffff;
+	border-left  : 1px solid #ffffff;
+	width:13%;
+	color:#ffffff;
+	font-weight:bold;
+}
+
+/* BORDERCOLORLIGHT='+this.weightColor+' BORDERCOLORDARK='+this.lineColor+' bgcolor='+this.lightColor+' width=100% */
+.calendar_content{
+	width: 100%;
+	background:#eaeffd;
+	border-top  : 1px solid #ffffff;
+	border-left : 1px solid #ffffff;
+}
+.calendar_content td{
+	border-bottom : 1px solid #ffffff;
+	border-right  : 1px solid #ffffff;
+}
+
+.calendar_text_able{
+	background:#eaeffd;
+	color:#000;
+	font-size:12px;
+	text-decoration: underline ;
+	cursor:pointer;
+}
+.calendar_text_disable{	
+	color:#999999;
+}
+.calendar_noCurrent{
+    background:#eeeeee;
+	color:#999999;
+	font-size:10px;
+}
+.calendar_selectDate{
+    background:#ffffff;
+	color:#000000;
+	font-size:11px;
+}

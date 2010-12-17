@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<script type="text/javascript">
+	if (CurrentPage == null) {
+   		var CurrentPage = {};
+	}    
+    myquery = function()
+    {
+    }
+	CurrentPage.query = function() {
+	if (document.getElementsByName("paginater.page") != null) {
+	    document.getElementsByName("paginater.page").value = 0;
+	}
+	FormUtils.post(document.forms[0], '<c:url value="/sm/DataMemberAction.do?step=list"/>');
+	}
+</script>
+
+<div class="update_subhead" >
+    <span class="switch_close" onClick="StyleControl.switchDiv(this, $('supplierQuery'))" title="点击这里进行查询">查询条件</span>
+</div>
+
+<div id="supplierQuery" style="display:none">
+	<table width="100%"  border="0" cellpadding="0" cellspacing="0" class="Detail" id="listtable" style="display:">
+		<tr>
+
+		<td class="attribute" id="data_search_name">成员变量名</td>
+		<td>
+			<search:text name="memberName" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	<tr>
+
+		<td class="attribute" id="data_search_className">类型</td>
+		<td>
+			<search:text name="type" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+		<tr>
+
+		<td class="attribute" id="data_search_fatherModule">名称</td>
+		<td>
+			<search:text name="name" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	<tr>
+
+		<td class="attribute" id="data_search_fatherModule">子节点集合变量名</td>
+		<td>
+			<search:text name="childrensName" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	
+	    	</table>
+    <div class="query_button">
+    	<input name="" type="button" value="" id="opera_query"  title="点击查询"  onClick="CurrentPage.query()"/>
+    </div>
+</div>

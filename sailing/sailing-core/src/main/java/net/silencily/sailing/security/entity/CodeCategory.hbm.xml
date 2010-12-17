@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_code_category" name="net.silencily.sailing.security.entity.CodeCategory">
+    <id length="32" unsaved-value="null" name="value">
+      <generator class="assigned"/>
+    </id>
+    <version unsaved-value="null" name="version"/>
+    <property name="name" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+    <property name="description" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+    <set lazy="true" order-by="orderField" name="codes">
+      <key column="code_category_id"/>
+      <one-to-many class="net.silencily.sailing.security.entity.Code"/>
+    </set>
+  </class>
+</hibernate-mapping>

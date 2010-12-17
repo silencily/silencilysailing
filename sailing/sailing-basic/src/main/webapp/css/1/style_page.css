@@ -1,0 +1,357 @@
+
+/* 普通页面公用css */
+
+
+/*对文字超长的使用...*/
+div.font_overflow{
+	overflow: hidden; text-overflow:ellipsis;
+}
+
+/* 隐藏起来 */
+.hidden{
+	display:none;
+}
+
+/* 页面主题 css */
+.main_title{
+	height:28px;
+	background-image:url(../image/skin/1/main_title_bg.gif);
+	background-repeat:repeat-x	;
+	font-weight:bold;
+	padding-left:10px;
+	overflow:hidden;
+}
+/* 桌面主题，以下是桌面上用的定位css */
+.main_desktop{
+	padding:5px;
+}
+.desktop_content{
+	width:100%;
+	float:left;
+}
+.desktop_left{
+	float:left;
+	width:50%;
+}
+.desktop_right{
+	float:right;
+	width:49%;		
+}
+
+/*  列表Body的背景颜色*/
+.list_body{
+	background-color:#ffffff;
+	overflow-x:hidden;
+	border:0px;
+}
+
+/*主操作页面背景css*/
+.main_body{
+	margin:0px 8px 0px 8px;
+	background-color:#ffffff;
+}
+
+/* 选项卡对应的内容外框架*/
+.panel_content{
+	padding-top:3px;
+	padding-left:8px;
+	padding-right:8px;
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+}
+/*用于区分列表组*/
+.list_group{
+	/*width:98%;*/
+	height:25px;
+	margin-top:10px;
+	padding-left:10px;
+	border-bottom:1px solid #666;	
+}
+/*列表大标题css*/
+.list_title{
+	padding-top:5px;
+	float:left;
+	vertical-align:bottom;	
+	font-size:13px;
+}
+/*列表导航栏*/
+.list_explorer{
+	padding-top:2px;
+	padding-left:5px;
+	background-color:#9AAFE9;
+	height:25px;
+	
+}
+.list_explorer span{
+	color:#FFFFFF;
+	cursor:pointer;
+}
+/*列表备注css*/
+.list_notes{
+	font-size:12px;
+	color:#aaa;
+}
+/*列表操作按钮css*/
+.list_button{
+	float:right;
+}
+/*列表查询按钮css*/
+.query_button{
+	text-align:center;
+}
+/*列表工具栏css*/
+.list_tools{
+	text-align:right;
+	height:22px;
+	padding-top:2px;
+	padding-right:5px;
+}
+/*列表副标题css*/
+.list_subhead{
+	height:20px;
+	padding-top:2px;
+	margin-left:5px;
+}
+/*列表底部css*/
+.list_bottom{
+	 margin:2px;
+	 text-align: right;
+	 color:#666666;
+	 line-height:22px;
+	 border-top: 1px dashed  #6D86DC;
+}
+
+/*编辑页面标题css*/
+.update_subhead{
+	 height:22px;
+	 background-color:#E3E9F9;
+	 border-bottom: 1px solid #ccc;
+	 cursor:pointer;
+	 padding-left:5px;
+	 padding-top:2px;
+}
+/*编辑提示标题css*/
+.update_warn{
+	 height:18px;
+	 margin:0px;
+	 margin-top:2px;
+	 padding-left:25px;
+	 padding-top:2px;	 
+	 background-image:url("../image/main/warn.gif");
+	 background-repeat : no-repeat;	 
+	 border-bottom: 1px solid #ccc;
+	 width:400px;
+}
+/*编辑提示错误信息css*/
+.update_errorInfo{
+	 height:20px;
+	 color:#FF0000; 
+	 padding-left:40px;
+	 padding-top:2px;
+}
+
+/*编辑表格css*/
+table.Update{
+    width:100%;
+	border-right:1px solid #8D91B8;
+	/*border-top: 1px solid #E6E6E6;*/
+}
+table.Update td
+{
+	padding: 1px 3px 1px 3px;
+	border-bottom: 1px solid #B5B8D0;
+	border-left: 1px solid  #B5B8D0;
+	height:20px;
+}
+td.normal input,textarea,.normal{
+	width:180px;
+	color:#333333;
+	border:1px solid #999999;
+}
+
+/*列表表格 css*/
+table.Listing {
+	width:100%;
+	border-bottom: 3px solid #6D86DC;/*#6B86B3;*/
+	width:auto;
+}
+table.Listing td{
+	border-bottom: 1px solid #E6E6E6;
+	height:25px;
+}
+
+table.Listing td, 
+table.Listing th,
+table.Listing caption, 
+h2 {
+	padding: 0px 3px 0px 3px;
+	text-align: left;
+}
+
+table.Listing tr {
+	/*color: inherit;*/
+	/*background: #F5F5F5;*/
+}
+table.Listing input,textarea{
+	width:90%;
+	color:#333333;
+	border:1px solid #999999;
+	background:#ffffff
+}
+table.Listing th,
+table.Listing thead tr td,
+table.Listing td.Header,
+table.Listing tr.Header td{
+	/*font-weight: bold;
+	color: inherit;*/
+	font-weight:lighter;
+	border-bottom: 1px solid #C9CADC;
+	background: #efefef;
+	text-align:center;
+	height:22px;
+	cursor:pointer;
+}
+
+table.Listing tr.Alt {
+	/*color: inherit;*/
+	background: #F5F5F5;
+}
+
+.ListingLink a:hover {
+	height:24px;
+	width:24px;
+	background-image:url(../image/common/click_bg.gif);
+	background-repeat:no-repeat;
+}
+
+/*详细页面，暂时没用*/
+table.Detail{
+	border-right:1px solid #E6E6E6;
+	border-left:1px solid #E6E6E6;
+	border-bottom: 1px solid #E6E6E6;
+}
+table.Detail td
+{
+	padding: 0px 5px 0px 5px;
+	border-top: 1px solid #E6E6E6;
+}
+table.Detail td.attribute{
+	padding:2px 0px 0px 0px;
+	vertical-align:top;
+	text-align: right;	
+	height:22px;
+	width:20%;
+	background: #F5F5F5;
+}
+table.Detail td.detail_help{
+	padding:5px 0px 0px 0px;
+	vertical-align:top;	
+	width:30%;
+	background: #fff;
+	color:#999;
+}
+table.Detail input,textarea{
+	/* width:90%;*/
+}
+.Detail_author{
+	color:blue;
+	height:18px;
+	padding: 0pt 0pt 0pt 10pt; 
+	margin:  3pt 0pt 3pt 0pt;
+	border-bottom: 1px dashed  #ccc;
+}
+
+/*新闻使用css*/
+.news_title{
+	float:left;
+	padding-left:5px;	
+}
+.news_title_bg{
+	background:#F0F0F7;
+	height:22px;
+	border:1px solid  #666;
+	padding:1px;			
+}
+
+.news_list td{
+	height:22px;
+	margin-left:2px;
+	padding-left:0px;	
+	border-bottom:1px dotted  #ccc;	
+	overflow:hidden;
+}
+.news_list_time a{
+	font-size:11px;
+}
+.news_list a,.news_list a:visited,.news_list a:hover{
+	text-decoration: none;
+}
+.news_more{
+	float:right;	
+}
+
+/* 文字效果css */
+.font_master{
+	color:#0000ff;
+	font-weight : bold;
+}
+.font_keyword{
+	color:red;
+}
+.font_request{
+	color:red;
+}
+.font_error{
+	background-image:url(../image/main/warn.gif);
+	background-repeat:no-repeat;
+	padding-left:17px;	
+	color:red;
+}
+.font_ignore {
+	color: #bbb;
+}
+.font_help{
+	background-image:url(../image/common/help_list.gif);
+	background-repeat:no-repeat;
+	padding-left:15px;
+	margin-top:20px;
+	color:#999;
+}
+.font_help ul{
+	margin:0px;
+	padding-left:24px !important;
+	padding-left:16px;
+}
+.font_help li{
+	border-bottom:1px dotted #e7e7e7;
+	height:20px;
+	line-height:18px;
+	width:100%
+}
+
+.font_link{
+	background-image:url(../image/common/help_link.gif);
+	background-repeat:no-repeat;
+	padding-left:15px;
+	color:#0000FF;
+}
+.font_note{
+	background-image:url(../image/common/help_note.gif);
+	background-repeat:no-repeat;
+	padding-left:15px;
+	color:#FF6600;
+}
+
+/*--- alt/title 提示效果 ----*/
+.cPopText{  
+	background-color: #FFFFFF; 
+	border: 1px #000000 solid; 
+	font-size: 12px; 
+	padding-right: 4px; 
+	padding-left: 4px;  
+	padding-top: 2px; 
+	padding-bottom: 2px; 
+	filter: Alpha(Opacity=0);
+}
+

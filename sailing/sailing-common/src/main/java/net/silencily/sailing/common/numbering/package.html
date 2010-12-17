@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<title>numbering service</title>
+</head>
+<body>
+<pre style="align:center;font-size:10pt">
+编号服务用于在业务中按照日期或仅仅是数据的格式生成唯一的编号, 生成的原理是在一个实体
+中定义了一个编号格式 , 每次生成编号时在当前值的基础上加<b>1</b>返回, 如果编号格式中有
+日期格式, 那么只要当前编号时日期与这个实体的日期不同 , 编号就复位, 从<b>1</b>开始重新
+编号
+<dt>
+<dl><code>编号的配置</code></dl>
+<dd>
+首先需要在数据库表<code>platform_numbering_configure</code>中配置需要编号的格式:<ul>
+<li><code>business_name:</code>编号业务名称</li>
+<li><code>numbering_format:</code>编号格式</li>
+<li><code>numbering_note:</code>编号的说明及注释,就是这个编号用于什么系统什么功能</li>
+</ul>
+</dd>
+<dl><code>业务中编号的方法</code></dl>
+<dd>
+    NumberingService serivce = (NumberingService) ServiceProvider
+    	.getService(NumberingService.SERVICE_NAME);
+    String no = service.number("编号业务名称");
+</dd>
+<dl><code>编号格式说明</code></dl>
+<dd>
+编号格式是按照标准的<code title="java.util.MessageFormat">java message</code>中定义的格式,
+格式由日期和数字两部分组成或者仅仅是数字格式, 几个例子:
+	<dt>几个例子
+	<dl>日期数字, 当新的月份开始重新编号</dl>
+	<dd>{0,date,yyyyMM}-{1,number,000}, 可能的结果<u>200604-007</u></dd>
+	<dl>日期数字, 每天都重新编号</dl>
+	<dd>{0,date,yyyyMMdd}-{1,number,000}, 可能的结果<u>20060420-006</u></dd>
+	<dl>仅仅是数字, 一直编下去, 这种情况实际中基本没有</dl>
+	<dd>{0,number}</dd>
+	</dt>
+</dd>
+</dt>
+</pre>
+</body>
+</html>

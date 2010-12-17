@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+         "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>search</short-name>
+  <uri>http://www.coheg.com.cn/taglib/search</uri>
+  <description>
+    作者：赵一非
+    本标签是为查询条件提供的，具体标签之用法参照描述及人事代码
+  </description>
+
+  <!-- ========== table Control Tag ======================================== -->
+
+  <tag>
+
+
+    <name>text</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SearchTextTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     查询条件之文本标签
+
+    </description>
+	<attribute>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的value的id
+      </description>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性
+      </description>
+    </attribute>
+    <attribute>
+      <name>elName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性,el表达式形式传入，注意，如果name有值，此选项无效
+      </description>
+    </attribute>
+     <attribute>
+      <name>oper</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询操作符
+      </description>
+    </attribute>
+     <attribute>
+      <name>type</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        持久化类属性类型
+      </description>
+    </attribute>
+    <attribute>
+      <name>valueDefault</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        默认值
+      </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        样式
+      </description>
+    </attribute>
+  </tag>
+  
+  
+  <tag>
+
+    <name>select</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SearchSelectTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     查询条件之下拉框
+    </description>
+
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性
+      </description>
+    </attribute>
+    <attribute>
+      <name>elName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性,el表达式形式传入，注意，如果name有值，此选项无效
+      </description>
+    </attribute>
+	
+  </tag>
+  
+  
+  
+	<tag>
+    <name>time</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SearchTimeTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     查询条件之时间选择控件
+    </description>
+   <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性
+      </description>
+    </attribute>
+    <attribute>
+      <name>elName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        查询条件的持久化类的属性,el表达式形式传入，注意，如果name有值，此选项无效
+      </description>
+    </attribute>
+	<attribute>
+      <name>valueDefault</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        默认值
+      </description>
+    </attribute>
+    <attribute>
+      <name>pattern</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        时间显示及输入类型
+      </description>
+    </attribute>
+    
+    <attribute>
+      <name>type</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        时间属性的类型
+      </description>
+    </attribute>
+     <attribute>
+      <name>range</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        区间查询还是单个查询
+      </description>
+    </attribute>   
+      <attribute>
+      <name>dataType</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        时间控件类型
+      </description>
+    </attribute>    
+    
+  </tag>
+  
+  <tag>
+
+    <name>dept</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SearchDeptTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     查询条件之部门选择
+    </description>
+
+    <attribute>
+      <name>code</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        持久化类里部门的代码id
+      </description>
+    </attribute>
+	<attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        持久化类里部门的名称
+      </description>
+    </attribute>
+	<attribute>
+      <name>valueDefault</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        默认值
+      </description>
+    </attribute>
+	
+  </tag>
+<tag>
+
+    <name>member</name>
+    <tag-class>net.silencily.sailing.common.crud.tag.SearchMemberTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+     查询条件之人员选择
+    </description>
+
+    <attribute>
+      <name>code</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        持久化类里人员的id
+      </description>
+    </attribute>
+	<attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        持久化类里人员的名称
+      </description>
+    </attribute>
+	<attribute>
+      <name>valueDefault</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+        默认值
+      </description>
+    </attribute>
+	
+  </tag>
+</taglib>

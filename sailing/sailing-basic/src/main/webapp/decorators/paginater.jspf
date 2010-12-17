@@ -1,0 +1,161 @@
+
+
+<%--
+	@version $Id: paginater.jspf,v 1.1 2010/12/10 10:56:27 silencily Exp $
+	公用翻页页面, 使用时 include 即可, 同时要 set 'paginater.forwardUrl' 属性, Example :
+	<c:set var = "paginater.forwardUrl" value = "/flaw/flawAction.do?step=list" scope = "request" />
+	<%@ include file = "/decorators/paginater.jspf" %>
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+
+<c:choose>
+	<c:when  test = "${pageScope['paginater.forwardUrl'] == null}">
+		<script>
+			alert(' paginater.forwardUrl is missing ');
+		</script>
+	</c:when>
+	<c:when  test = "${theForm.paginater.notPaginated}">
+		<%-- 不分页 --%>	
+	</c:when>
+	<c:otherwise>
+		共&nbsp;<span class="font_master"><c:out value="${theForm.paginater.count}"/>&nbsp;</span>条记录&nbsp;
+		<c:if test="${not theForm.paginater.first}">
+		<a href="javascript:PublicPaginater.forward('first_page');" title="第一页"><img src="<c:out value = '${initParam["publicResourceServer"]}/image/paginater/first.gif'/>" border="0" valign="absmiddle"/></a>&nbsp;&nbsp;
+		</c:if>
+		<c:if test="${theForm.paginater.previousPageAvailable}">
+		<a href="javascript:PublicPaginater.forward('previous_page');" title="前一页"><img src="<c:out value = '${initParam["publicResourceServer"]}/image/paginater/previous.gif'/>" border="0" valign="absmiddle"/></a>&nbsp;&nbsp;
+		</c:if>
+		<c:if test="${theForm.paginater.nextPageAvailable}">
+		<a href="javascript:PublicPaginater.forward('next_page');" title="下一页"><img src="<c:out value = '${initParam["publicResourceServer"]}/image/paginater/next.gif'/>" border="0" valign="absmiddle"/></a>&nbsp;&nbsp;
+		</c:if>
+		<c:if test="${not theForm.paginater.last}">
+		<a href="javascript:PublicPaginater.forward('last_page');" title="末页"><img src="<c:out value = '${initParam["publicResourceServer"]}/image/paginater/last.gif'/>" border="0" valign="absmiddle"/></a>&nbsp;&nbsp;
+		</c:if>
+		<input type="hidden" name ="paginater.page" value="<c:out value = "${theForm.paginater.page}"/>"/>
+		<c:if test = "${theForm.paginater.pageCount > 0}">
+			<c:set var="isCountPage" value="false"/>
+			<c:if test = "${theForm.paginater.pageCount > 200}">
+				<c:set var="isCountPage" value="true"/>
+			</c:if>
+			<!-- #link extendCombo.js-->
+			第<input type="text" style="width:20px" id="input_text" name ="paginater_txtPage" 
+			value="<c:out value = "${theForm.paginater.page+1}"/>" 
+			onChange="PublicPaginater.onChangeText(this)"/><input type="button"
+			id="input_select"  title="点击这里选择分页" 
+			onclick ="ExtendCombo.getOptionStatic($('paginater_txtPage'), this, $('paginater.page'), PublicPaginater.pageArray,PublicPaginater.onChangePage,<c:out value='${isCountPage}'/>)" />
+			/ <c:out value = "${theForm.paginater.pageCount}" /> 页
+			<%--select name="paginater.page" >
+				<c:forEach begin="0" end="${theForm.paginater.pageCount - 1}" var="index">
+					<option value="<c:out value = "${index}" />" 
+					<c:if test = "${index == theForm.paginater.page}">selected</c:if>>
+					<c:out value = "${index + 1} / ${theForm.paginater.pageCount}" />
+					</option>  
+				</c:forEach>
+			</select--%>
+		
+		每页显示<input type="text" class="normal" onkeydown="if(event.keyCode==13){PublicPaginater.forward('paginater.page');}" name="paginater.pageSize" value="<c:out value = '${theForm.paginater.pageSize}' />" style="width:25px">
+		<input type="button"  class="opera_blank" value="GO" onclick="PublicPaginater.forward('paginater.page')"/>
+		</c:if>		
+		<script type="text/javascript">
+		
+		if (PublicPaginater == null) {
+			var PublicPaginater = {};
+		}
+		PublicPaginater.pageArray = new Array();
+		<c:if test = "${theForm.paginater.pageCount > 0}">
+		PublicPaginater.pageArray = [
+		<c:forEach begin="0" end="${theForm.paginater.pageCount - 1}" var="index"><c:if test="${index >0}">,</c:if>"<c:out value = "${index}" />|||<c:out value = "${index + 1}" />"</c:forEach>
+			];
+		</c:if>
+		//选择分页回调
+		PublicPaginater.onChangePage = function(str){
+			if(str){
+				if (PublicPaginater.filterWrongInput($('paginater_txtPage')) == false) {
+					return;
+				}		
+				PublicPaginater.forward();
+			}
+		}
+		//改变页码事件
+		PublicPaginater.onChangeText = function(obj){
+			$("paginater.page").value = parseInt(obj.value,10)-1;
+		}
+		PublicPaginater.pagerUrl    = '<c:url value = "${pageScope['paginater.forwardUrl']}" />';
+		PublicPaginater.forwardPage = '<c:out value = '${theForm.paginater.page}' />';
+		PublicPaginater.pageCount   = <c:out value = "${theForm.paginater.pageCount - 1}"/>;
+		PublicPaginater.count       = <c:out value="${theForm.paginater.count}"/>
+		
+		PublicPaginater.forward = function(objName) {
+			if (PublicPaginater.filterWrongInput($('paginater_txtPage')) == false) {
+				return;
+			}
+			var pageSize = $('paginater.pageSize')
+			if (PublicPaginater.filterWrongInput(pageSize) == false) {
+				return;
+			}
+			if(parseInt(pageSize.value,10) > 200){
+				alert('每页显示的数据条目超过200条会影响系统运行速度，请修正！');
+				document.getElementById("paginater.pageSize").focus();
+				return;
+			}
+			var pagerUrl = 	PublicPaginater.pagerUrl;
+			var forwardPage = 0;
+			forwardPage = $('paginater.page').value;
+			forwardPage = parseInt(forwardPage,10);
+			//PublicPaginater.forwardPage ?  parseInt(PublicPaginater.forwardPage,10) : 0;		
+			if (objName == "first_page") {
+				forwardPage = 0;
+			} else if (objName == "previous_page") {
+				forwardPage--;
+			} else if (objName == "next_page") {
+				forwardPage++;
+			} else if (objName == "last_page") {
+				forwardPage = PublicPaginater.pageCount;
+			} 
+			//else if (objName == "paginater.page") {
+			//	forwardPage = $('paginater.page').value;
+			//	forwardPage = parseInt(forwardPage,10)-1;
+			//}
+			if (forwardPage < 0) {
+				forwardPage	= 0;			
+			} else if (forwardPage > PublicPaginater.pageCount) {
+				forwardPage = PublicPaginater.pageCount;
+			}
+			if ($('paginater.pageSize').value > PublicPaginater.count) {
+				forwardPage = 0;
+			}
+			if (pagerUrl.indexOf('?') > -1) {
+				pagerUrl += '&';
+			} else {
+				pagerUrl += '?';
+			}
+			pagerUrl += 'paginater.page=' + forwardPage + '&paginater.pageSize=' + $('paginater.pageSize').value;
+			
+			if (document.forms[0]) {
+				FormUtils.post(document.forms[0], pagerUrl);
+			} else {
+				location.href = pagerUrl;	
+			}
+		}
+		<c:if test="${theForm.paginater.previousPageAvailable}">
+			PublicPaginater.forwardPre  = function(){PublicPaginater.forward("previous_page")}
+		</c:if>
+		<c:if test="${theForm.paginater.nextPageAvailable}">
+			PublicPaginater.forwardNext = function(){PublicPaginater.forward("next_page")}
+		</c:if>
+		
+		PublicPaginater.filterWrongInput = function(pageSizeObj) {
+		    /** number's format modified by XuefangHu begin */
+			//var reg = /[1-9]+/;
+			var reg = /^\d*$/;
+		    /** number's format modified by XuefangHu end */
+			if (!reg.test(pageSizeObj.value)) {
+				alert('请输入数字');
+				pageSizeObj.focus();
+				return false;
+			}	
+		}
+		
+		</script>
+	</c:otherwise>
+</c:choose>

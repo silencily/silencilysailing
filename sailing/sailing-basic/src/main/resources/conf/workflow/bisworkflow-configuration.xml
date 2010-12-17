@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="bisworkflow" />
+		<property name="description" value="BIS工作流引擎" />
+	</bean>
+	
+	<bean id="workflow.workflowService" class="net.silencily.sailing.basic.wf.impl.IbatisOsWorkflowService"/>
+    <bean id="workflow.workflowSearchService" class="net.silencily.sailing.basic.wf.impl.IbatisOsWorkflowSearchService">
+        <property name="workflowService"><ref local="workflow.workflowService"/></property>
+    </bean>
+    
+	<bean id="bisworkflow.BisWfService" class="net.silencily.sailing.basic.wf.service.adapter.WfServiceAdapter" >
+		<property name="wfservice" >
+			<bean class="net.silencily.sailing.container.ServiceProvider" factory-method="getService">
+				<constructor-arg index="0" value="workflow.workflowService" />
+			</bean>
+		</property>
+	</bean>	
+</beans>
+

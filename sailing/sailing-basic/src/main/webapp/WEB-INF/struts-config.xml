@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<form-beans>   
+		<form-bean name="net.silencily.sailing.common.ui.selector.web.SelectorForm" 
+					type="net.silencily.sailing.common.ui.selector.web.SelectorForm" />	
+		<form-bean name="net.silencily.sailing.common.systemcode.spi.SystemCodeForm" 
+					type="net.silencily.sailing.common.systemcode.spi.SystemCodeForm" />
+		<form-bean name="com.coheg.common.ui.user.web.UserForm" 
+					type="com.coheg.common.ui.user.web.UserForm" />
+		<form-bean name="com.coheg.common.ui.organization.web.OrganizationForm" 
+					type="com.coheg.common.ui.organization.web.OrganizationForm" />	
+		<form-bean name="net.silencily.sailing.common.message.service.web.CommonMessageForm" 					
+					type="net.silencily.sailing.common.message.service.web.CommonMessageForm" />
+	</form-beans>
+
+
+  <action-mappings>
+	<action
+		path="/common/ui/selector"
+		name="net.silencily.sailing.common.ui.selector.web.SelectorForm"
+		type="net.silencily.sailing.common.ui.selector.web.SelectorAction"
+		parameter="step"
+		scope="request"
+		validate="true"
+		attribute="theForm">    
+		<forward name="selectDept" path="/jsp/selector/selectDept.jsp"/>
+		<forward name="selectUser" path="/jsp/selector/selectUser.jsp"/>
+		<forward name="selectCode" path="/jsp/selector/selectCode.jsp"/>
+		<forward name="displayCode" path="/jsp/selector/displayCode.jsp"/>
+	</action>
+	
+	<action
+		path="/common/ui/comboSupportTest"
+		type="com.coheg.common.ui.demo.ComboSupportListAction"
+		scope="request"
+		validate="false">    
+		<forward name="success" path="/jsp/jsTutorial.jsp" />
+	</action>
+	
+	<action
+		path="/common/systemcode"
+		name="net.silencily.sailing.common.systemcode.spi.SystemCodeForm"
+		type="net.silencily.sailing.common.systemcode.spi.SystemCodeAction"
+		parameter="step"
+		scope="request"
+		validate="true"
+		attribute="theForm">    
+		<forward name="frame" path="/jsp/common/systemcode/systemcodeFrame.jsp" />
+		<forward name="entry" path="/jsp/common/systemcode/systemcodeEntry.jsp" />			
+		<forward name="info" path="/jsp/common/systemcode/systemcodeInfo.jsp" />
+		<forward name="list" path="/jsp/common/systemcode/systemcodeList.jsp" />
+		<forward name="listForSelect" path="/jsp/common/systemcode/systemcodeListForSelect.jsp" />
+		
+		<forward name="frameInput" path="/jsp/common/systemcode/systemcodeFrame.jsp" />
+		<forward name="entryInput" path="/jsp/common/systemcode/systemcodeEntry.jsp" />
+		<forward name="saveInput" path="/jsp/common/systemcode/systemcodeInfo.jsp" />	
+		<forward name="listInput" path="/jsp/common/systemcode/systemcodeList.jsp" />		
+		<forward name="deleteInput" path="/common/systemcode.do?step=list" />
+		<forward name="listForSelectInput" path="/jsp/common/systemcode/systemcodeListForSelect.jsp" />
+	</action>
+	
+	<action
+		path="/common/ui/user"
+		name="com.coheg.common.ui.user.web.UserForm"
+		type="com.coheg.common.ui.user.web.UserAction"
+		parameter="step"
+		scope="request"
+		validate="true"
+		attribute="theForm">    
+		<forward name="list" path="/jsp/common/user/userList.jsp" />
+		<forward name="listInput" path="/jsp/common/user/userList.jsp" />
+	</action>	
+	
+	<action
+		path="/common/ui/organization"
+		name="com.coheg.common.ui.organization.web.OrganizationForm"
+		type="com.coheg.common.ui.organization.web.OrganizationAction"
+		parameter="step"
+		scope="request"
+		validate="true"
+		attribute="theForm">    
+		<forward name="frame" path="/jsp/common/organization/organizationFrame.jsp" />
+	</action>
+
+	<action
+		path="/common/messageAction"
+		name="net.silencily.sailing.common.message.service.web.CommonMessageForm"
+		type="net.silencily.sailing.common.message.service.web.CommonMessageAction"
+		parameter="step"
+		scope="request"
+		validate="true"
+		attribute="theForm">    
+		<forward name="entry" path="/jsp/common/message/entry.jsp" />
+		<forward name="info" path="/jsp/common/message/info.jsp" />
+		<forward name="detailAccept" path="/jsp/common/message/detail_accept.jsp" />
+		<forward name="detailSend" path="/jsp/common/message/detail_send.jsp" />
+		<forward name="listAccept" path="/jsp/common/message/list_accept.jsp" />
+		<forward name="listSend" path="/jsp/common/message/list_send.jsp" />
+		<forward name="listRemind" path="/jsp/common/message/list_remind.jsp" />
+	</action>
+		
+  </action-mappings>
+  
+  <controller inputForward="true" processorClass="net.silencily.sailing.framework.web.struts.CustomRequestProcessorTemplate"/>  
+  <plug-in className="net.silencily.sailing.utils.InitializingPlugInConver"/>
+</struts-config>

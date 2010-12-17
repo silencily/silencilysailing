@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+   <cell id="1" name="开始" type="Step"  x="200" y="350"/>   
+  <cell id="2" name="领导审核" type="Step"  x="400" y="200"/>   
+  <cell id="3" name="接受人签字" type="Step"  x="400" y="350"/>   
+  <cell id="99" name="结束" type="Step"  x="600" y="350"/>  
+  <action startId="3" nextId="1" name="" type="action" points="380,365 275,365"/>
+  <action startId="2" nextId="1" name="" type="action" points="380,220 255,315"/>  
+</layout>
+

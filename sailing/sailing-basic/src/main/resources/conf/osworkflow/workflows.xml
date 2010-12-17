@@ -1,0 +1,5 @@
+<workflows>
+	<!-- flows -->
+	<workflow name="st.rpt.output" type="resource" location="conf/osworkflow/am-prj-first-workflow.sample.xml" />
+
+</workflows>

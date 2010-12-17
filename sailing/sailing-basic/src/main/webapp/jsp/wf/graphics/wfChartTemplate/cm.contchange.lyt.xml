@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始（申请）" type="Step"  x="100" y="100"/> 
+  <cell id="2" name="部门主管" type="Step"  x="250" y="100"/> 
+  <cell id="3" name="会签部门专工" type="Step"  x="400" y="100"/> 
+  <cell id="4" name="预算专工" type="Step"  x="550" y="100"/>  
+  <cell id="5" name="合同专工" type="Step"  x="700" y="100"/> 
+  <cell id="6" name="策划部主管" type="Step"  x="700" y="200"/> 
+  <cell id="7" name="分管领导" type="Step"  x="700" y="300"/> 
+  <cell id="8" name="总经理" type="Step"  x="700" y="400"/>  
+  <cell id="9" name="编制人" type="Step"  x="700" y="500"/> 
+  <cell id="99" name="结束" type="Step"  x="700" y="600"/> 
+  <action startId="2" nextId="1" name="" type="action" points="230,115 175,115"/>
+  <action startId="6" nextId="8" name="" type="action" points="770,200 830,200 830,400 770,400"/>
+  <action startId="7" nextId="1" name="" type="action" points="685,300 140,300 140,140"/> 
+  <action startId="8" nextId="1" name="" type="action" points="685,400 130,400 130,140"/> 
+</layout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="security.remoteCachesProviderService" class="com.coheg.security.remoting.RemoteCachesProviderSerivceImpl">
+		<property name="applicationNameCachesProviderServiceMapAware" ref="security.applicationNameCachesProviderServiceMapAware" />
+	</bean>
+
+	<bean id="security.servletContextAware" class="com.coheg.security.app.acegi.remoting.httpinvoker.InjectionServletContextAware">
+		<property name="scheme" value="${scheme}" />
+		<property name="serverPort" value="${serverPort}" />
+	</bean>
+	
+	<bean id="security.multiApplicationHttpInvokerDao" class="com.coheg.security.app.application.dao.hibernate.HibernateMultiApplicationHttpInvokerDao" autowire="byType" />
+		
+	<bean id="security.applicationNameCachesProviderServiceMapAware" class="com.coheg.security.app.acegi.remoting.httpinvoker.MultiApplicationHttpInvokerProxyFactoryBean">
+		<property name="servletContextAware" ref="security.servletContextAware" />
+		<property name="multiApplicationHttpInvokerDao" ref="security.multiApplicationHttpInvokerDao" />
+		<property name="authenticationServerContext" value="${authenticationServer}" />
+		<property name="remotingCachesProviderServiceUrl" value="${remotingCachesProvider.url}" />
+	</bean>
+	
+	<bean id="security.remoteOnlineUsersManager" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+	  	<property name="serviceUrl" value="${scheme}://localhost:${serverPort}${authenticationServer}/remoting/security.remoteOnlineUsersManager"/>
+  		<property name="serviceInterface" value="com.coheg.security.app.user.manager.RemoteOnlineUsersManager"/>	
+	</bean>
+
+</beans>

@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<div class="update_subhead" >
+    <span class="switch_close" 
+    onClick="StyleControl.switchDiv(this, $('supplierQuery'))" 
+    title="点击这里进行查询">条件查询</span>
+</div>
+
+<div id="supplierQuery" style="display:none">
+	<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable" style="display: ">
+		<tr>
+		<td class="attribute" >标题</td>
+		<td>
+         	<search:text name="title" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		<td class="attribute" >所属栏目</td>
+		<td>
+			<search:select name="tblUfColumn.id"/><ec:composite value='${theForm.conditions["tblUfColumn.id"].value}' valueName = "conditions(tblUfColumn.id).value" textName = "temp.conditions(tblUfColumn.id).value" source = '${theForm.conditions["allColumns"]}' />	
+		</td>
+		</tr>
+		<tr>
+		<td class="attribute" >发布时间</td>
+		<td colspan="3">
+            <search:time name="publishTime" pattern="yyyy-MM-dd" valueDefault="${theForm}"/>
+		</td>
+		</tr>
+		<tr>
+		<td class="attribute" >关键字</td>
+		<td>
+         	<search:text name="keyword" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		<td class="attribute" >内容</td>
+		<td>
+         	<search:text name="content" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		</tr>
+	</table>
+
+    <div class="query_button">
+        <input type="button" name="" id="opera_query"  title="点击查询"  onclick="CurrentPage.query();"/>
+    </div>
+</div>
+

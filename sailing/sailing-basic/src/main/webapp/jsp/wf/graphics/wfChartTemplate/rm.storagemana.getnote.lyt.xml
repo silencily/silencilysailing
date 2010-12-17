@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  
+  <cell id="1" name="开始" type="Step"  x="300" y="300"/> 
+  <cell id="2" name="审核人" type="Step"  x="500" y="200"/> 
+  <cell id="99" name="结束" type="Step"  x="700" y="300"/>   
+  <action startId="2" nextId="1" name="" type="action" points="480,215 360,275"/>
+</layout>
+

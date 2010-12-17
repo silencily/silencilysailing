@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="100" y="300"/> 
+  <cell id="2" name="验收班长签字" type="Step"  x="300" y="150"/> 
+  <cell id="3" name="验收部门领导签字" type="Step"  x="300" y="450"/> 
+  <cell id="4" name="生技部领导签字" type="Step"  x="500" y="300"/>   
+  <cell id="99" name="结束" type="Step"  x="700" y="300"/>   
+  
+</layout>
+

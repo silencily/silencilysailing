@@ -1,0 +1,190 @@
+ <div class="update_subhead">				
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<span class="switch_open" onClick="StyleControl.switchDiv(this, $(divId_scrollLing_upLoadFiles))" title="点击伸缩节点">相关附件</span>
+				</td>				
+			</tr>
+		</table>
+ </div>
+<div id="divId_scrollLing_upLoadFiles" class="list_scroll">
+<table border="0" cellpadding="0" cellspacing="0" class="Listing" id="divId_uploadFiles" 
+				onClick="" >
+					<thead>
+						<tr>
+							<td align="center" nowrap="nowrap" width="5%">
+							<vision:btn										
+								rwCtrlType="${requestScope['uploadFilesRwCtrlType']}"										
+								permissionCode="${requestScope['uploadFilesPermissionCode']}" 
+								wfpermissionCode="${requestScope['uploadFilesWfPermissionCode']}" 									
+								onClick="CurrentPage.addRow(divId_uploadFiles)"					
+								clazz="list_create"	
+								style="display:" 
+								name="addBtn" 
+								title="新增" 							
+								comInvorkeeClassFullName="${requestScope['uploadFilesComInvorkeeClassFullName']}" />	
+							</td>
+							<td><div align="center">名称</td>
+							<td><div align="center">附件选取</td>
+							<td><div align="center">备注</td>
+						</tr>
+					</thead>
+					<tbody">
+					<c:forEach items = "${theForm.tblCmnUpLoadFiles}" var = "item" varStatus = "status" >
+						<tr id="uploadFiles_trId_[<c:out value='${status.index}'/>]">
+							<td width="5%" align="center">
+						            <vision:btn		
+									       rwCtrlType="${requestScope['uploadFilesRwCtrlType']}"
+								           permissionCode="${requestScope['uploadFilesPermissionCode']}" 
+								           wfpermissionCode="${requestScope['uploadFilesWfPermissionCode']}" 
+										   onclick="CurrentPage.addRow(divId_uploadFiles);return false;"	
+										   clazz="list_create"	
+										   title="新增"
+										   style="display:"
+										   id="uploadFiles_[${status.index}].add"
+								           comInvorkeeClassFullName="${requestScope['uploadFilesComInvorkeeClassFullName']}"/>
+								    <vision:btn	
+									       rwCtrlType="${requestScope['uploadFilesRwCtrlType']}"
+								           permissionCode="${requestScope['uploadFilesPermissionCode']}" 
+								           wfpermissionCode="${requestScope['uploadFilesWfPermissionCode']}" 
+										    onclick="uploadFiles.delRowaa(divId_uploadFiles,this);return false"
+											clazz="list_delete"
+											id="uploadFiles_[${status.index}].del"
+											style="display:"
+											row="${status.index}"
+											name="delBtn"
+											title="删除"
+									        comInvorkeeClassFullName="${requestScope['uploadFilesComInvorkeeClassFullName']}"/>
+								    <input type="button"
+					                       class="list_renew"
+								           onClick="uploadFiles.renRowCur(divId_uploadFiles,this);return false"
+								           id="uploadFiles_[<c:out value='${status.index}'/>].old" 
+								           style="display:none" 
+								           row="<c:out value='${status.index}'/>"
+								           name="oldBtn" 
+								           holdObj=true 
+								           title="恢复" />
+							</td>
+							<td valign="middle" width="25%">
+									<input type="hidden"
+										   name="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].id" 
+								           id="uploadFiles_[<c:out value='${status.index}'/>].id" 
+								           value='<c:out value="${item.id}"/>' />
+								    <input type="hidden"
+										   name="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].delFlg" 
+										   id="uploadFiles_[<c:out value='${status.index}'/>].delFlg"
+										   value='<c:out value="${item.delFlg}"/>' />
+								    <input type="hidden"
+										   name="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].version" 
+										   id="uploadFiles_[<c:out value='${status.index}'/>].version"
+										   value='<c:out value="${item.version}"/>'/>
+								          
+									<div id="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].div_picLink" class="list" valign="middle" >
+										<a href="<c:out value='${initParam["publicResourceServer"]}'/>/common/FileLoadActionPlus.do?step=download&id=<c:out value='${item.id}'/>" id="picLink"> 
+									<c:out value="${item.name}" />
+									</a>
+									</div>
+									
+									<input type="hidden"
+										   id="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].name"
+			                               name="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].name"
+			                               value="<c:out value='${item.name}' />" />
+     
+							</td>
+							<td width="30%">
+
+									<input type="hidden"
+										   id="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].savePath"
+					                       name="tblCmnUpLoadFiles[<c:out value='${status.index}'/>].savePath"
+					                       value="<c:out value='${item.savePath}' />" />
+
+							</td>
+							<td width="40%">
+
+									<vision:text 
+									       rwCtrlType="${requestScope['uploadFilesRwCtrlType']}"
+								           permissionCode="${requestScope['uploadFilesPermissionCode']}" 
+								           wfpermissionCode="${requestScope['uploadFilesWfPermissionCode']}" 
+										   name="tblCmnUpLoadFiles[${status.index}].describle" 
+										   value="${item.describle}"
+								           dataType="6" 
+										   longTextSaveFormat="true"
+										   longTextType = "true"
+										   style = "width:180px"
+								           maxlength="400"
+								           comInvorkeeClassFullName="${requestScope['uploadFilesComInvorkeeClassFullName']}"/>
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+</table>
+</div>
+<script language="javascript">
+	var msgInfo_ = new msgInfo();
+    uploadFiles.rowNumber = $(divId_uploadFiles).rows.length-1;
+	uploadFiles.uuidObj   = "id";
+		
+	CurrentPage.addRow = function(table) { 
+		uploadFiles.addListingRow(table);				
+		Global.setHeight();	
+	}
+	function changeSrc(filePicker) {
+		//NAME隐藏域赋值 
+		var tempName = filePicker.name;
+		var beginIndex = tempName.indexOf("[");
+		var endIndex = tempName.indexOf("].");
+		var name = tempName.substring(beginIndex, endIndex+1);
+		name = "tblCmnUpLoadFiles"+name;
+		//savePath 隐藏域
+		var file=filePicker.value;
+		var index=file.lastIndexOf("\\");
+		var picName=file.substring(index+1);
+		var path = file.substring(0,index+1);
+		
+		if(picName!=""){
+			//name hidden
+			document.getElementById(name + ".name").value=picName;
+			//path 
+			document.getElementById(name + ".savePath").value=path;
+			//name show
+			document.getElementById(name + ".div_picLink").innerHTML=picName;
+		} 
+	}
+	CurrentPage.CheckFilename = function() {
+			var newfiles = new Array();
+			var index = 0;
+			var i = 0;
+			//var count = document.getElementById("divId_uploadFiles").getElementsByTagName("tr").length-1;
+			var count = uploadFiles.rowNumber;
+			for(var i=0;i<count;i++) {
+				if(document.getElementById("uploadFiles_trId_["+i+"]")==null){
+					//alert(i+"-=-=-=-"+document.getElementById("uploadFiles_["+i+"]"));
+					continue;
+				}
+				//循环处理，如果DELFLG等于1不参与比较
+				var delflg = document.getElementById("uploadFiles_["+i+"].delFlg").value;
+				if("1" == delflg){
+					continue;
+				}
+				var name = document.getElementById("tblCmnUpLoadFiles["  + i +  "].name").value;
+				for(var j=i+1;j<count;j++){
+					if(document.getElementById("uploadFiles_trId_["+j+"]")==null){
+						//alert(j+"-=-=-=-"+document.getElementById("uploadFiles_["+j+"]"));
+						continue;
+					}
+					var delflgJ = document.getElementById("uploadFiles_["+j+"].delFlg").value;
+					if("1" == delflgJ){
+						continue;
+					}
+					var nameJ = document.getElementById("tblCmnUpLoadFiles["  + j +  "].name").value;
+					if(name == nameJ){
+						Validator.clearValidateInfo();
+						Validator.warnMessage(msgInfo_.getMsgById('HR_I093_R_0'));
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+</script>
+

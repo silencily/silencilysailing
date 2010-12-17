@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2007-12-10 21:26:05 by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="net.silencily.sailing.common.fileload.domain.TblCmnUpLoadFile" table="TBL_CMN_UPLOADFILE"    optimistic-lock="version" dynamic-insert="true" dynamic-update="true">
+        <id name="id" type="string">
+            <column name="ID" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <version name="version" column="version" unsaved-value="undefined"> </version>
+       
+        <property name="name" type="string">
+            <column name="NAME" length="4000"/>
+        </property>
+        <property name="savePath" type="string">
+            <column name="SAVEPATH" length="4000" />
+        </property>
+  
+        <property name="describle" type="string">
+            <column name="DESCRIBLE" length="4000" />
+        </property>
+  
+        <property name="creator" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="CREATOR" length="32" />
+        </property>
+        <property name="creatorDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="CREATOR_DEPT" length="32" />
+        </property>
+        <property name="createdTime" type="java.util.Date">
+            <column name="CREATED_TIME" length="7" />
+        </property>
+        <property name="modifier" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="MODIFIER" length="32" />
+        </property>
+        <property name="modifierDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="MODIFIER_DEPT" length="32" />
+        </property>
+        <property name="modifiedTime" type="java.util.Date">
+            <column name="MODIFIED_TIME" length="7" />
+        </property>
+        <property name="deleter" type="net.silencily.sailing.framework.codename.impl.hibernate.UserCodeNameUserType">
+            <column name="DELETER" length="32" />
+        </property>
+        <property name="deleterDept" type="net.silencily.sailing.framework.codename.impl.hibernate.DepartmentCodeNameUserType">
+            <column name="DELETER_DEPT" length="32" />
+        </property>
+        <property name="deletedTime" type="java.util.Date">
+            <column name="DELETED_TIME" length="7" />
+        </property>
+        <property name="delFlg" type="string">
+            <column name="DEL_FLG" length="1" not-null="true" />
+        </property>
+        <property name="sequenceNo" type="java.lang.Integer">
+            <column name="SEQUENCE_NO" precision="9" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

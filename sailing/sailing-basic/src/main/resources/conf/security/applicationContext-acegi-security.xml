@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+    <!-- ======================== FILTER CHAIN ======================= -->
+    <bean id="security.filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
+        <property name="filterInvocationDefinitionSource">
+            <value>
+                PATTERN_TYPE_APACHE_ANT
+                /j_security_check*=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.authenticationProcessingFilter,security.rememberMeProcessingFilter
+                /**/singleSignOnAction.do*=security.clearSecurityContextFilter
+                /**/IMAction.do*=security.clearSecurityContextFilter				
+				/**/login.jsp*=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter   
+				/**/logoff=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter
+				/**/*.do*=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.expirerFilter,security.remoteUserFilter,security.rememberMeProcessingFilter,security.exceptionTranslationFilter,security.filterInvocationInterceptor
+				/**/loading.jsp=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter
+				/**/main.jsp=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter
+				/**/frame_midden.jsp=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter
+           <!-- 
+            	/**/*.jsp*=security.clearSecurityContextFilter,security.httpSessionContextIntegrationFilter,security.remoteUserFilter,security.rememberMeProcessingFilter,security.exceptionTranslationFilter ,security.filterInvocationInterceptor
+-->
+            </value>
+        </property>
+    </bean>
+
+	<bean id="security.expirerFilter" class="net.silencily.sailing.security.acegi.context.ExpirerFilter" />
+
+	<!-- Acegi： 认证部分 ======================================= S T A R T ===========================================================
+	 -->
+	<!-- 清空SecurityContext中保存的信息，因为使用了ThreadLocal类型的变量ContextInfo保存了登录用户的信息，
+	      所以需要在退出时调用ContextInfo.clear()来清空ContextInfo中的信息。
+	-->
+	<bean id="security.clearSecurityContextFilter" class="net.silencily.sailing.basic.security.acegi.context.ClearSecurityContextFilter" />
+	
+    <!-- 使用HTTP Session Context Filter拦截器来保证各个请求之间共享Acegi框架中SecurityContextHolder中保存的信息。
+    -->
+    <bean id="security.httpSessionContextIntegrationFilter" class="org.acegisecurity.context.HttpSessionContextIntegrationFilter">
+        <property name="context"><value>org.acegisecurity.context.SecurityContextImpl</value></property>
+    </bean>
+    
+    <!-- 认证拦截器，基于Acegi框架，需要进行扩展。
+    -->
+    <bean id="security.authenticationProcessingFilter" class="net.silencily.sailing.basic.security.acegi.ui.webapp.CustomAuthenticationProcessingFilter">
+        <property name="authenticationManager"><ref local="security.authenticationManager"/></property>
+		<property name="rememberMeServices" ><ref local="security.rememberMeServices"/></property>
+        <property name="authenticationFailureUrl"><value>/coheg/login.jsp?login_error=true</value></property>
+        <property name="defaultTargetUrl"><value>/uf/login/MainPageAction.do?step=getTop<![CDATA[&]]>y=x</value></property>
+		<!-- Use 'j_security_check.auth' to avoid websphere5 servlet bug -->
+        <property name="filterProcessesUrl"><value>/j_security_check.auth</value></property>
+		<property name="continueChainBeforeSuccessfulAuthentication"><value>false</value></property>
+		<property name="singleSignOnService" ref="security.singleSignOnService"></property>
+    </bean>
+    
+    <bean id="security.rememberMeServices" class="net.silencily.sailing.security.acegi.ui.rememberme.SameDomainTokenBasedRememberMeService">
+		<property name="userDetailsService"><ref local="security.authenticationDao"/></property>
+		<property name="key"><value>cohegSecuritySpringRocks</value></property>
+	</bean>
+    
+    <bean id="security.authenticationManager" class="org.acegisecurity.providers.ProviderManager">
+        <property name="providers">
+            <list>
+                <ref local="security.daoAuthenticationProvider"/>
+				<ref local="security.rememberMeAuthenticationProvider"/>
+            </list>
+        </property>
+		<property name="sessionController"><ref bean="security.concurrentSessionController"/></property>
+    </bean>
+    
+    <bean id="security.daoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService"><ref local="security.authenticationDao"/></property>
+		<property name="hideUserNotFoundExceptions"><value>false</value></property>
+		<property name="passwordEncoder"><ref local="security.passwordEncoder"/></property>
+	</bean>
+
+    <!-- Read users from database -->
+    <bean id="security.authenticationDao" class="net.silencily.sailing.basic.security.acegi.userdetails.hibernate.HibernateAuthenticationDao">
+        <property name="sessionFactory">
+			<ref bean="system.sessionFactory" />
+        </property>
+    </bean>
+
+	<bean id="security.passwordEncoder" class="org.acegisecurity.providers.encoding.Md5PasswordEncoder"></bean>
+	
+	<bean id="security.cachesProviderService" class="net.silencily.sailing.security.remoting.CachesProviderServiceImpl">
+		<property name="userCache">
+			<ref bean="security.userCache"></ref>
+		</property>
+<!-- 
+		<property name="resourceCache">
+			<ref bean="security.resourceCache"></ref>
+		</property>
+		<property name="permissionCache">
+			<ref bean="security.permissionCache"></ref>
+		</property>
+		<property name="organizationManager">
+			<ref bean="security.organizationManager"></ref>
+		</property>
+-->
+	</bean>
+	<bean id="security.userCache" class="net.silencily.sailing.security.acegi.providers.dao.cache.HashtableBasedFlushbleUserCache" />
+
+	<bean id="security.rememberMeAuthenticationProvider" class="org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider">	
+		<property name="key"><value>cohegSecuritySpringRocks</value></property>
+	</bean>
+
+	<!-- Acegi： 认证部分 ====================================== E N D ===============================================================
+	 -->
+	
+		
+	<bean id="security.webserviceOutSecurityFilter" class="net.silencily.sailing.basic.security.acegi.context.WebServiceOutSecurityFilter" />
+	
+    <!-- ======================== AUTHENTICATION ======================= -->
+    
+    <!-- Note the order that entries are placed against the objectDefinitionSource is critical.
+         The FilterSecurityInterceptor will work from the top of the list down to the FIRST pattern that matches the request URL.
+         Accordingly, you should place MOST SPECIFIC (ie a/b/c/d.*) expressions first, with LEAST SPECIFIC (ie a/.*) expressions last -->
+    <bean id="security.filterInvocationInterceptor" class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+        <property name="authenticationManager"><ref local="security.authenticationManager"/></property>
+        <property name="accessDecisionManager"><ref local="security.accessDecisionManager"/></property>
+        <property name="objectDefinitionSource"><ref local="security.filterInvocationDefinitionSource"></ref></property>
+		<!--
+		<property name="rejectPublicInvocations"><value>true</value></property>
+		-->
+    </bean>
+	
+	<bean id="security.filterInvocationDefinitionSource" class="net.silencily.sailing.security.acegi.intercept.web.RdbmsBasedFilterInvocationDefinitionSource">
+		<property name="resourceMappingProvider">
+			<ref local="security.resourceMappingProvider"></ref>
+		</property>
+		<property name="resourceExpression">
+			<value>PATTERN_TYPE_APACHE_ANT</value>
+		</property>
+	</bean>
+	
+	<bean id="security.resourceMappingProvider" class="net.silencily.sailing.security.acegi.intercept.web.ResourceMappingProviderImpl" >
+		<property name="cachesProviderService">
+			<ref bean="security.cachesProviderService"/>
+		</property>
+	</bean>
+			
+	<bean id="security.rememberMeProcessingFilter" class="org.acegisecurity.ui.rememberme.RememberMeProcessingFilter">
+		<property name="authenticationManager"><ref local="security.authenticationManager"/></property>	
+		<property name="rememberMeServices"><ref local="security.rememberMeServices"/></property>
+	</bean>
+	
+	<bean id="security.concurrentSessionController" class="org.acegisecurity.concurrent.ConcurrentSessionControllerImpl">
+		<property name="maximumSessions"><value>-1</value></property>
+		<property name="sessionRegistry"><ref local="security.sessionRegistry"/></property>
+	</bean>
+
+	<bean id="security.sessionRegistry" class="org.acegisecurity.concurrent.SessionRegistryImpl"/>
+   
+   
+    <!-- Automatically receives AuthenticationEvent messages -->
+	<!--
+	<bean id="security.loggerListener" class="org.acegisecurity.event.authentication.LoggerListener"/>
+	-->
+	
+    <bean id="security.anonymousAuthenticationProvider" class="org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider">
+        <property name="key"><value>anonymous</value></property>
+    </bean>
+    
+    <bean id="security.roleVoter" class="org.acegisecurity.vote.RoleVoter">
+        <property name="rolePrefix"><value/></property>
+    </bean>
+
+    <bean id="security.accessDecisionManager" class="org.acegisecurity.vote.AffirmativeBased">
+        <property name="allowIfAllAbstainDecisions"><value>false</value></property>
+        <property name="decisionVoters">
+            <list>
+                <ref local="security.roleVoter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="security.singleSignOnService" class="net.silencily.sailing.security.acegi.ui.sso.ddny.RdbmsBasedSingleSignOnService">
+    	<property name="dataSource" ref="system.datasource"></property>
+    	<property name="clientSystemNames">
+    		<list>
+    			<value>Runtime</value>
+    			<value>OA</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    <bean id="security.anonymousProcessingFilter" class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+        <property name="key"><value>anonymous</value></property>
+        <property name="userAttribute"><value>anonymous,crd_ROLE_ANONYMOUS</value></property>
+    </bean>
+    
+    <bean id="security.exceptionTranslationFilter" class="net.silencily.sailing.security.acegi.ui.ExtensionalExceptionTranslationFilter">
+        <property name="authenticationEntryPoint"><ref local="security.authenticationProcessingFilterEntryPoint"/></property>	
+        <property name="accessDeniedHandler">
+      		<bean class="org.acegisecurity.ui.AccessDeniedHandlerImpl">
+      			<property name="errorPage" value="/403.jsp"/>
+      		</bean>
+      	</property>
+		<property name="forbiddenAnyAnonymousVisit"><value>false</value></property>
+		<property name="ignoreForbiddenFileFormats">
+			<list>
+				<value>.css</value>
+				<value>.js</value>
+				<value>.jpg</value>
+				<value>.gif</value>
+				<value>.png</value>
+			</list>
+		</property>
+    </bean>
+    
+    <bean id="security.remoteUserFilter" class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter">
+    	<property name="wrapperClass"><value>net.silencily.sailing.security.acegi.ui.rememberme.NeverRemainCookiesSavedReqeustAwareWrapper</value></property>
+    </bean>
+
+    <bean id="security.authenticationProcessingFilterEntryPoint" class="net.silencily.sailing.security.acegi.ui.webapp.InternetSupportAuthenticationProcessingFilterEntryPoint">
+		<property name="useInternetLoginUrl" value="true"/>
+        <property name="loginFormUrl"><value>/sailing/coheg/login.jsp</value></property>
+		<property name="forceHttps"><value>false</value></property>
+		<property name="rememberMeServices" ><ref local="security.rememberMeServices"/></property>
+		<property name="singleSignOnService" ref="security.singleSignOnService"></property>
+    </bean>
+	
+	
+	<!-- Struts Menu -->
+	<!-- 
+	<bean id="security.strutsMenuBuilder" class="com.qware.security.acegi.strutsmenu.StrutsMenuBuilderImpl">
+		<property name="menuItemProvider">
+			<ref local="security.menuItemProvider"></ref>
+		</property>
+	</bean>
+	
+	<bean id="security.menuItemProvider" class="com.qware.security.acegi.strutsmenu.MenuItemProviderImpl">
+		<property name="cachesProviderService">
+			<ref bean="security.cachesProviderService"/>
+		</property>
+		<property name="menuLinkTarget">
+			<value>mainFrame</value>
+		</property>
+	</bean>
+	-->
+	<!-- Xml Menu -->
+	<!-- 
+	<bean id="security.xmlMenuBuilder" class="com.qware.security.acegi.xmlmenu.XmlMenuBuilderImpl">
+		<property name="menuItemProvider">
+			<ref local="security.menuItemProvider"></ref>
+		</property>
+	</bean>
+	
+	<bean id="security.userMenuAware" class="com.qware.security.acegi.ui.UserMenuAwareSupport">
+		<property name="strutsMenuBuilder">
+			<ref local="security.strutsMenuBuilder"></ref>
+		</property>
+		<property name="xmlMenuBuilder">
+			<ref local="security.xmlMenuBuilder"></ref>
+		</property>
+	</bean>
+	
+	<bean id="security.strutsMenuFilter" class="com.qware.security.acegi.ui.StrutsMenuFilter" autowire="byType" />
+	
+	<bean id="security.xmlMenuFilter" class="com.qware.security.acegi.ui.XmlMenuFilter" autowire="byType" />
+	-->
+</beans>

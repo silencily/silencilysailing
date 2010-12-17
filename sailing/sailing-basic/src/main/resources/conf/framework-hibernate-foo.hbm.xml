@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- Define Wrapper Types -->
+	<typedef name="user_wrapper" class="com.coheg.persistent.hibernate3.usertype.UserWrapperType" />
+	<typedef name="department_wrapper" class="com.coheg.persistent.hibernate3.usertype.DepartmentWrapperType" />
+	<typedef name="code_wrapper" class="com.coheg.persistent.hibernate3.usertype.CodeWrapperType" />	
+	
+	<typedef name="user_code_name" class="com.coheg.framework.codename.impl.hibernate.UserCodeNameUserType"/>
+	<typedef name="department_code_name" class="com.coheg.framework.codename.impl.hibernate.DepartmentCodeNameUserType"/>
+	<typedef name="users_code_name" class="com.coheg.framework.codename.impl.hibernate.UsersCodeNameUserType"/>
+	<typedef name="departments_code_name" class="com.coheg.framework.codename.impl.hibernate.DepartmentsCodeNameUserType"/>
+</hibernate-mapping>

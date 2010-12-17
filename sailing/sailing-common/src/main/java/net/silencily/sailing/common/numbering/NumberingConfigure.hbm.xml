@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="platform_numbering_configure" name="net.silencily.sailing.common.numbering.NumberingConfigure">
+        <id type="string" column="business_name" length="300" unsaved-value="null" name="businessName">
+            <generator class="assigned"/>
+        </id>
+        <version column="version" unsaved-value="undefined" name="version"/>
+        <property name="numberingFormat" column="numbering_format" type="string" length="4000"/>
+        <property name="currentNo" column="current_no" type="double"/>
+        <property name="numberingNote" column="numbering_note" type="string" length="4000"/>
+        <property name="sequenceNo" column="sequence_no" type="integer"/>
+        <property name="resetValue" column="reset_value" type="string" length="100"/>
+    </class>
+</hibernate-mapping>

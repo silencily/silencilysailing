@@ -1,0 +1,78 @@
+
+/*refact style_desktop.css */
+
+.info_time{
+	padding:2px;
+	text-align:right;
+	color:#999999;
+	font-size:8pt;
+	width:100%;
+}
+
+/*refact style_calendar.css*/
+
+table.Listing td{
+	height:70px;
+}
+.cal_tr td{
+	background-color:#efefef;	
+}
+.cal_today {
+	background:url(../image/desktop/bg_click_date.jpg) top right;
+	border:1px solid #0000ff;
+}
+/**/
+.cal_normal{
+	background:none;
+}
+.cal_day{
+	color:#999999;
+	font-size:13px;
+	/*font-weight:bold;*/
+    font-family: Arial Black;
+	text-align:right;
+	cursor:pointer;
+}
+.cal_work{
+	height:32px;
+	text-align:center;
+}
+.cal_normal a,.cal_normal a:visited,.cal_normal a:active{
+	color:#bbbbbb;
+}
+.cal_today_link a,.cal_today_link a:visited,.cal_today_link a:active{
+	color:#FF9900;
+}
+.cal_oldDay{
+	color:#333;
+	font-size:10px;
+}
+.cal_oldDate{
+	color:#bbbbbb;
+	font-size:11px;	
+}
+.cal_fest_bg{
+	background-color:#eeeeee;
+	padding:2px 0px 0px 4px;
+	height:20px;
+	text-align:left;
+}
+.cal_fest{
+	color:#6699FF;
+}
+.cal_oldFest{
+	color:#CC0000;
+}
+.cal_24Fest{
+	color:#00CC00;
+}
+.cal_head td{
+	width:100px;
+	text-align:center;
+}
+.cal_alt{
+	width:140px;
+	color:#666666;
+	text-align:right;
+	font-family: Verdana, Arial;
+}

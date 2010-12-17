@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>	
+	<!--
+		Export HttpInvoker Serivice
+	-->
+	<bean name="/security.httpInvokerCachesProviderService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="security.cachesProviderService"/>
+		</property>
+		<property name="serviceInterface" value="com.coheg.security.remoting.CachesProviderService" />
+	</bean>
+		
+</beans>

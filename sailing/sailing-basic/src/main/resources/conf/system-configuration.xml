@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!--
+    在主配置中必须的bean:
+    1. com.coheg.core.ServiceInfo: 用于声明当前的配置文件
+    2. org.springframework.context.event.SimpleApplicationEventMulticaster: 用于广播事件通知, 它的名称
+       (id)定义在 GlobalParameter.APPLICATION_EVENT_MULTICASTER, id 必须是这个值, 否则就不会广播
+    3. org.springframework.jndi.JndiObjectFactoryBean: 系统数据源, 注意它是基于 jndi 的, 所以如果在本地
+       环境下运行数据库相关的程序首先需要启动, LocalDataSource.mock(), 如果在服务器环境下需要配置的是
+    4. org.springframework.jdbc.datasource.DataSourceTransactionManager: 系统中涉及数据库相关操作的事务
+       管理器
+    5. com.coheg.persistent.ServiceAutoProxyCreator: 用于创建事务代理(可能的其他通用服务)
+    6. com.coheg.persistent.ServiceTransactionProxyAdvisor: 处理事务的 Advisor, 由 5 使用
+    7. com.coheg.scheduling.SchedulingListener: 用于在系统启动后启动定时器执行周期性任务
+-->
+<beans>
+	<bean id="system.serviceInfo" class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="system"/>
+		<property name="description" value="framework configuration"/>	
+	</bean>
+	
+    <!--  messages used by system -->
+    <bean id="system.codedMessageSource" class="net.silencily.sailing.resource.impl.HierarchyCodedMessageSource" init-method="init">
+        <description>
+            <![CDATA[
+              <property name="list*">readOnly</property>
+            ]]>
+        </description>
+    </bean>
+    
+    <bean id="system.exceptionHandler" class="net.silencily.sailing.exception.DefaultBaseExceptionHandler"/>
+    
+    <bean id="system.applicationEventMulticaster" class="org.springframework.context.event.SimpleApplicationEventMulticaster"/>
+    
+	<!-- below are relative to transaction -->
+    <bean id="system.datasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName" value="java:comp/env/jdbc/OracleDS"/>
+    </bean>  
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="system.platformTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="system.sessionFactory"/>
+	</bean>
+    
+    <bean id="system.transactionAutoProxy" class="net.silencily.sailing.framework.service.ServiceAutoProxyCreator">
+    	<!-- 
+    	<property name="customTargetSourceCreator">
+   			<bean class="com.coheg.framework.service.support.AbstractMethodImplementationTargetSourceCreator">
+   				<property name="methodNames">
+   					<map>
+   						<entry key="getRequestContext" value="system.requestContext"/>
+   						<entry key="getAuthenticationService" value="system.authenticationService"/>
+   						<entry key="getHibernateTemplate" value="system.hibernateTemplate"/>
+   						<entry key="getJdbcTemplate" value="system.jdbcTemplate"/>
+   					</map>
+   				</property>
+   			</bean>
+    	</property>
+    	-->
+    	<property name="advisors">
+    		<list>
+	    		<ref local="system.transactionAdvisor"/>
+	    		<bean class="net.silencily.sailing.framework.service.MethodNullParametersNotAllowedAdvisor"/>
+                <bean class="net.silencily.sailing.framework.core.support.aop.RequestContextIntroductionAdvisor"/>
+    		</list>
+    	</property>
+    </bean>
+    
+    <bean id="system.transactionAdvisor" class="net.silencily.sailing.framework.service.ServiceTransactionProxyAdvisor">
+        <property name="platformTransactionManager">
+            <ref local="system.platformTransactionManager"/>            
+        </property>
+        <property name="transactionAttributes"> 
+			<props> 
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>  
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop> 
+				<prop key="list*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="fetchAll">PROPAGATION_REQUIRED,readOnly</prop>
+			</props> 
+		</property> 
+    </bean>
+    
+    <!-- this is timer's definition -->
+    <bean id="system.schedulingListener" class="net.silencily.sailing.scheduling.SchedulingListener">
+    </bean>
+
+    <bean id="system.sqlMapClientFactoryBean" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource"><ref local="system.datasource"/></property>    
+        <property name="configLocation">
+            <bean class="net.silencily.sailing.framework.persistent.ibatis.IbatisSqlMapResource" init-method="init"/>
+        </property>
+    </bean>
+
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- 
+	<bean id="system.propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<bean class="com.coheg.persistent.ResourceProbeBasedResource">
+					<property name="path"><value>jdbc.properties</value></property>
+				</bean>
+			</list>
+		</property>	
+	</bean>
+	-->
+	
+	<!-- Hibernate SessionFactory -->
+	<bean id="system.sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="system.datasource"/>
+		<property name="entityInterceptor">
+			<bean class="net.silencily.sailing.framework.persistent.hibernate3.ReworkingHibernateInterceptor"></bean>
+		</property>
+		<property name="mappingLocations">
+        	<list>
+            	<bean class="net.silencily.sailing.framework.persistent.hibernate3.HibernateMappingResource" />
+            </list>
+        </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.query.substitutions">true 1, false 0, yes 1, no 0</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="system.hibernateTemplate" class="net.silencily.sailing.framework.persistent.hibernate3.EnhancedHibernateTemplate">
+        <property name="sessionFactory"><ref local="system.sessionFactory"/></property>
+    </bean>
+
+    <bean id="system.sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+        <property name="sqlMapClient">
+<!--        <ref local="system.sqlMapClientFactoryBean"/>-->
+            <bean class="net.silencily.sailing.framework.persistent.ibatis.IbatisPersistentSupportFactoryBean">
+                <property name="sqlMapClientFactoryBeanName">
+                    <value>system.sqlMapClientFactoryBean</value>
+                </property>
+                <property name="sqlMapProxy"><ref local="system.sqlMapProxy"/></property>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="system.jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource"><ref local="system.datasource"/></property>
+    </bean>
+    
+    <bean id="system.primaryKey" class="net.silencily.sailing.framework.persistent.PrimaryKeyGeneratorFactoryBean"/>
+
+    <bean id="system.sqlMapProxy" class="net.silencily.sailing.framework.persistent.ibatis.SqlMapProxy">
+        <property name="sqlExecutorMethods">
+            <map>
+                <entry key="executeQuery"><bean class="net.silencily.sailing.framework.persistent.filter.impl.ReworkingParameterForCondition"/></entry>
+            </map>
+        </property>
+        <property name="sqlMapExecutorMethods">
+            <map>
+                <entry key="insert"><bean class="net.silencily.sailing.framework.persistent.filter.impl.ReworkingParameterForInsert"/></entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="system.conditionService" class="net.silencily.sailing.framework.persistent.filter.impl.ConditionServiceImpl"/>
+    
+    <!-- 初始化所有实现 com.coheg.business.Initializable 接口的 beans -->
+    <bean id="system.initializableBeansProcessor" class="net.silencily.sailing.business.spi.InitializableBeansProcessor" />
+
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames"><value>system.moduleCodeNameService</value></property>
+		<property name="interceptorNames"><value>system.moduleCodeNameInterceptor</value></property>
+	</bean>
+
+	<bean id="system.moduleCodeNameInterceptor" class="net.silencily.sailing.framework.codename.impl.ModuleCodeNamePrefixInterceptor"/>
+	
+	<bean id="system.moduleCodeNameService" class="net.silencily.sailing.framework.codename.impl.hibernate.HibernateModuleCodeNameService">
+		<property name="hibernateTemplate">
+			<ref bean="system.hibernateTemplate"/>
+		</property>
+	</bean>
+
+<!--    
+    <bean id="system.authenticationService" class="com.coheg.framework.authentication.service.impl.BeanShellAuthenticationService"/>
+    
+    <bean id="system.departmentService" class="com.coheg.framework.authentication.service.impl.BeanShellDepartmentService">
+    	<property name="topDepartment" value="0000"/>
+    	<property name="jdbcTemplate" ref="system.jdbcTemplate"/>
+    </bean>    
+-->
+
+    <!-- 
+    <bean id="system.requestContext" class="com.coheg.framework.core.support.RequestContextFactoryBean">
+    	<property name="authenticationService"><ref local="system.authenticationService"/></property>
+    </bean>
+    -->
+</beans>

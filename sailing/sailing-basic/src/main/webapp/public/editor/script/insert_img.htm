@@ -1,0 +1,180 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<style type="text/css">
+body, a, table, div, span, td, th, input, select{
+	font:9pt;font-family: "宋体", Verdana, Arial, Helvetica, sans-serif;
+}
+body {padding:5px}
+</style>
+<script language="JavaScript">
+
+var CurrentPage = {};
+
+CurrentPage.actionName = "INSERT";
+CurrentPage.pageTitle = "在选中的位置插入一个新图片";
+
+CurrentPage.oControl ;
+CurrentPage.oSeletion;
+CurrentPage.sRangeType;
+
+CurrentPage.imgSrc  = "";
+CurrentPage.isError = false;
+
+// 图片来源单选点击事件
+function switchClick(str){
+	if (str == "url"){
+		document.getElementsByName("box")[0].checked = true;
+		//document.getElementById("localFile").disabled = true;
+		document.getElementById("webFile").disabled   = false
+		CurrentPage.previewImage(document.getElementById("webFile").value);
+	}
+	/*else{
+		document.getElementsByName("box")[0].checked = true;
+		document.getElementById("localFile").disabled = false;
+		document.getElementById("webFile").disabled   = true
+		CurrentPage.previewImage(document.getElementById("localFile").value);
+	}*/
+}
+//try{
+	CurrentPage.oSelection = self.dialogArguments.frames["HtmlEditor"].document.selection.createRange();
+	CurrentPage.sRangeType = self.dialogArguments.frames["HtmlEditor"].document.selection.type;
+//}catch(e){}
+
+if (CurrentPage.sRangeType == "Control") {
+		if (CurrentPage.oSelection.item(0).tagName == "IMG"){
+			CurrentPage.pageTitle = "修改选中的图片";
+			CurrentPage.actionName = "MODI";
+			CurrentPage.oControl = CurrentPage.oSelection.item(0);
+		}
+}
+document.title = "图片设置（" + CurrentPage.pageTitle + "）";
+
+// 初始值
+CurrentPage.InitPage = function(){	
+	switchClick('url');	
+	if(CurrentPage.actionName == "MODI"){
+		CurrentPage.imgSrc = CurrentPage.oControl.src;
+		document.getElementById("webFile").value = CurrentPage.imgSrc;		
+		CurrentPage.previewImage(CurrentPage.imgSrc)
+	}	
+}
+window.onload = CurrentPage.InitPage;
+
+
+// 本窗口返回值
+function getReturnImage(){
+	var url = 	CurrentPage.imgSrc;
+	if(url == ""){
+		alert('请您选择要插入的图片！');
+		return;
+	}
+	if(CurrentPage.isError){
+		alert('您要插入的图片路径有错误，请检查路径：'+url);
+		return;
+	}
+	//if (CurrentPage.actionName == "MODI") {
+	//	CurrentPage.oControl.src = url;
+	//}else{}		
+		//sHTML =  '<img src="'+url+'"'+sHTML;
+		//sHTML += '>';
+	self.returnValue = url;		
+	self.close();
+}
+function closeWindow(){
+	self.close();
+}
+
+CurrentPage.previewImage = function(str){	
+	if(str == ""){
+		document.getElementById("tdId_view").innerHTML = "";
+		document.getElementById("divId_imageSize").innerHTML = "";
+		CurrentPage.imgSrc = "";
+		return;
+	}
+	CurrentPage.isError = false;
+	CurrentPage.imgSrc  = str;
+	document.getElementById("tdId_view").innerHTML = '<a href="#" onclick="getWindow(\''+str+'\')" ><img src="'+str+'" onload="setSize(this)" onerror="loadError(this)" alt="点击图片预览" border=0 name="imgId_view" border="0"></a>'			
+}
+function getWindow(url){
+	window.open(url,"_blank","width=600,height=600,resizable=yes,top=100,left=300");
+}
+function setSize(obj){
+	var imgHeight = obj.height;
+	var imgWidth  = obj.width;	
+	if(imgHeight > 260){
+		var temp = 260 / imgHeight ;
+		obj.height = imgHeight * temp;
+		obj.width  = imgWidth  * temp;
+	}
+	if(obj.width > 500)
+		obj.width = 500;
+	document.getElementById("divId_imageSize").innerHTML = " 宽度：" +imgWidth + " 高度：" + imgHeight;
+}
+function loadError(obj){
+	setSize(obj);
+	CurrentPage.isError = true;
+}
+</script>
+
+<BODY bgColor="menu"  style="border: 1px buttonhighlight;">
+
+<table border=0 cellpadding=0 cellspacing=0 align=center width="100%">
+<tr>
+	<td>
+	<fieldset>
+	<legend>图片来源</legend>
+	<table border=0 cellpadding=0 cellspacing=0>
+	<tr><td colspan=9 height=5></td></tr>
+	<!-- 先屏蔽上传图片 
+	<tr disabled="true">
+		<td width=7></td>
+		<td width=54 align=right onclick="switchClick('file')">
+			<input type=radio name="box" id="d_checkfromfile" value="1" onclick="switchClick('file')" >上传:</td>
+		<td width=5></td>
+		<td colspan=5>
+			<input type="file" id="localFile" onchange="CurrentPage.previewImage(this.value)" size="55"/>
+		</td>
+		<td width=7></td>
+	</tr>
+	-->
+	<tr><td colspan=9 height=5></td></tr>
+	<tr>
+		<td width=7></td>
+		<td width=54 align=right onclick="switchClick('url')">
+			<input type=radio name="box" id="d_checkfromurl" value="1" checked>网址:</td>
+		<td width=5></td>
+		<td colspan=5>
+			<input type=text id="webFile" size="66" value="" onChange="CurrentPage.previewImage(this.value)" disabled></td>
+		<td width=7></td>
+	</tr>
+	<tr><td colspan=9 height=5></td></tr>
+	</table>
+	</fieldset>
+	</td>
+</tr>
+<tr><td height=5></td></tr>
+
+<!------------------------------>
+<tr>
+<td>
+	<fieldset>
+	<legend>预览图片</legend>
+		<div id="tdId_view" style="height:260px;text-align:center;margin-bottom:3px;"></div>
+	</fieldset>
+</td>
+</tr>
+<!------------------------------>
+
+<tr><td height=5></td></tr>
+<tr><td align=right>
+	<div id="divId_imageSize" style="float:left"></div>
+	<div style="float:right">
+		<input type=submit value='  确定  ' id=Ok onclick="getReturnImage()">&nbsp;&nbsp;
+		<input type=button value='  取消  ' onclick="closeWindow()">
+	</div>
+</td></tr>
+</table>
+
+</body>
+</html>

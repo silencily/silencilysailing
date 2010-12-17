@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <bean class="net.silencily.sailing.framework.core.ServiceInfo">
+      <property name="name"><value>vfs</value></property>
+      <property name="description"><value>virtual file system"</value></property>
+   </bean>
+   
+   <bean id="FileObjectManager" class="com.power.vfs.FileSystemFileObjectManager" singleton="false">
+        <property name="rootPaths">
+            <map>
+                <entry key="windows" value="D:/vfsroot"/>
+                <entry key="linux" value="/usr/vfsroot"/>
+            </map>        
+        </property>
+   </bean>
+   
+   <bean id="FileObjectManagerFactory" class="com.power.vfs.FileObjectManagerFactory">
+        <lookup-method name="lookupFileObjectManager" bean="FileObjectManager"/>
+   </bean>
+</beans>

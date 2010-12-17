@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="common.components"/>
+		<property name="description" value="common.components"/>
+	</bean>
+	
+	<!-- 注册用于重组 EntityWrapper 的 Callbach Handler -->
+	<!-- 2007/12/18,Comment by Lxg
+	<bean id="common.persistent.reformUserWrapperCallbackHandler" class="com.coheg.common.persistent.hibernate3.spi.ReformUserWrapperCallbackHandler" />
+	<bean id="common.persistent.reformDepartmentWrapperCallbackHandler" class="com.coheg.common.persistent.hibernate3.spi.ReformDepartmentWrapperCallbackHandler" />
+	<bean id="common.persistent.reformCodeWrapperCallbackHandler" class="com.coheg.common.persistent.hibernate3.spi.ReformCodeWrapperCallbackHandler" />	
+	<bean id="common.persistent.typeWrapperCallbackHandlerRegister" class="com.coheg.common.persistent.hibernate3.spi.TypeWrapperCallbackHandlerRegister" />
+
+	<bean id="common.ui.selectorService" class="com.coheg.common.ui.selector.service.impl.SelectorServiceImpl">
+        <property name="jdbcTemplate">
+            <ref bean="system.jdbcTemplate"/>
+        </property>  
+	</bean>
+
+	<bean id="common.ui.comboProviderService" class="com.coheg.common.ui.combo.DefaultComboProviderService" />
+	-->
+	
+	<!-- 系统代码 Service -->
+	<!--
+	2007/12/4,Commented by lxg
+	<bean id="common.systemCodeCRUDService" class="com.coheg.common.systemcode.spi.JdbcSystemCodeService">
+		<property name="systemModuleMap">
+			<map>
+				<entry>
+					<key><value>common</value></key>
+					<value>公用代码</value>
+				</entry>
+				<entry>
+					<key><value>hr</value></key>
+					<value>人事代码</value>
+				</entry>
+				<entry>
+					<key><value>material</value></key>
+					<value>物资代码</value>
+				</entry>
+				<entry>
+					<key><value>equipment</value></key>
+					<value>设备代码</value>
+				</entry>
+				<entry>
+					<key><value>flaw</value></key>
+					<value>缺陷代码</value>
+				</entry>
+				<entry>
+					<key><value>fuel</value></key>
+					<value>燃料代码</value>
+				</entry>
+				<entry>
+					<key><value>cp</value></key>
+					<value>计划经营代码</value>
+				</entry>				
+			</map>
+		</property>
+	</bean>
+
+	
+	<bean id="common.extensionalOrganizationService" class="com.coheg.common.ui.organization.service.DefaultExtensionalOrganizationService" />
+	<bean id="common.extensionalUserService" class="com.coheg.common.ui.user.service.HibernateExtensionalUserService" />
+	
+	<bean id="common.messageService" class="com.coheg.common.message.service.impl.HibernateCommonMessageService"/>
+-->
+    <bean id="common.numberingService" class="net.silencily.sailing.common.numbering.service.impl.HibernateNumberingService"/>
+</beans>
