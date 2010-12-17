@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="工作负责人开票" type="Step"  x="250" y="100"/> 
+  <cell id="2" name="签发人审核签名" type="Step"  x="400" y="100"/> 
+  <cell id="3" name="接票人审核签名" type="Step"  x="550" y="100"/> 
+  <cell id="4" name="许可人补充安全措施" type="Step"  x="700" y="100"/>  
+  <cell id="5" name="开工许可人签字" type="Step"  x="850" y="100"/> 
+  <cell id="6" name="开工工作负责人签字" type="Step"  x="850" y="300"/> 
+  <cell id="7" name="完工负责人签名" type="Step"  x="700" y="300"/> 
+  <cell id="8" name="完工许可人签名" type="Step"  x="550" y="300"/>  
+  <cell id="9" name="许可人加盖执行章" type="Step"  x="400" y="300"/> 
+  <cell id="10" name="负责人汇报工作" type="Step"  x="250" y="300"/> 
+  <cell id="11" name="签发人终结工作" type="Step"  x="250" y="500"/> 
+  <cell id="99" name="结束" type="Step"  x="400" y="500"/> 
+  <action startId="3" nextId="1" name="" type="action" points="580,80 580,50 290,50 290,80"/>
+  <action startId="2" nextId="1" name="" type="action" points="380,115 320,115"/>
+  <action startId="4" nextId="1" name="" type="action" points="730,80 730,60 280,60 280,80"/>
+  <action startId="5" nextId="1" name="" type="action" points="870,140 870,180 290,180 290,140"/>
+  <action startId="6" nextId="1" name="" type="action" points="870,280 870,200 280,200 280,140"/>
+  <action startId="11" nextId="10" name="" type="action" points="290,480 290,340"/>
+</layout>

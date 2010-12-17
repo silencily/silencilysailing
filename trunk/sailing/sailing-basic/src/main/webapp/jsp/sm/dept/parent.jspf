@@ -1,0 +1,21 @@
+<%--
+    @version:$Id: parent.jspf,v 1.1 2010/12/10 10:56:43 silencily Exp $
+    @since $Date: 2010/12/10 10:56:43 $
+--%>
+
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<div class="update_subhead">
+	 <span class="switch_open" onclick="StyleControl.switchDiv(this,$('parenttable'))" title="伸缩节点">代码信息</span>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable">
+	<tr>
+		<td class="attribute">所属部门编码</td>
+		<td><input name="dummy.bean.parent.deptCd" value="<c:out value='${parent.deptCd}'/>" class="readonly" readonly="readonly" disabled/></td>
+		<td class="attribute">所属部门名称</td>
+		<td><input name="dummy.bean.parent.deptName" value="<c:out value='${parent.deptName}'/>" class="readonly" readonly="readonly" disabled/></td>
+	</tr>
+	<tr>
+		<td class="attribute">备注</td>
+		<td colspan="3"><input name="dummy.bean.parent.remark" value="<c:out value='${parent.remark}'/>" class="readonly" readonly="readonly" disabled style="width:85%"/></td>
+	</tr>
+</table>

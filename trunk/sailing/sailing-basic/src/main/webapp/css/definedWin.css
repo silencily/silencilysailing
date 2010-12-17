@@ -1,0 +1,217 @@
+.definedWin_lightbox{
+	background-color:#eee;
+	padding: 1px;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+	z-index:9005;
+	position:absolute;
+	display:none;
+}
+#definedWin_loading{
+	z-index:9005;
+	position:absolute;
+	display:none;
+}
+
+#definedWin_overlay{ 
+	top: 0px; 
+	left:0px;
+	position:absolute;
+	width:100%;
+	z-index:9002;
+	display:none;	
+	background:transparent url(../image/blank.gif) repeat;/**/
+}
+/*这里只能使用绝对路径*/
+* html #definedWin_overlay{
+	overflow:hidden;
+	background-color: transparent;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/publicresource/image/overlay.png", sizingMethod="scale");
+}
+
+.definedWin_box{}
+.definedWin_button{
+	text-align:right;
+	margin:3px;
+	display:none;
+}
+.definedWin_content{
+	text-align:center;
+}
+.definedWin_content textarea{
+	border:1px solid #999999;
+	text-align:left;
+}
+
+.definedWin_title{
+	/*background-image:url(../image/skin/1/window_top.gif);*/
+	background: transparent url(../image/skin/dialog/top_mid.gif) repeat-x 0 0;	
+	background-repeat:repeat-x;
+	line-height:18px;
+	padding:2px;
+	cursor:move;
+}
+.definedWin_title table{
+	color:#fff;
+	height:22px;
+}
+#definedWin_close{
+	
+}
+
+/**使用window窗口*/
+.overlay_dialog {
+	background-color: #DFDFFF;
+	filter:alpha(opacity=40);
+	-moz-opacity: 0.4;
+	opacity: 0.4;
+}
+
+.overlay___invisible__ {
+  background-color: #ECECFF;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.dialog_nw {
+	width: 9px;
+	height: 23px;
+	background: transparent url(../image/skin/dialog/top_left.gif) no-repeat 0 0;		
+}
+
+.dialog_n {
+	background: transparent url(../image/skin/dialog/top_mid.gif) repeat-x 0 0;	
+	height: 23px;
+}
+
+.dialog_ne {
+	width: 9px;
+	height: 23px;
+	background: transparent url(../image/skin/dialog/top_right.gif) no-repeat 0 0;		
+}
+
+.dialog_e {
+	width: 2px;
+	background: transparent url(../image/skin/dialog/center_right.gif) repeat-y 0 0;	
+}
+
+.dialog_w {
+	width: 2px;
+	background: transparent url(../image/skin/dialog/center_left.gif) repeat-y 0 0;		
+}
+
+.dialog_sw {
+	width: 9px;
+	height: 19px;
+	background: transparent url(../image/skin/dialog/bottom_left.gif) no-repeat 0 0;			
+}
+
+.dialog_s {
+	background: transparent url(../image/skin/dialog/bottom_mid.gif) repeat-x 0 0;		
+	height: 19px;
+}
+
+.dialog_se {
+	width: 9px;
+	height: 19px;
+	background: transparent url(../image/skin/dialog/bottom_right.gif) no-repeat 0 0;			
+}
+
+.dialog_sizer {
+	width: 9px;
+	height: 19px;
+	background: transparent url(../image/skin/dialog/sizer.gif) no-repeat 0 0;	
+	cursor:se-resize;	
+}
+
+.dialog_close {
+	width: 23px;
+	height: 20px;
+	background: transparent url(../image/skin/dialog/close.gif) no-repeat 0 0;			
+	position:absolute;
+	top:3px;
+	right:2px;
+	cursor:pointer;
+	z-index:1001;
+}
+
+.dialog_minimize {
+	width: 23px;
+	height: 20px;
+	background: transparent url(../image/skin/dialog/minimize.gif) no-repeat 0 0;			
+	position:absolute;
+	top:3px;
+	right:48px;
+	cursor:pointer;
+	z-index:1001;
+}
+
+.dialog_maximize {
+	width: 23px;
+	height: 20px;
+	background: transparent url(../image/skin/dialog/maximize.gif) no-repeat 0 0;			
+	position:absolute;
+	top:3px;
+	right:25px;
+	cursor:pointer;
+	z-index:1001;
+}
+
+.dialog_title {
+	float:left;
+	height:25px;
+	font-size:9pt;
+	text-align:left;
+	width:100%;
+	color:#fff;
+	font-weight:bold;
+	padding-top:5px;
+	background: transparent url(../image/skin/dialog/top_mid.gif) repeat-x 0 0;	
+	background-color:#3053BC;
+}
+.dialog_select {
+	background-color:#eee;
+	text-align:right;
+}
+.dialog_content {
+	overflow:auto;
+	color: #DDD;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background-color:#fff;
+	border-right: 1px solid #aaa;
+}
+.top_draggable, .bottom_draggable {
+	cursor:move;
+}
+.status_bar {
+	font-size:12px;
+}
+.status_bar input{
+	font-size:12px;
+}
+/* DO NOT CHANGE THESE VALUES*/
+.dialog {
+	display: block;
+	position: absolute;
+	border: 1px solid #eee;
+}
+
+.dialog table.table_window  { 
+    border-collapse: collapse; 
+    border-spacing: 0px; 
+    width: 100%;
+    margin: 0px;
+	padding:0px;
+}
+
+.dialog table.table_window td , .dialog table.table_window th { 
+	padding: 0; 
+}
+
+.dialog .title_window {
+  -moz-user-select:none;
+}
+
+	

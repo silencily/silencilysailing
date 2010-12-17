@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<title>principals</title>
+</head>
+<body>
+<pre  style="font-size:10pt;line-height:16pt">
+这个package中提供了按照<b>人员,部门,岗位等实现了Principal接口的实体</b>过滤业务数据的功能及结构,需要
+按照这个机制执行过滤的实体要求实现Principalable接口. 具体的例子是一条信息, 可以规定哪些人, 部
+门或岗位可以查看这条信息.需求来源于哪些群体的用户可以看到某些数据. 
+通常有两方面的应用:
+<ul>
+	<li>不限制检索的结果集, 而是作用于结果集中的对象, 就是当前用户是否有权进行某种操作</li>
+	<li>过滤满足条件结果集, 就是当前用户是否有权看到数据</li>
+</ul>
+<span style="color:blue">首先是<code>HIBERNATE</code>的实现</span>
+比如这个实体:
+<blockquote>
+public class Information extends Entity implements Principalable {
+	private String title;
+	private PrincipalTypes principalTypes = new PrincipalTypes();
+	......
+}
+</blockquote>
+用于在hbm文件中定义类型
+<blockquote>
+	&lt;property name="principalTypes" 
+		 type="com.coheg.framework.business.principals.PrincipalTypesUserType" 
+		 column="principal_types" 
+		 length="4000"/&gt;
+</blockquote>
+通过使用<code>HibernateUtils.principals()</code>可以生成一个用于
+<code>Criteria</code>的查询条件:
+<blockquote>
+    DetachedCriteria dc = DetachedCriteria.forClass(Information.class)
+       .add(Restrictions.like("title", "设备%"))
+       .add(HibernateUtils.principals());
+    return getHibernateTemplate().queryByCriteria(dc);
+</blockquote>
+上面的代码检索出以"设备"开头的标题并且当前登录用户可以查看的信息
+
+
+
+
+
+
+
+
+
+
+
+
+问题有两方面组成, web层组装PrincipalTypes和持久化层生成查询条件, 以便从数据库中检索出来后就是
+满足条件的数据
+</pre>
+<p><img src=""/></p>
+</body>
+</html>

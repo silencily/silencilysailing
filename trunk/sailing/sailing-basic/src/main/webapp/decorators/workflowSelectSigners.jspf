@@ -1,0 +1,52 @@
+<script type="text/javascript">
+	//********************************AJAX方式获取下一步的待办人 BEGIN***************************************************************
+	var appointSigner = '<c:out value="${requestScope['workflow.workflowInfo'].pointType}"/>'
+	function workflowSelectActionCallback(actionId)
+	{
+		alert("in my workflowSelectActionCallback");
+		if(appointSigner != 'point.emp')
+		{
+			//return;
+		}
+		createXMLHttpRequest();
+		var oid=$("oid").value;
+		var url = '<c:url value="/wf/CommonAction.do?step=getNextStepSigners&className=${beanClassName}&oid="/>'+oid+'&actionId='+actionId;
+		xmlHttp.open("GET",url);
+		xmlHttp.onreadystatechange = refreshNextSigners;
+		xmlHttp.send(null);	
+	}
+	function refreshNextSigners()
+	{
+		if (xmlHttp.readyState == 4){
+			if (xmlHttp.status == 200){ 
+				//设置数据到下拉列表
+				var select = document.getElementsByName('select_signers')[0];
+				while(select.options.length>0)
+				{
+					select.options.remove(0);
+				}
+
+				var retext = xmlHttp.responseText;
+
+				var arr = retext.split("$");
+				for(var i=0;i<arr.length;i++)
+				{
+
+					select.add(new Option(arr[i],arr[i]));
+				}
+			}
+		}
+	}
+	//********************************AJAX方式获取下一步的待办人 END***************************************************************
+</script> 	
+
+<table border="0" cellpadding="0" cellspacing="0" class="Update"
+		id="tabId_initWorkFlow">
+		<tr>
+			<td class="text">待办人</td>
+			<td colspan="3" class="font_master">
+			<select name="select_signers" width=100px>
+			</select>	
+			</td>
+		</tr>
+</table>		

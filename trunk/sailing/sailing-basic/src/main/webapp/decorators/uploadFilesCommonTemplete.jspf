@@ -1,0 +1,84 @@
+<script language="javascript">
+		if (CurrentPage == null) {
+				var CurrentPage = {};
+		}
+		var uploadFiles = new EditPage("uploadFiles");
+</script>
+<table style="display:none">
+	<tr id="uploadFiles_trId_[template]">
+		<td width="5%">
+			<div>
+				<input type="button" 
+					   class="list_create"
+			           onClick="CurrentPage.addRow(divId_uploadFiles);return false"
+			           id="uploadFiles_[template].add" 
+			           style="display:" 
+			           name="addBtn"
+			           title="ÐÂÔö" /> 
+			    <input type="button" 
+			           class="list_delete"
+			           onClick="uploadFiles.delRowaa(divId_uploadFiles,this);return false"
+			           id="uploadFiles_[template].del" 
+			           style="display:" 
+			           row="template"
+			           name="delBtn" 
+			           title="É¾³ý" />
+			    <input type="button"
+                       class="list_renew"
+			           onClick="uploadFiles.renRowCur(divId_uploadFiles,this);return false"
+			           id="uploadFiles_[template].old" 
+			           style="display:none" 
+			           row="template"
+			           name="oldBtn" 
+			           holdObj=true 
+			           title="»Ö¸´" />
+			</div>
+		</td>
+		<td align="center" valign="middle"  width="25%">
+				<input type="hidden"
+					   name="tblCmnUpLoadFiles[template].id" 
+			           id="uploadFiles_[template].id" 
+			           value="" />
+			    <input type="hidden"
+					   name="tblCmnUpLoadFiles[template].delFlg" 
+					   id="uploadFiles_[template].delFlg"
+					   value="0" /> 
+			    <input type="hidden"
+					   name="tblCmnUpLoadFiles[template].version" 
+					   id="uploadFiles_[template].version"
+					   value=""/>
+   
+				 
+				<div id="tblCmnUpLoadFiles[template].div_picLink" class="list" valign="middle" ></div>
+				
+				<input type="hidden"
+					   id="tblCmnUpLoadFiles[template].name"
+                       name="tblCmnUpLoadFiles[template].name"
+                       value="" />
+		</td>
+		<td width="30%">
+		
+				<input type="hidden"
+					   id="tblCmnUpLoadFiles[template].savePath"
+                       name="tblCmnUpLoadFiles[template].savePath"
+                       value="" />
+
+				<input type="file" name="filesBean.files[template].formFile" value="" onkeydown="return false;" onpaste="return false;" id="filesBean.files[template].formFile" onchange="changeSrc(this)" />
+
+		</td>
+		<td width="40%"> 
+				<vision:text 
+				       rwCtrlType="${requestScope['uploadFilesRwCtrlType']}"
+			           permissionCode="${requestScope['uploadFilesPermissionCode']}" 
+			           wfpermissionCode="${requestScope['uploadFilesWfPermissionCode']}" 
+					   name="tblCmnUpLoadFiles[template].describle" 
+					   value=""
+			           dataType="6" 
+					   longTextSaveFormat="true"
+					   longTextType = "true"
+					   style = "width:180px"
+			           maxlength="400"
+			           comInvorkeeClassFullName="${requestScope['uploadFilesComInvorkeeClassFullName']}"/>
+		</td>
+	</tr>
+</table>

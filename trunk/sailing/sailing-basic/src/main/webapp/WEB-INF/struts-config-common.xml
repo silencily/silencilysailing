@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+  <form-beans>
+    <form-bean name="net.silencily.sailing.common.dict.web.CommonBasicCodeForm" type="net.silencily.sailing.common.dict.web.CommonBasicCodeForm"/>
+    <form-bean name="net.silencily.sailing.common.basiccode.web.CommonBasicCodeInitForm" type="net.silencily.sailing.common.basiccode.web.CommonBasicCodeInitForm"/>    
+  </form-beans>
+  
+	<global-forwards >
+	<forward name="globalMessage" path="/jsp/common/message.jsp" />
+	</global-forwards>
+	
+	
+  <action-mappings>
+  	<action path="/common/basiccodemanager"
+  			name="net.silencily.sailing.common.dict.web.CommonBasicCodeForm"
+  			type="net.silencily.sailing.common.dict.web.CommonBasicCodeAction"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true"
+  	>
+  		<forward name="entry" path="/jsp/basiccode/code/entry.jsp"/>
+  		<forward name="list" path="/jsp/basiccode/code/list.jsp"/>
+  		<forward name="edit" path="/jsp/basiccode/code/edit.jsp"/>
+  		<forward name="detail" path="/jsp/basiccode/code/detail.jsp"/>
+  	</action>
+	<action path="/common/basiccodeinit"
+  			name="net.silencily.sailing.common.basiccode.web.CommonBasicCodeInitForm"
+  			type="net.silencily.sailing.common.basiccode.web.CommonBasicCodeInitAction"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true"
+  	>  		
+  		<forward name="init" path="/jsp/basiccode/init/init.jsp"/>
+  	</action>
+  	<action path="/common/fileLoad"
+  			name=""
+  			type="net.silencily.sailing.common.fileload.web.FileLoadAction"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true"
+  	>  	
+  	</action>
+  	
+  	<action path="/common/FileLoadActionPlus"
+  			name=""
+  			type="net.silencily.sailing.common.fileload.web.FileLoadActionPlus"
+  			attribute="theForm"
+  			parameter="step"
+  			scope="request"
+  			validate="true"
+  	>  	
+  	</action>
+  	
+  </action-mappings>
+</struts-config>

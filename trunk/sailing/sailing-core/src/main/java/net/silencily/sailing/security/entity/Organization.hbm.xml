@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_organization" name="net.silencily.sailing.security.entity.Organization">
+    <id length="50" name="id">
+      <generator class="assigned"/>
+    </id>
+    <property name="name" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType" column="org_name"/>
+    <many-to-one column="parent_id" index="idx_organization_parent_id" name="parent" class="net.silencily.sailing.security.entity.Organization"/>
+    <property name="childrenCount" formula=" ( select count(*) from security_organization c where c.parent_id = id ) "/>
+    <set table="security_organization" inverse="true" cascade="all-delete-orphan" order-by="org_name" name="children">
+      <key column="parent_id"/>
+      <one-to-many class="net.silencily.sailing.security.entity.Organization"/>
+    </set>
+  </class>
+</hibernate-mapping>

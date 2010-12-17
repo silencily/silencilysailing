@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+  <form-beans>
+    <form-bean name="net.silencily.sailing.basic.uf.columnorder.web.TblColumnOrderForm" type="net.silencily.sailing.basic.uf.columnorder.web.TblColumnOrderForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.columndisplay.web.TblColumnDisplayForm" type="net.silencily.sailing.basic.uf.columndisplay.web.TblColumnDisplayForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.column.web.ColumnManageForm" type="net.silencily.sailing.basic.uf.column.web.ColumnManageForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.news.web.NewsPublishForm" type="net.silencily.sailing.basic.uf.news.web.NewsPublishForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.funtree.web.DisplayFunTreeForm" type="net.silencily.sailing.basic.uf.funtree.web.DisplayFunTreeForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.login.top.web.MainPageForm" type="net.silencily.sailing.basic.uf.login.top.web.MainPageForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.schedule.web.ScheduleForm" type="net.silencily.sailing.basic.uf.schedule.web.ScheduleForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.sso.web.SingleSignOnForm" type="net.silencily.sailing.basic.uf.sso.web.SingleSignOnForm"/>
+    <form-bean name="net.silencily.sailing.basic.uf.im.web.IMForm" type="net.silencily.sailing.basic.uf.im.web.IMForm"/>
+  </form-beans>
+  
+  <action-mappings> 
+   <!-- Custion Display using Action -->
+   <action    path="/uf/desk/TblColumnOrderAction"
+               type="net.silencily.sailing.basic.uf.columnorder.web.TblColumnOrderAction"
+               name="net.silencily.sailing.basic.uf.columnorder.web.TblColumnOrderForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+        <forward name="list" path="/jsp/uf/columnorder/columnOrder.jsp" />
+    </action>
+    
+    <!-- My Desktop Display using Action -->
+    <action    path="/uf/desk/TblColumnDisplayAction"
+               type="net.silencily.sailing.basic.uf.columndisplay.web.TblColumnDisplayAction"
+               name="net.silencily.sailing.basic.uf.columndisplay.web.TblColumnDisplayForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+		<forward name="desk" path="/jsp/uf/columndisplay/frame.jsp" />
+		 <forward name="list" path="/jsp/uf/columndisplay/columnDisplay.jsp" />
+        <forward name="detail" path="/jsp/uf/columndisplay/columnDetail.jsp" />
+        <forward name="more" path="/jsp/uf/columndisplay/columnMore.jsp" />
+        <forward name="waitTask" path="/jsp/uf/columndisplay/waitTaskList.jsp" />
+    </action>
+    <!-- My Column Manage using Action -->
+    <action    path="/uf/desk/ColumnManageAction"
+               type="net.silencily.sailing.basic.uf.column.web.ColumnManageAction"
+               name="net.silencily.sailing.basic.uf.column.web.ColumnManageForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+		<forward name="entry" path="/jsp/uf/columns/columnManageEntry.jsp" />
+		<forward name="list" path="/jsp/uf/columns/columnManageList.jsp" />
+		<forward name="info" path="/jsp/uf/columns/columnManageInfo.jsp" />
+		<forward name="delete" path="/jsp/uf/columns/columnManageList.jsp" />
+    </action>
+    <!-- My News Publish using Action -->
+    <action    path="/uf/news/NewsPublishAction"
+               type="net.silencily.sailing.basic.uf.news.web.NewsPublishAction"
+               name="net.silencily.sailing.basic.uf.news.web.NewsPublishForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+		<forward name="entry" path="/jsp/uf/news/newsEntry.jsp" />
+		<forward name="list" path="/jsp/uf/news/newsList.jsp" />
+		<forward name="info" path="/jsp/uf/news/newsInfo.jsp" />
+		<forward name="more" path="/jsp/uf/news/newsMore.jsp" />
+    </action>
+	<!-- My Login MainPage using Action -->
+    <action    path="/uf/login/MainPageAction"
+               type="net.silencily.sailing.basic.uf.login.top.web.MainPageAction"
+               name="net.silencily.sailing.basic.uf.login.top.web.MainPageForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+		<forward name="top" path="/jsp/uf/topFrame.jsp" />		
+		<forward name="main" path="/jsp/uf/main.jsp" />		
+    </action>
+
+   <!-- UF Function Tree Display Action begin add by Huxf-->
+   <action    path="/uf/funTree/DisplayFunTreeAction"
+               type="net.silencily.sailing.basic.uf.funtree.web.DisplayFunTreeAction"
+               name="net.silencily.sailing.basic.uf.funtree.web.DisplayFunTreeForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+        <forward name="display" path="/jsp/uf/funTree.jsp" />
+    </action>
+    <!-- UF Function Tree Display Action end add by Huxf-->
+    
+    <!-- my  Schedule Action,add by zhangwenqi-->
+    <action    path="/uf/schedule/ScheduleAction"
+               type="net.silencily.sailing.basic.uf.schedule.web.ScheduleAction"
+               name="net.silencily.sailing.basic.uf.schedule.web.ScheduleForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+		<forward name="entry" path="/jsp/uf/schedule/scheduleEntry.jsp" />
+		<forward name="calendar" path="/jsp/uf/schedule/scheduleCalendar.jsp" />
+		<forward name="list" path="/jsp/uf/schedule/scheduleList.jsp" />
+		<forward name="info" path="/jsp/uf/schedule/scheduleInfo.jsp" />
+    </action>
+
+    <!-- UF Function SingleSignOn Action begin add by Tongjq-->
+    <action    path="/uf/sso/singleSignOnAction"
+               type="net.silencily.sailing.basic.uf.sso.web.SingleSignOnAction"
+               name="net.silencily.sailing.basic.uf.sso.web.SingleSignOnForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+        
+        <forward name="urlLogin" path="/sso/urlLogin" />
+    </action>
+    <!-- UF Function SingleSignOn Action end add by Tongjq-->
+
+    <!-- UF Function IM Action begin add by Tongjq-->
+    <action    path="/uf/im/IMAction"
+               type="net.silencily.sailing.basic.uf.im.web.IMAction"
+               name="net.silencily.sailing.basic.uf.im.web.IMForm"
+               validate="false"
+               scope="request"
+               attribute="theForm"
+               parameter="step">
+    </action>
+    <!-- UF Function IM Action end add by Tongjq-->
+  </action-mappings>  
+</struts-config>

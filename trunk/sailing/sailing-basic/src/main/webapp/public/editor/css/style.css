@@ -1,0 +1,99 @@
+/*<meta http-equiv="Content-Type" content="text/html;charset=gb2312">*/
+body,div,span,h1,h2,h3,h4,ul,li,img,p,b,textarea,input,select,form,a,table,td,tr
+{font-size:12px}
+.fbold{font-weight:bold}/*B*/
+.fnoml{font-weight:normal}/*正常字体*/
+
+/*字体颜色*/
+.fbk0,.fbk3,ul.rcMenu,body{color:#000}
+.rmListMtb,.glTab1,a,.tbtn_m,.cmf_tb,.cmbtl,.optDl,.optDl1,.optDr,#virusTable,.novirusTbs,.mid_msg{color:#333}
+.fgy,.gTab0 b.chaCn,#R_tabArea table span.chaCn,.switchAds a{color:#777}
+.fgy2{color:#999}
+.fbl,.xf188 a.fbl,a.cm_pre,a.cm_nxt{color:#0C53C5}
+.fw{color:#FFF}
+.fgn,.btnFn,.gTab1 b.chaCn,.switchAds a.on{color:#060}
+.fg1{color:#4e6a01}/*浅绿色1:失去焦点字体颜色*/
+.fg2{color:#3A8A39}/*浅绿色2:左标签未激活状态字体颜色*/
+.fgn3{color:#4D784D}/*绿色 具体选项下的标题*/
+.fgy3{color:#8F8F8F}/*灰色 具体选项下的标题 文字注释*/
+.fred{color:#F00}/*红色 提醒文字*/
+.smTxt{color:#536851}/*右上系统信息字体颜色*/
+.Wel_welcome,.Wel_welcome a,.Wel_welcome li{color:#2A8000}
+.Wel_m_info a,.wel_kf_mail a,.wel_m_i,.wel_alert,.wel_tj0_txt a,.wel_w_sj a,.wel_ovr_w b a,.wel_tj_icon a,a.welImp{color:#476A39}
+.Wel_rl{color:#5E7E4A}
+.col3 h4,.autofinish td b{ color:#060}
+.sysTip span{color:#567C52}/*右上系统信息*/
+.sysTip .p2{color:#647D60}/*右上系统信息*/
+
+/*背景颜色*/
+.bgcolor0,.gM2tb,.wCtn,.gM2,.mid_cn,.cmpSusAll,.sevAll,.WelPages,.WelPagesAll,.gFdCtn{background-color:#FFF}
+.bgcolor1{background-color:#88AC85}/*深绿色:选定*/
+.bgcolor2{background-color:#EDF7E7}/*浅绿色:失去焦点*/
+.bgcolor3{background-color:#7F93BE}/*左边菜单被选择颜色*/
+.bgcolor4{background-color:#8AAD77}
+.bgcolor5{background-color:#FBFFFA}/*收件人抄送人背景*/
+.bgcolor6{background-color:#c7e091}/*容量大小背景*/
+
+.optDetailtle1-on,.addressDetailtle1-on,.addressDetailtle2,.sevIndex li.over{background-color:#EDF5EB;}/*详细选项标题区域 高亮 的背景颜色*/
+body,.gRsbr3,.gFd{background-color:#F9F9F9}
+.gTab0 .gTi,.gTab0 .gTm,.gTab0 .gTc{background-color:#D0D8CB}/*右边未激活标签色*/
+.gset2_l,.gset2_r{background-color:#B0BCA6}/*Gset2显示时的2小线*/
+ul.rcMenu{background-color:#FAFFF8}/*下拉菜单，弹出窗口 背景色*/
+.wbdy,.mid_msg{background-color:#E8F3E6}/*弹出窗口,系统信息 背景色*/
+.btnFn{background-color:#DFF1D1}
+.sysMsg{background-color:#FFFFE0}/*右上系统信息背景颜色*/
+.cmpMsgAll2,.mAdArea,.cmpMsg{background-color:#F8FBF7}/*写信区域底色*/
+td.cmp_adlst,.cmpAl1,.cmp_lst_page{ background-color:#FBFFFB}/*写信新开通讯录色*/
+.cmp_lst_page a:hover{ background-color:#E3F0DF}/*写信新开通讯录文字移上的颜色*/
+.nmAlert{ background-color:#F2F4F0}/*新邮件提醒背景色*/
+.sysTip .main{ background-color:#F4F9F2}/*右下系统提示背景颜色*/
+
+/*边框颜色*/
+.border1,.nmAlert{border-color: #B0BCA5}
+.border2,#MailListDiv,.gM2tb,.gFdCtn,.mAdArea,.WelPagesAll,.leftAd,td.cmp_adlst{border-color:#B0BCA6}/*右区域边框色*/
+.border3{border-color:#e6e6e6}/*文件夹淡边框颜色*/
+.gTab0 .gTi,.gTab0 .gTm,.gTab0 .gTc{border-color:#B3B3B4;}/*右边未激活标签边框色*/
+.gSipt,.optDinpt,#opttmsand td,#opttmsand{border-color:#B5BEAE}
+.optDetailtle0,.addressDetailtle0,.optDt,.optDbtm,.optDTb td{border-color:#E7E7E7;}/*详细选项标题区域的边框颜色*/
+.optDetailtle1,.addressDetailtle1{border-color:#FFF;}/*详细选项标题区域 前部|正常*/
+.optDetailtle1-on,.addressDetailtle1-on,.addressDetailtle2{border-color:#D6E8CE;}/*详细选项标题区域 前部|高亮*/
+.btnFn{ border-color:#8FC16F}/*功能按钮边框色*/
+.sysMsg{border-color:#A6C16A}/*右上系统信息边框色*/
+.wCtn{ border-color:#ADBC9F}
+a.cm_lst{ border-color:#EFEFEF}
+.ReName{ border-color:#666}/*重命名输入框*/
+.mid_msg{border-color:#ABBA9D;}
+.opWin{ border-color:#FFF}
+.sysTip{border-color:#7EA57A}/*右下提示边框色*/
+
+ul.rcMenu,.wbdyOut{border-top-color:#ABBA9D; border-left-color:#ABBA9D; border-bottom-color:#333; border-right-color:#333}/*下拉彩旦边框色*/
+ul.rcMenu div,.wbdy{border-top-color:#FFF; border-left-color:#FFF; border-bottom-color:#8F8F8F; border-right-color:#8F8F8F}
+/*图片主题背景*/
+	.bgF1,.Wel_rl,.Wel_rl_0,.gFdSep,a.closeCmpLst,a.closeCmpLst:hover,.cl_line
+	{background-image:url(http://mimg.163.com/dmstyle/126green/imgs_gframe.gif)}/*框架用背景1  http://mimg.163.com/dmstyle/126green/imgs_gframe.gif*/
+	.bgF2,.btnFn,.switchAds,.switchAds a.on,td.cmp_adlst,.cmp_main,.sysAlert .bdy
+	{background-image:url(http://mimg.163.com/dmstyle/126green/imgs_gframe2.gif)}/*框架用背景2（需要平铺）*/
+	.btnS,.gTab1 td.hasIco b,.Adbtns b,.wel_m_i,.optDarrow1 b,.optDarrow2 b
+	{background-image:url(http://mimg.163.com/dmstyle/126green/imgs_sbtn.gif)}/*小按钮图表用*/
+	.btnS2,.gTab0 td.hasIco b{background-image:url(http://mimg.163.com/dmstyle/126green/imgs_sbtn2.gif)}/*灰色小按钮图表用*/
+	.btnL{background-image:url(http://mimg.163.com/dmstyle/126green/imgs_bbtn.gif)}/*大按钮图表用*/
+	.w_jf_bg,b.jf_0,b.jf_1,b.jf_2,b.jf_3,b.jf_4,b.jf_5,b.jf_6,.wel_ad1,.wel_ad2,.wel_ad3,.wel_ico_1,.wel_ico_2,.wel_ico_3,.wel_ico_4,.wel_ico_5,.wel_ico_6,.wel_ico_7,.wel_ico_8,.wel_ico_9,.wel_ico_10,.wel_ico_11,.wel_alert,.wel_kf_mail,.Wel_info_bod_top,.Wel_info_bod_top1,.Wel_info_bod_top2,.Wel_info_bod_btm,.Wel_info_bod_btm3,.Wel_info_bod_btm4,.wel_dotline
+	{background-image:url(http://mimg.163.com/dmstyle/126green/wel_1.gif)}
+
+/*unsort*/
+a.cm_lst{color:#333}
+a.cm_lst:hover{ background-color:#EBF5E9; color:#000}
+
+.cm_sortCha a{color:#999}
+.cm_sortCha a:hover{ background-color:#8AAD77; color:#FFF}
+
+/*输入框聚焦状态*/
+.cMt0{ border-color:#CCC; background-color:#FFF; color:#666}
+.cMt1{ border-color:#AFAFAF; background-color:#FFFFDB; color:#000}
+
+/*容量条*/
+.Wel_rl_0{border-left:1px solid #B4E29D;border-right:1px solid #C7EAB5; background-color: #E5F6DC ;}
+
+/*自动完成*/
+.autofinish td.autofinish_over{ background-color:#EBF5E9}
+table.autofinish{ border-color:#B1C0A5}

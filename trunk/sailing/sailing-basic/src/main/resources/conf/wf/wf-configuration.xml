@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "../spring-beans.dtd" >
+
+<beans>
+	<bean class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="wf"/>
+		<property name="description" value="工作流"/>
+	</bean>
+		<!-- 工作流维护 -->
+	<bean id="wf.wFService"
+			class="net.silencily.sailing.basic.wf.service.impl.WFServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 工作流信息 -->
+	<bean id="wf.OperationService"
+		class="net.silencily.sailing.basic.wf.service.impl.OperationServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 可编辑项弹出选择 -->
+	<bean id="wf.NapeEdit"
+		class="net.silencily.sailing.basic.wf.service.impl.NapeEditServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="wf.PopedomEditService"
+		class="net.silencily.sailing.basic.wf.service.impl.PopedomEditServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+</beans>

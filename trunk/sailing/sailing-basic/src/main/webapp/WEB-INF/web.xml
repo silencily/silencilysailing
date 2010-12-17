@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<!-- Public Resource Project ServerPath -->
+	<context-param>
+		<param-name>publicResourceServer</param-name>
+		<param-value>/sailing</param-value>
+	</context-param>
+
+	<!-- Spring context file Define -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>/WEB-INF/classes/conf/security/applicationContext.xml,/WEB-INF/classes/conf/security/applicationContext-aop.xml</param-value> -->
+		<param-value>/WEB-INF/classes/conf/security/applicationContext.xml</param-value>
+	</context-param>
+	
+	<filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>GBK</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>	
+	
+	<filter>
+        <filter-name>responseNoCacheFilter</filter-name>
+        <filter-class>net.silencily.sailing.framework.web.filter.ForceResponseNoCacheFilter</filter-class>
+    </filter>
+	
+	<filter>
+        <filter-name>hibernate3OpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>system.sessionFactory</param-value>
+		</init-param>
+    </filter>
+    
+	<filter>
+        <filter-name>cohegHibernate3OpenSessionInViewFilter</filter-name>
+        <filter-class>net.silencily.sailing.framework.persistent.hibernate3.OpenSessionInViewFilter</filter-class>
+        <init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>system.sessionFactory</param-value>
+		</init-param>
+    </filter>
+				
+	<!-- 
+		Note !!!
+		Please make sure the  securityChainFilter is the last filter in web.xml, 
+		because org.acegisecurity.util.FilterChainProxy will ignore all filters after it.	
+	 -->
+	<filter>
+        <filter-name>securityChainFilter</filter-name>
+        <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+        <init-param>
+            <param-name>targetClass</param-name>
+            <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+        </init-param>
+    </filter>
+	
+	<filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>responseNoCacheFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>hibernate3OpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<!--
+	<filter-mapping>
+        <filter-name>userIdAwareFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>	
+	-->
+	<filter-mapping>
+        <filter-name>cohegHibernate3OpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>securityChainFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<!-- 
+	<listener>
+		<listener-class>com.coheg.security.acegi.sso.cas.listener.RegisterHostnameVerifierListener</listener-class>
+	</listener>
+	 -->
+	
+	<!-- Open it when use Servlet2.4, Close it when use Servlet2.3 or lower !!! -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>net.silencily.sailing.security.loader.SecurityContextLoaderListener</listener-class>
+	</listener> 	
+	
+	<!-- This needs to be after Spring ContextLoaderListener -->
+	<listener>
+	  <listener-class>com.opensymphony.xwork.spring.SpringObjectFactoryListener</listener-class>
+	</listener>
+	
+	<!-- Init System Data, remove it if you don't need it -->
+	<!--
+	<listener>
+	  <listener-class>com.coheg.security.setup.SetupSystemListener</listener-class>
+	</listener>
+	-->
+	
+	<!--
+	   - Loads the menu-config.xml for struts-menu at startup,
+	   - by default from "/WEB-INF/menu-config.xml".
+	   - To override this, add a context-param named "menuConfigLocation"
+	   - web.xml file.
+	-->
+<!-- 
+	<listener>
+		<listener-class>net.sf.navigator.menu.MenuContextListener</listener-class>
+	</listener>
+-->
+	<!--
+	<listener>
+      <listener-class>com.coheg.framework.web.webwork.listener.UserCounterListener</listener-class>
+	</listener>
+	-->
+	
+	<listener>
+	  <listener-class>org.acegisecurity.ui.session.HttpSessionEventPublisher</listener-class>
+	</listener>
+	
+	<!-- 
+		Open it when use Servlet2.3 or lower, Close it when use Servlet2.4 !!!  
+		* This should never even be called since no mapping to this servlet should
+		* ever be created in web.xml. That's why a correctly invoked Servlet 2.3
+		* listener is much more appropriate for initialization work ;-)	
+	-->
+	<!--
+	<servlet>
+        <servlet-name>springContextLoaderServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.ContextLoaderServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+    </servlet>
+	-->
+	
+	<!-- Webwork action -->
+	<servlet>
+        <servlet-name>webwork</servlet-name>
+        <servlet-class>com.opensymphony.webwork.dispatcher.ServletDispatcher</servlet-class>
+		<load-on-startup>2</load-on-startup>
+    </servlet>	
+			
+	 <servlet>
+        <servlet-name>velocity</servlet-name>
+        <servlet-class>com.opensymphony.webwork.views.velocity.WebWorkVelocityServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+	
+	<servlet>
+		<servlet-name>logoff</servlet-name>
+		<servlet-class>net.silencily.sailing.security.acegi.ui.servlet.LogoffServlet</servlet-class>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+	
+    <servlet>
+		<servlet-name>jsload</servlet-name>
+		<servlet-class>net.silencily.sailing.servlet.MsgServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>GetDBTimeServlet</servlet-name>
+		<servlet-class>net.silencily.sailing.servlet.GetDBTimeServlet</servlet-class>
+	</servlet>
+	<!--
+	<servlet>
+		<servlet-name>ClearWorkFlowPermissionServlet</servlet-name>
+		<servlet-class>com.qware.servlet.ClearWorkFlowPermissionServlet</servlet-class>
+	</servlet>
+	-->
+<!-- 
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<display-name>DWR Servlet</display-name>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<init-param>
+		   <param-name>debug</param-name>
+		   <param-value>true</param-value>
+		</init-param>
+		<load-on-startup>6</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>remoting</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>7</load-on-startup>
+	</servlet> 
+-->	
+	<servlet>
+		<servlet-name>sso</servlet-name>
+		<servlet-class>net.silencily.sailing.basic.uf.sso.web.SingleSignOnServlet</servlet-class>
+		<load-on-startup>8</load-on-startup>
+	</servlet>
+
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <display-name>ActionServlet</display-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>
+            	/WEB-INF/struts-config.xml,
+            	/WEB-INF/struts-config-common.xml,
+            	/WEB-INF/struts-config-crud.xml,
+				/WEB-INF/sm/struts-config-sm.xml,
+				/WEB-INF/uf/struts-config-uf.xml,
+				/WEB-INF/wf/struts-config-wf.xml
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>SchedulerTaskConfig</param-name>
+            <param-value>
+            	/WEB-INF/scheduler-config.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    	
+	<servlet-mapping>
+        <servlet-name>webwork</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+	
+
+	<servlet-mapping>
+        <servlet-name>velocity</servlet-name>
+        <url-pattern>*.vm</url-pattern>
+    </servlet-mapping>
+	
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>	
+    	
+	<servlet-mapping>
+		<servlet-name>logoff</servlet-name>
+		<url-pattern>/logoff</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>sso</servlet-name>
+		<url-pattern>/sso/urlLogin</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>GetDBTimeServlet</servlet-name>
+		<url-pattern>/GetDBTimeServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 	
+	<servlet-mapping>
+		<servlet-name>ClearWorkFlowPermissionServlet</servlet-name>
+		<url-pattern>/ClearWorkFlowPermissionServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>remoting</servlet-name>
+		<url-pattern>/remoting/*</url-pattern>
+	</servlet-mapping>
+-->
+
+	<!--
+	   To specify mime mappings, create a file named mime-mappings.xml, put it in your project's mergedir.
+	   Organize mime-mappings.xml following this DTD slice:
+	
+	   <!ELEMENT mime-mapping (extension, mime-type)>
+	-->
+	
+	<welcome-file-list>
+        <welcome-file>coheg/login.jsp</welcome-file>
+    </welcome-file-list>
+	
+	<!--
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>   
+	<error-page>
+        <error-code>400</error-code>
+        <location>/index.jsp</location>
+    </error-page>
+    -->
+	<error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
+	<!-- 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+	-->
+	
+	<taglib>
+		<taglib-uri>http://jsptags.com/tags/navigation/pager</taglib-uri>
+		<taglib-location>/WEB-INF/tld/pager-taglib.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>webwork</taglib-uri>
+		<taglib-location>/WEB-INF/tld/webwork.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+		<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>http://struts-menu.sf.net/tag</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-menu.tld</taglib-location>
+	</taglib>
+		
+	<taglib>
+		<taglib-uri>http://struts-menu.sf.net/tag-el</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-menu-el.tld</taglib-location>
+	</taglib>
+	
+	<resource-ref>
+        <res-ref-name>jdbc/OracleDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    
+    <!-- WebLogic communicates with AJAX-->
+	 <mime-mapping> 
+        <extension>xml</extension> 
+        <mime-type>text/xml</mime-type> 
+    </mime-mapping> 	
+    
+	<error-page>
+	
+		<exception-type>net.silencily.sailing.exception.DataAccessDenyException</exception-type>
+	
+		<location>/000.jsp</location>
+	
+	</error-page>
+
+</web-app>

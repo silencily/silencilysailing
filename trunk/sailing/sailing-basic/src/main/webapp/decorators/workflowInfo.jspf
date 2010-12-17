@@ -1,0 +1,107 @@
+<div class="update_subhead">
+	<span class=" switch_open" onClick="StyleControl.switchDiv(this, $('publicWorkflowInfoTable'))" title="点击伸缩节点">工作流审批历史步骤</span>
+</div>
+
+<div class="list_scroll" id="publicWorkflowInfoTable">
+<table  border="0" cellpadding="0" cellspacing="0" class="Listing"  >		
+<c:set var = "workflow.hasWorkflowHistory" value = "false" scope="page" />
+<c:if test = "${requestScope['workflow.workflowInfo'] != null}" >
+	<c:if test = "${requestScope['workflow.workflowInfo'].historySteps != null}">
+	<c:set var = "workflow.hasWorkflowHistory" value = "true" />	
+	<thead>
+	<tr>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	    <td>环节</td>
+	    <td>动作</td>  
+	    <td>处理人</td>
+	    <td>接受时间</td>
+	    <td>提交时间</td>
+	    <td>意见</td>
+	    <td>修改内容</td>
+	</tr>
+	</thead><tbody>	
+	<c:forEach var = "step" items = "${requestScope['workflow.workflowInfo'].historySteps}" varStatus = "status">		
+	<tr>		
+		<td style="width:20px"  >			
+			<span id="divId_workflowChange_<c:out value="${status.count}"/>" <c:if test = "${!empty step.data['step.change.content']}"> 
+				class="switch_close1" onclick="StyleControl.switchDivListing(this,$('trId_workflowChange_<c:out value="${status.count}"/>'));return false"
+			</c:if>>&nbsp;</span>			
+		</td>
+		<td><c:out value="${status.count}"/>.</td>
+		<td>
+		<!-- 设置父子流中历史步骤所在环节显示 -->
+		<c:set var="stepObject" value="step.specialObject}" scope="request" />
+		<%String stepObjectNames = com.qware.am.wo.wo.WoCommon.Inherit((String) request.getAttribute("stObject"),"0"); %>
+		<c:choose>
+			<c:when test = "${step.action.name=='给父流解锁'}">
+				<%=stepObjectNames %>
+			</c:when>
+			<c:otherwise>
+				<c:out value = "${step.name}" />
+			</c:otherwise>
+		</c:choose>
+		</td>
+		<td>
+			<c:choose>
+			<c:when test = "${status.first}">
+				<c:set var = "workflowClassName" value = "workflowStatus_scratch" scope = "page" />
+			</c:when>
+			<c:when test = "${status.last && requestScope['workflow.workflowInfo'].currentStep == null}">
+				<c:set var = "workflowClassName" value = "workflowStatus_finish" scope = "page" />
+			</c:when>
+			<c:otherwise>
+				<c:set var = "workflowClassName" value = "workflowStatus_process" scope = "page" />
+			</c:otherwise>
+			</c:choose>
+			<div class="<c:out value = "${pageScope['workflowClassName']}" />">
+			<!-- 设置父子流中历史步骤所在动作显示 -->
+			<c:choose>
+				<c:when test = "${step.action.name=='给父流解锁'}">
+					提交到<c:out value = "${step.name}" />审批
+				</c:when>
+				<c:otherwise>
+					<c:out value = "${step.action.name}" />
+				</c:otherwise>
+			</c:choose>
+			</div>
+		</td>
+		<td><c:out value = "${step.userChineseName}" />&nbsp;[ <c:out value = "${step.username}" /> ]</td>	
+		<td><fmt:formatDate value="${step.startTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+		<td><fmt:formatDate value='${step.finishTime}' pattern='yyyy-MM-dd HH:mm:ss'/></td>
+		<td>
+			<div style="width:200px" class="font_overflow">
+			<nobr title="<c:out value='${step.opinion}'/>"><c:out value='${step.opinion}'/></nobr>
+			</div>
+		</td>
+		<td>
+			<div style="width:400px;height:17px" class="font_overflow">	
+			<nobr >&nbsp;<c:if test = "${!empty step.data['step.change.content']}"><a 
+			title="点击查看" href="#" onclick="StyleControl.switchDivListing($('divId_workflowChange_<c:out value="${status.count}"/>'),$('trId_workflowChange_<c:out value="${status.count}"/>'));return false"
+			>点击查看</a>
+			</c:if></nobr>
+			</div>
+		</td>
+	</tr>
+	<c:if test = "${!empty step.data['step.change.content']}">
+	<tr id="trId_workflowChange_<c:out value="${status.count}"/>" style="display:none">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td colspan="5" class="font_blur">
+			<script type="text/javascript">
+				document.write("<c:out value = "${step.data['step.change.content']}"  escapeXml = "false" />".replace(/_br_/g,"<br/>"))
+			</script>
+		</td>
+	</tr>
+	</c:if>
+	</c:forEach>
+	</tbody>		
+	</c:if>
+</c:if>
+<c:if test = "${pageScope['workflow.hasWorkflowHistory'] == false}" >
+	<tr><td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还没有历史步骤</td></tr>
+</c:if>
+</table>
+</div>

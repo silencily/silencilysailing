@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="100" y="300"/> 
+  <cell id="2" name="生技专工" type="Step"  x="250" y="150"/> 
+  <cell id="3" name="运行专工" type="Step"  x="250" y="450"/> 
+  <cell id="4" name="值长" type="Step"  x="400" y="300"/>   
+  <cell id="5" name="部门领导" type="Step"  x="550" y="300"/>  
+  
+  <cell id="6" name="总工" type="Step"  x="700" y="300"/> 
+  <cell id="99" name="结束" type="Step"  x="850" y="300"/> 
+  <action startId="3" nextId="5" name="" type="action" points="320,440 580,440 580,330"/> 
+  <action startId="3" nextId="6" name="" type="action" points="320,455 730,455 730,330"/> 
+  <action startId="3" nextId="99" name="" type="action" points="320,470 880,470 880,340"/> 
+  <action startId="4" nextId="6" name="" type="action" points="440,280 440,250 730,250 730,280"/>
+  <action startId="4" nextId="99" name="" type="action" points="420,280 420,240 880,240 880,280"/>
+  <action startId="5" nextId="99" name="" type="action" points="580,280 580,260 870,260 870,280"/>
+</layout>

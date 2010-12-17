@@ -1,0 +1,50 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.dtd">
+<validators>
+	
+	<field name="strValue">
+        <field-validator type="requiredstring">
+			<param name="trim">true</param>
+            <message key="invalid.required"></message>
+        </field-validator>
+    </field>
+		
+	<field name="strValue">
+        <field-validator type="stringlengthIfExist">
+			<param name="trim">false</param>
+			<param name="maxLength">20</param>
+            <message key="invalid.maxLength">50</message>
+        </field-validator>
+    </field>
+	
+	<field name="name">
+        <field-validator type="requiredstring">
+			<param name="trim">true</param>
+            <message key="invalid.required"></message>
+        </field-validator>
+    </field>
+	
+	<field name="name">
+        <field-validator type="stringlengthIfExist">
+			<param name="trim">false</param>
+			<param name="maxLength">50</param>
+            <message key="invalid.maxLength">50</message>
+        </field-validator>
+    </field>
+	
+	<field name="orderField">
+        <field-validator type="required">
+            <message key="invalid.required"></message>
+        </field-validator>
+    </field>
+	
+	
+	<field name="description">
+        <field-validator type="stringlengthIfExist">
+			<param name="trim">false</param>
+			<param name="maxLength">250</param>
+            <message key="invalid.maxLength">250</message>
+        </field-validator>
+    </field>
+				
+
+</validators>

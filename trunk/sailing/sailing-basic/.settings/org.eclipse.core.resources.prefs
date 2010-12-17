@@ -1,0 +1,4 @@
+#Thu Dec 02 14:52:37 CST 2010
+eclipse.preferences.version=1
+encoding//src/main/resources/conf/framework-messages.properties=GBK
+encoding//src/main/webapp/decorators/default.jspf=GBK

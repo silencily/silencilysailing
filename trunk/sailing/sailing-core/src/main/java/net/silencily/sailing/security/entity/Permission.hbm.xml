@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_permission" name="net.silencily.sailing.security.entity.Permission">
+    <id length="32" unsaved-value="null" name="id">
+      <generator class="uuid.hex"/>
+    </id>
+    <version unsaved-value="null" name="version"/>
+    <many-to-one column="resource_id" name="resource" class="net.silencily.sailing.security.entity.Resource"/>
+    <property name="aclMask"/>
+    <many-to-one column="role_id" name="role" class="net.silencily.sailing.security.entity.Role"/>
+  </class>
+</hibernate-mapping>

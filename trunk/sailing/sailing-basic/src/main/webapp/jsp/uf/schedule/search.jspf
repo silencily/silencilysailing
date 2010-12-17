@@ -1,0 +1,52 @@
+<%--
+    @version:$Id: search.jspf,v 1.1 2010/12/10 10:56:18 silencily Exp $
+    @since $Date: 2010/12/10 10:56:18 $
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<div class="update_subhead">
+	 <span class="switch_close" onClick="StyleControl.switchDiv(this,$('supplierQuery'))" title="点击这里进行查询">查询条件</span>
+</div>
+<div id="supplierQuery" style="display:none">
+<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable" style="display:">
+	<tr>
+		<td class="attribute"  id="uf_search_title">主题</td>
+		<td>
+			<search:text name="title" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		<td class="attribute" id="uf_search_completeFlg">完成状态</td>
+		<td>
+			<search:select name="completeFlg.code"/>
+			<ec:composite 
+			value='${theForm.conditions["completeFlg.code"].value}' 
+			valueName = "conditions(completeFlg.code).value" 
+			textName = "temp.conditions(completeFlg.code).value" 
+			source = '${theForm.sysCodes["UF"]["WCZT"]}' />
+		</td>
+	</tr>
+	<tr>
+		<td class="attribute"  id="uf_search_begTime">开始时间</td>
+		<td colspan="3">
+			<search:time name="begTime" pattern="yyyy-MM-dd hh:mm:ss" valueDefault="${theForm}"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="attribute"  id="uf_search_endTime">结束时间</td>
+		<td colspan="3">
+			<search:time name="endTime" pattern="yyyy-MM-dd hh:mm:ss" valueDefault="${theForm}"/>
+		</td>
+	</tr>
+	<tr>
+		<td class="attribute" id="uf_search_content">内容</td>
+		<td colspan="3"> 
+			<input name="conditions(content).name" type="hidden" value="content"/>
+			<input name="conditions(content).operator" type="hidden" value="like"/>
+			<input name="conditions(content).type" type="hidden" value="java.lang.String"/>
+			<textarea name="conditions(content).value" rows="1" class="input_long" style="width:84%"><c:out value='${theForm.conditions["content"].value}'/></textarea>
+        	<input type="button" id="edit_longText" onclick="definedWin.openLongTextWin($('conditions(content).value'));" />	
+        </td>
+	</tr>
+</table>	
+<div class="query_button">
+	<input type="button" id="opera_query" title="点击查询" onclick="CurrentPage.myquery();"/>
+</div>
+</div>

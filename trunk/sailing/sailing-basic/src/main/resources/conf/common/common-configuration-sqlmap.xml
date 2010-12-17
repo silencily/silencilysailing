@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="common">
+    <select id="common.message.statSend" parameterClass="string" resultClass="com.coheg.common.message.dto.CommonMessageStat">
+		select 	count(*) as num, 
+		platform_message.status as code
+		from platform_message where platform_message.author = #id#  group by platform_message.status 
+	</select>
+
+	<select id="common.message.statAccept" parameterClass="string" resultClass="com.coheg.common.message.dto.CommonMessageStat">
+		select count(*) as num,
+		platform_message_accept.status as code
+		from platform_message_accept,
+		(select * from platform_message where status != 'message.sendStatus.00') message 
+	    where platform_message_accept.accept_person = #id# and platform_message_accept.message_id = message.id
+		and accept_type != 'message.acceptType.02'
+		group by platform_message_accept.status
+	</select>
+</sqlMap>

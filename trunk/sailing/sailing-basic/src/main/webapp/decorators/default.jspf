@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<%@ include file = "/decorators/tablibs.jsp" %>
+
+<%--
+	这里包含了<head></head>, 因此页面上不需要再申明 head, 这样做页面更规范
+--%>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<title>发电企业资源管理套件解决方案</title>
+
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style_page.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/style_buttom.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="all" />
+<link rel="stylesheet" href="<c:out value = "${initParam['publicResourceServer']}/css/print.css" />?<%= System.currentTimeMillis() %>" type="text/css" media="print" />
+
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/prototype.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/contextInfo.js" />"></script>
+<script type="text/javascript">
+ContextInfo.contextPath = '<c:out value="${initParam['publicResourceServer']}"/>'
+</script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/xmlhttp.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/formUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/dateUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/dateComponent.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/styleControl.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/staticTree.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/global.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/treeUtils.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/validator.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/tableSort.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/alt.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/panel.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/print.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/editPage.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/extendCombo.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/public/scripts/definedWin.js" />"></script>
+
+
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/search.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/common.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/msgInfo.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/showMsg.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/form.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/univerify.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/choiceTbl.js" />"></script>
+<script type="text/javascript" src = "<c:out value = "${initParam['publicResourceServer']}/js/utils.js" />"></script>
+
+</head>
+
+<%@ include file = "/decorators/popup.jspf" %>
+<%@ include file = "/decorators/messages.jsp" %>
+<%@ include file = "/decorators/commonButtonCtrl.jspf" %>
+
+
+
+
+
+
+
+
+
+

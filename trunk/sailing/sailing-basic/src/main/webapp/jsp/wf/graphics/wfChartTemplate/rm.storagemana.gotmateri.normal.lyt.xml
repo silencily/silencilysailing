@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="200" y="300"/> 
+  <cell id="2" name="专工审核" type="Step"  x="400" y="200"/> 
+  <cell id="3" name="部门领导" type="Step"  x="400" y="400"/> 
+  <cell id="4" name="分管领导" type="Step"  x="600" y="300"/> 
+  <cell id="5" name="仓库管理员" type="Step"  x="600" y="500"/> 
+  <cell id="99" name="结束" type="Step"  x="800" y="400"/>   
+</layout>

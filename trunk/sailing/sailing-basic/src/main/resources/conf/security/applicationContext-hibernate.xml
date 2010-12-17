@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  - Application context definition for security on Hibernate.
+-->
+<beans>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="system.sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="system.datasource"/>
+		<property name="mappingDirectoryLocations">
+            <list>
+            <value>classpath:/net/silencily/sailing/</value>
+            </list>
+        </property>
+        <property name="mappingJarLocations">
+            <list>
+            <value>WEB-INF/lib/sailing-common-0.0.1-SNAPSHOT.jar</value>
+            </list>
+        </property> 
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.query.substitutions">true ${boolean.true.value}, false ${boolean.false.value}, yes ${boolean.true.value}, no ${boolean.false.value}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+			</props>
+		</property>
+	</bean>
+	
+		
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="system.platformTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="system.sessionFactory"/>
+	</bean>
+
+	<!-- Transaction Tempate -->	
+	<bean id="system.txProxyTemplate" abstract="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager"><ref bean="system.platformTransactionManager"/></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean> 
+									 
+</beans>

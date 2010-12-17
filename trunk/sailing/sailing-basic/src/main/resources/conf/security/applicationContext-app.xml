@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<!-- Daos -->
+	<bean id="security.codeCategoryDao" class="com.coheg.security.app.systemcode.dao.hibernate.HibernateCodeCategoryDao" autowire="byType" />
+	<bean id="security.codeDao" class="com.coheg.security.app.systemcode.dao.hibernate.HibernateCodeDao" autowire="byType" />
+	<bean id="security.userDao" class="com.coheg.security.app.user.dao.hibernate.HibernateUserDao" autowire="byType" />
+	<bean id="security.roleDao" class="com.coheg.security.app.role.dao.hibernate.HibernateRoleDao" autowire="byType" />
+	<bean id="security.resourceDao" class="com.coheg.security.app.resource.dao.hibernate.HibernateResourceDao" autowire="byType" />
+	<bean id="security.applicationDao" class="com.coheg.security.app.application.dao.hibernate.HibernateApplicationDao" autowire="byType">
+		<property name="cachesProviderService" ref="security.cachesProviderService"></property>
+		<property name="remoteCachesProvideService" ref="security.remoteCachesProviderService"></property>
+	</bean>
+	<bean id="security.organizationDao" class="com.coheg.security.app.organization.dao.hibernate.HibernateOrganizationDao" autowire="byType" />
+	
+	<!-- Caches -->
+	<bean id="security.codeCache" parent="ehcache.cacheTemplate">				
+		<property name="cacheName"><value>codeCache</value></property>
+	</bean>
+	
+	<bean id="security.userCache" class="com.coheg.security.acegi.providers.dao.cache.HashtableBasedFlushbleUserCache" />
+		
+	<bean id="security.resourceCache" class="com.coheg.security.acegi.intercept.web.cache.ListBasedResourceCache">
+		<property name="dataSource">
+			<ref bean="system.datasource"></ref>
+		</property>
+		<property name="allResourcesQuery">
+			<value>select t.id, t.id, t.parent_id, t.url, t.title, t.layer, t.resource_type, t.allow_appendurl, t.application_id, a.server, a.context_path, t.orderField from security_resource t left join security_application a on t.application_id = a.id order by t.orderField</value>
+		</property>
+	</bean>
+	
+	<bean id="security.permissionCache" class="com.coheg.security.acegi.intercept.web.cache.ListBasedPermissionCache">
+		<property name="dataSource">
+			<ref bean="system.datasource"></ref>
+		</property>
+		<property name="recipentsResourceMappingQuery">
+			<value>select r.name, p.resource_id from security_permission p left outer join security_role r on p.role_id = r.id</value>
+		</property>	
+	</bean>
+
+	<!-- Managers -->
+	<bean id="security.codeCategoryManager" class="com.coheg.security.app.systemcode.manager.CodeCategoryManagerImpl" autowire="byType" />
+	
+	<bean id="security.codemanager" class="com.coheg.security.app.systemcode.manager.CodeManagerImpl" autowire="byType" >
+		<property name="cache">
+			<ref local="security.codeCache"></ref>
+		</property>
+	</bean>		
+	
+	<bean id="security.userManager" class="com.coheg.security.app.user.manager.UserManagerImpl" autowire="byType" >
+		<property name="cachesProviderService" ref="security.cachesProviderService"></property>
+		<property name="remoteCachesProvideService" ref="security.remoteCachesProviderService"></property>
+	</bean>
+	
+	<bean id="security.roleManager" class="com.coheg.security.app.role.manager.RoleManagerImpl" autowire="byType" >
+		<property name="cachesProviderService" ref="security.cachesProviderService"></property>
+		<property name="remoteCachesProvideService" ref="security.remoteCachesProviderService"></property>
+	</bean>
+	
+	<bean id="security.resourceManager" class="com.coheg.security.app.resource.manager.ResourceManagerImpl" autowire="byType" >
+		<property name="cachesProviderService" ref="security.cachesProviderService"></property>
+		<property name="remoteCachesProvideService" ref="security.remoteCachesProviderService"></property>
+	</bean>
+	
+	<bean id="security.setupManager" class="com.coheg.security.app.setup.SetupManagerImpl" autowire="byType" />
+	
+	<bean id="security.organizationManager" class="com.coheg.security.app.organization.manager.OrganizationCrudManagerImpl" autowire="byType" />
+	<bean id="security.onlineUsersManager" class="com.coheg.security.app.user.manager.OnlineUsersManagerImpl" autowire="byType" />
+
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="100" y="350"/> 
+  
+  <cell id="2" name="专工审核" type="Step"  x="300" y="150"/> 
+  
+  <cell id="3" name="部门领导审核" type="Step"  x="300" y="350"/> 
+  
+  <cell id="4" name="相关部门会签" type="Step"  x="500" y="350"/>  
+  
+  <cell id="5" name="专管领导审批" type="Step"  x="700" y="350"/> 
+  
+  <cell id="6" name="返回文档负责人" type="Step"  x="900" y="350"/> 
+  
+  <cell id="7" name="相关部门传阅" type="Step"  x="900" y="150"/> 
+  
+  <cell id="99" name="结束" type="Step"  x="1100" y="350"/>  
+  
+  <action startId="2" nextId="1" name="" type="action" points="310,190 175,325"/> 
+  
+  <action startId="3" nextId="1" name="" type="action" points="280,365 175,365"/> 
+   
+  <action startId="3" nextId="5" name="" type="action" points="340,330 340,300 730,300 730,330"/> 
+  
+  <action startId="5" nextId="1" name="" type="action" points="730,390 730,430 130,430 130,390"/> 
+  
+  <action startId="5" nextId="99" name="" type="action" points="740,390 740,430 1130,430 1130,390"/> 
+  
+</layout>

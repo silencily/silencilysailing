@@ -1,0 +1,10 @@
+loopItem = ${items};
+if (loopItems instanceof Object[]) {
+	loopItems = Arrays.asList(loopItems);
+}
+if (loopIndex < loopItem.size()) {
+	${item} = loopItem.get(loopIndex);
+} else {
+	${item} = null;
+}
+return loopItem.size();

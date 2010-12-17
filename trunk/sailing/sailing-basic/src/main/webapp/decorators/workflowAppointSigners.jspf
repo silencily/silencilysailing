@@ -1,0 +1,110 @@
+<script type="text/javascript">
+
+function removeTable(tableid)
+{
+	var table = document.getElementById(tableid);
+	if(table)
+	{
+		var len = table.rows.length;
+		for(i=0;i<len-1;i++)
+		{
+			table.deleteRow(1);
+		}
+		var div = document.getElementById(tableid+"_msg");
+		div.style.display="none";
+	}
+}
+var beanClassName = '<c:out value="${beanClassName}"/>';
+var workflowName = '<c:out value="${workflowName}"/>';
+var beanName = '<c:out value="${requestScope['workflow.objectName']}"/>';
+var lastCheckedActionId="";
+workflowAppCallback = function(actionId,stepId,point_type,specialObj) {}
+workflowSelectActionCallback = function(actionId,stepId,point_type,specialObj,actionName,obj) {
+	if(lastCheckedActionId!="")
+	{
+		//删除上次选中后展开的table
+		var lastCheckedTableid = "divId_selectedSigners_"+lastCheckedActionId;
+		removeTable(lastCheckedTableid);
+		lastCheckedActionId="";
+	}
+
+	if(point_type)
+	{
+		if(point_type == '<%=com.qware.wf.constant.WorkflowConstants.POINT_EMP%>')
+		{
+			//弹出代办人选择
+			var iHeight="600";
+			var iWidth="850";
+			var sFeatures="dialogHeight: " + iHeight + "px;" + "dialogWidth: " + iWidth + "px;" + "help:no;" + "scroll:0;";
+			var oid;
+			var WorkflowOid =$('WorkflowOid');
+			if(WorkflowOid!="undefined" && WorkflowOid!= null && WorkflowOid !="")
+				oid = WorkflowOid.value;
+			else
+				oid=$('oid').value;
+			var url = '<c:url value="/jsp/wf/selectSigners/selectSignerPopFrame.jsp"/>'+"?oid="+oid+"&className="+beanClassName+"&stepId="+stepId+"&workflowName="+workflowName;
+			rows=window.showModalDialog(url,"",sFeatures);	
+			if(!rows)
+			{
+				obj.checked=false;
+				return;
+			}
+	
+			//显示新的table
+			var tableid = "divId_selectedSigners_"+actionId;
+			var table = document.getElementById(tableid);
+			var div = document.getElementById(tableid+"_msg");
+			div.style.display="inline";
+			//table.style.display="inline";
+			if (rows != null){
+				for(var i=0;i<rows.length;i++) {
+					var row = table.insertRow(i+1);
+					var td = document.createElement("TD");
+					td.innerHTML="<input type='hidden' name='"+beanName+".empCds["+i+"]' value='"+rows[i][0]+"' />"+rows[i][1];
+					row.appendChild(td);
+					td = document.createElement("TD");
+					td.innerText=rows[i][2];
+					row.appendChild(td);
+					td = document.createElement("TD");
+					td.innerText=rows[i][3];
+					row.appendChild(td);
+					td = document.createElement("TD");
+					td.innerText=rows[i][4];
+					row.appendChild(td);
+				}
+			}
+			//showSelectedTable(tableid);
+			lastCheckedActionId=actionId;
+	
+		}
+
+	}
+	if(specialObj)
+	{
+		if(specialObj!="null")
+			$('nextStepSpecialObj').value = specialObj;
+		else
+			$('nextStepSpecialObj').value = "";
+	}
+	$('actionName').value = actionName;
+	Global.setHeight();
+	workflowAppCallback(actionId,stepId,point_type,specialObj,actionName);
+}
+
+beforeWorkFlowCommit = function()
+{
+	if (FormUtils.getCheckedValue(document.getElementsByName(beanName+'.actionId')) == null
+		&&FormUtils.getCheckedValue(document.getElementsByName(beanName+'.initSplitActionId')) == null&&FormUtils.getCheckedValue(document.getElementsByName('beanparity.actionId')) == null&&FormUtils.getCheckedValue(document.getElementsByName('beanparity.initSplitActionId')) == null) {
+		alert('请选择一项操作');
+		return false;
+	}
+	
+	var actionResult = ' 您确定要提交吗 ? ';	
+	if (!confirm(actionResult)) {
+		return false;
+	}
+	return true;
+
+}
+
+</script>

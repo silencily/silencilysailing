@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="100" y="100"/> 
+  <cell id="2" name="财务专工审核" type="Step"  x="250" y="100"/> 
+  <cell id="3" name="部门领导审核" type="Step"  x="400" y="100"/> 
+  <cell id="4" name="财务部审核" type="Step"  x="550" y="100"/>  
+  <cell id="5" name="总经理审核" type="Step"  x="700" y="100"/> 
+  <cell id="6" name="财务主管审核" type="Step"  x="850" y="100"/> 
+  <cell id="99" name="结束" type="Step"  x="1000" y="100"/> 
+  
+ <action startId="2" nextId="1" name="" type="action" points="230,115 175,115"/> 
+ <action startId="3" nextId="1" name="" type="action" points="440,130 440,180 140,180 140,130"/> 
+ <action startId="4" nextId="1" name="" type="action" points="580,130 580,200 130,200 130,130"/> 
+ <action startId="5" nextId="1" name="" type="action" points="730,130 730,220 120,220 120,130"/> 
+ <action startId="6" nextId="1" name="" type="action" points="880,130 880,240 110,240 110,130"/> 
+</layout>

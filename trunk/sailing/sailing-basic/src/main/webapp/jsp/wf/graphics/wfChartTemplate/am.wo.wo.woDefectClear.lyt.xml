@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>	
+
+  <cell id="1" name="缺陷登记" type="Step"  x="100" y="300" boolean="true"/> 
+  
+  <cell id="2" name="缺陷确认" type="Step"  x="250" y="300" boolean="true"/> 
+  
+  <cell id="3" name="缺陷分发" type="Step"  x="400" y="300" boolean="true"/> 
+  
+  <cell id="4" name="检修接收" type="Step"  x="550" y="300" boolean="true"/> 
+  
+  <cell id="5" name="缺陷专业确认" type="Step"  x="400" y="450" boolean="true"/>
+   
+  <cell id="6" name="缺陷处理" type="Step"  x="700" y="300" boolean="true"/>   
+  
+  <cell id="7" name="检修专工审核" type="Step"  x="700" y="150" boolean="true"/> 
+  	
+  <cell id="8" name="延期流程" type="Step"  x="850" y="150" boolean="true"/> 
+  
+  <cell id="9" name="工作票流程" type="Step"  x="700" y="450" boolean="true"/>  
+  
+  <cell id="10" name="缺陷验收" type="Step"  x="850" y="300" boolean="true"/>   
+  
+  <cell id="99" name="结束" type="Step"  x="1000" y="300" boolean="true"/>  
+  
+  <action startId="2" nextId="1" name="" type="action" points="270,280 270,240 140,240 140,280"/>
+  
+  <action startId="3" nextId="1" name="" type="action" points="420,280 420,220 120,220 120,280"/>
+  
+  <action startId="2" nextId="5" name="" type="action" points="290,330 290,460 390,460"/>
+  
+  <action startId="3" nextId="5" name="" type="action" points="440,330 440,430"/>
+  
+  <action startId="5" nextId="4" name="" type="action" points="470,460 570,460 570,330"/>
+  
+  <action startId="6" nextId="9" name="" type="action" points="710,330 710,425"/>
+  
+  <action startId="9" nextId="6" name="" type="action" points="740,425 740,330"/>
+
+  <action startId="6" nextId="7" name="" type="action" points="710,280 710,180"/>
+  
+  <action startId="7" nextId="6" name="" type="action" points="740,180 740,280"/>
+  
+  <action startId="7" nextId="8" name="" type="action" points="770,165 838,165"/>
+  
+  <action startId="8" nextId="7" name="" type="action" points="838,145 770,145"/>
+  
+  <action startId="6" nextId="10" name="" type="action" points="770,295 838,295"/>
+  
+  <action startId="10" nextId="6" name="" type="action" points="838,310 770,310"/>
+</layout>

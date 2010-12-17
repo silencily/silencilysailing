@@ -1,0 +1,10 @@
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt"  prefix="fmt" %>
+<%@ taglib prefix="authz" uri="http://acegisecurity.org/authz" %>
+<%@ taglib prefix="ec" uri="http://www.coheg.com.cn/ec" %>
+<%@ taglib prefix="search" uri="http://www.coheg.com.cn/taglib/search" %>
+<%@ taglib prefix="settable" uri="http://www.coheg.com.cn/taglib/settable" %>
+<%@ taglib prefix="table" uri="http://www.coheg.com.cn/taglib/table" %>
+<%@ taglib prefix="vision" uri="http://www.coheg.com.cn/taglib/vision" %>
+<%@ taglib prefix="entryPanel" uri="http://www.coheg.com.cn/taglib/entryPanel" %>
+<%@ taglib prefix="workFlow" uri="http://www.coheg.com.cn/taglib/workFlow" %>

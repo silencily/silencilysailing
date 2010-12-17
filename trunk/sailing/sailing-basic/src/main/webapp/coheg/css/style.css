@@ -1,0 +1,130 @@
+/*  */
+
+
+/*  以下是公用html元素的css  */
+
+/* 0 means zero regardless of measurement 
+html {
+	overflow-x:hidden;
+	overflow-y:auto;
+}*/
+body {
+    background: #ffffff;
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:90%;
+    margin: 0;
+    padding: 0;
+    border:0px;
+}
+
+/**/
+div,td, pre,span,code,a {
+    font-family: /*Verdana, Arial, Helvetica, sans-serif;*/tahoma, 宋体, fantasy;
+	font-size:12px;
+	overflow:hidden;
+}
+
+
+a{
+    color:#333333;
+	text-decoration: underline ;
+    /*font-weight: bold; #00008b*/
+}
+
+a:visited,a:active {
+    color: #696969;
+	text-decoration: underline ;
+}
+
+a:hover {
+    background-color: transparent;
+    color: #8C8FB7 !important; 
+    text-decoration: underline ;/*overline #1e90ff*/
+}
+
+a img { border: 0 }
+
+/*
+.link1:hover{
+	text-decoration: underline ;
+}
+.link1:visited{
+	text-decoration: none; 
+}
+.link1:active{
+	text-decoration: underline; 
+}*/
+
+
+img {
+	vertical-align: middle  ;
+	margin:0px;
+}
+
+form, table {
+    margin: 0;
+    padding: 0;
+}
+
+/* for cool looking /sunken/  input boxes, from www.theserverside.com */
+form input, form select {
+    padding-left: 2px;
+    color: #666;
+	vertical-align:middle  ;
+	height:18px;
+}
+form textarea{
+    padding-left: 2px;
+    color: #666;
+	vertical-align:middle  ;
+}
+
+/* make buttons looks the same in Mozilla 
+td input.button {
+    padding: 1px 3px !important;
+}*/
+
+/*
+form input.focus, form textarea.focus {
+    border-color: orange;
+    color: #000;
+	width: auto;
+}*/
+
+/*
+form select {
+    padding-left: 0px;
+}
+*/
+
+/*
+h1 {
+    color: #ccc;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 28px;
+    margin: 0px 0px 15px 0px;
+    padding: 0px;
+}*/
+
+
+/* Labels for validation and label tag 
+label {
+    font-weight: normal;
+    cursor: pointer;
+    cursor: hand;
+}*/
+
+
+/*树型菜单中 img css*/
+.css_menu_depart img {
+	vertical-align:top;
+	margin:0px;
+}
+
+/*树型菜单中选中文字*/
+.font_master{
+	color:#0000ff;
+	font-weight : bold;
+}

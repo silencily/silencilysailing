@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<script type="text/javascript">
+if (CurrentPage == null) {
+    var CurrentPage = {};
+}    
+</script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+</head> 
+<div class="update_subhead">
+	 <span class="switch_close" onClick="StyleControl.switchDiv(this,$('supplierQuery'))" title="点击这里进行查询">查询条件</span>
+</div>
+<div id="supplierQuery" style="display:none">
+<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable"style="display:">
+	<tr>
+		<td class="attribute">表单项</td>
+ 		<td>
+			<search:text name="fieldNameEdit" oper="like" type="java.lang.String" valueDefault='${theForm}' style="width:96pt"/>
+		</td>
+		<td class="attribute">表单KEY</td>
+ 		<td>
+ 			<search:text name="fieldCodeEdit" oper="like" type="java.lang.String" valueDefault='${theForm}' style="width:96pt"/>
+		</td>
+	</tr>
+</table>
+<div class="query_button">
+	<input name="" type="button" value="" id="opera_query"  title="点击查询"  onClick="CurrentPage.query();"/>
+</div>
+</div>

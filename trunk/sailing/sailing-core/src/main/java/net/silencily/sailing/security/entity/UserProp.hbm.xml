@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_user_prop" name="net.silencily.sailing.security.entity.UserProp">
+    <composite-id class="net.silencily.sailing.security.entity.UserPropId" name="id">
+      <key-property type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType" length="100" name="propName"/>
+      <key-many-to-one class="net.silencily.sailing.security.entity.User" column="user_id" name="user"/>
+    </composite-id>
+    <version unsaved-value="null" name="version"/>
+    <property name="propValue" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+  </class>
+</hibernate-mapping>

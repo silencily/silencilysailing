@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="workflow">
+    <!-- 删除指定 id 工作流实体 -->
+
+    <delete id="clear" parameterClass="string">
+        delete from os_wfentry where id=#id#
+    </delete>
+
+    <!-- 列出所有的活动状态的工作流实体 -->
+    
+    <resultMap class="com.qware.wf.impl.WorkflowEntryWithOid" id="listAllActivatedWorkflowEntry-result">
+        <result property="id" column="id"/>
+        <result property="workflowName" column="name"/>
+        <result property="state" column="state"/>
+        <result property="oid" column="oid"/>
+        <result property="currentStep.dueDate" column="due_date"/>
+        <result property="currentStep.finishDate" column="finish_date"/>
+        <result property="currentStep.startDate" column="start_date"/>
+        <result property="currentStep.caller" column="caller"/>
+        <result property="currentStep.owner" column="owner"/>
+        <result property="currentStep.status" column="cstatus"/>
+        <result property="currentStep.actionId" column="action_id"/>
+        <result property="currentStep.stepId" column="step_id"/>
+        <result property="currentStep.entryId" column="entry_id"/>
+        <result property="currentStep.id" column="stepid"/>
+        <result property="currentStep.values" column="globalkey" select="getDataFromPropertySet"/>
+        <result property="historySteps" column="id" select="listHistoryStepsByWorkflowEntry"/>
+    </resultMap>
+    
+    <resultMap class="com.qware.wf.impl.SimpleStepWithSavedValues" id="listHistoryStepsAndData">
+        <result property="dueDate" column="due_date"/>
+        <result property="finishDate" column="finish_date"/>
+        <result property="startDate" column="start_date"/>
+        <result property="caller" column="caller"/>
+        <result property="owner" column="owner"/>
+        <result property="status" column="status"/>
+        <result property="actionId" column="action_id"/>
+        <result property="stepId" column="step_id"/>
+        <result property="entryId" column="entry_id"/>
+        <result property="id" column="id"/>
+        <result property="values" column="globalkey" select="getDataFromPropertySet"/>
+    </resultMap>
+    
+    <!-- 与 listAllActivatedWorkflowEntry-result 的区别是不检索历史记录 -->
+    <resultMap class="com.qware.wf.impl.WorkflowEntryWithOid" id="listAllActivatedWorkflowEntryWithoutHistory-result">
+        <result property="id" column="id"/>
+        <result property="workflowName" column="name"/>
+        <result property="state" column="state"/>
+        <result property="oid" column="oid"/>
+        <result property="currentStep.dueDate" column="due_date"/>
+        <result property="currentStep.finishDate" column="finish_date"/>
+        <result property="currentStep.startDate" column="start_date"/>
+        <result property="currentStep.caller" column="caller"/>
+        <result property="currentStep.owner" column="owner"/>
+        <result property="currentStep.status" column="cstatus"/>
+        <result property="currentStep.actionId" column="action_id"/>
+        <result property="currentStep.stepId" column="step_id"/>
+        <result property="currentStep.entryId" column="entry_id"/>
+        <result property="currentStep.id" column="stepid"/>
+        <result property="currentStep.values" column="globalkey" select="getDataFromPropertySet"/>
+    </resultMap>
+    
+    <select id="listAllActivatedWorkflowEntry" parameterClass="string" resultMap="listAllActivatedWorkflowEntryWithoutHistory-result">
+        select t.id as id, t.name as name, t.state as state, p.string_value as oid, 'oid_' || p.string_value as globalkey, nvl(c.id, 0) as stepid, nvl(c.entry_id, 0) as entry_id, nvl(c.step_id, 0) as step_id, nvl(c.action_id, 0) as action_id, c.owner, c.start_date, c.finish_date, c.due_date, nvl(c.status, 0) as cstatus, c.caller
+        from  os_wfentry t, os_currentstep c, os_propertyentry p
+        where t.name = #value# and t.state = 1 and c.entry_id = t.id and p.global_key = 'osff_' || t.id and p.item_key = 'dto.id' 
+    </select>
+
+    <!-- 
+    <select id="listAllActivatedWorkflowEntry" parameterClass="string" resultMap="listAllActivatedWorkflowEntry-result">
+        select t.id as id, t.name as name, t.state as state, p.string_value as oid, 'oid_' || p.string_value as globalkey, nvl(c.id, 0) as stepid, nvl(c.entry_id, 0) as entry_id, nvl(c.step_id, 0) as step_id, nvl(c.action_id, 0) as action_id, c.owner, c.start_date, c.finish_date, c.due_date, nvl(c.status, 0) as cstatus, c.caller
+        from  os_wfentry t, os_currentstep c, os_propertyentry p
+        where t.name = #value# and t.state = 1 and c.entry_id = t.id and p.item_key = 'dto.id' and 'osff_' || t.id = p.global_key
+    </select>
+    -->
+
+    <select id="listSpecifiedStepWorkflowEntry" parameterClass="map" resultMap="listAllActivatedWorkflowEntry-result">
+        select t.id as id, t.name as name, t.state as state, 'oid_' || p.string_value as globalkey, p.string_value as oid, nvl(c.id, 0) as stepid, nvl(c.entry_id, 0) as entry_id, nvl(c.step_id, 0) as step_id, nvl(c.action_id, 0) as action_id, c.owner, c.start_date, c.finish_date, c.due_date, nvl(c.status, 0) as cstatus, c.caller
+        from  os_wfentry t, os_currentstep c, os_propertyentry p
+        where t.name = #name# and t.state = 1 and c.entry_id = t.id and c.step_id = #stepNo# and p.item_key = 'dto.id' and 'osff_' || t.id = p.global_key
+    </select>
+
+    <select id="listSpecifiedOidWorkflowEntry" parameterClass="string" resultMap="listAllActivatedWorkflowEntry-result">
+        select w.id, w.name, w.state, nvl(c.id, 0) as stepid, nvl(c.entry_id, 0) as entry_id, nvl(c.step_id, 0) as step_id, nvl(c.action_id, 0) as action_id, c.owner, c.start_date, c.finish_date, c.due_date, c.status as cstatus, c.caller, substr(p.global_key, 5) as oid, p.global_key as globalkey
+        from os_propertyentry p, os_wfentry w, os_currentstep c
+        where substr(p.global_key, 5) = #oid# and p.number_value = w.id and p.number_value = c.entry_id(+)
+    </select>
+    
+    <select id="listOidFromWorkflowEntryId" parameterClass="string" resultClass="string">
+        select string_value from os_propertyentry where global_key = #val# and item_key = 'dto.id'
+    </select>
+    
+    <select id="getDataFromPropertySet" parameterClass="string" resultClass="org.apache.commons.collections.map.CaseInsensitiveMap">
+        select item_key as key, string_value as value from os_propertyentry where global_key = #globalKey#
+    </select>
+    
+    <select id="listHistoryStepsByWorkflowEntry" parameterClass="long" resultMap="listHistoryStepsAndData">
+        select h.id, h.step_id, h.action_id, h.owner, h.start_date, h.finish_date, h.due_date, h.status, h.caller, h.entry_id, 'oid_' || p.string_value as globalkey
+        from os_historystep h, os_propertyentry p
+        where h.entry_id = #entryId# and 'osff_' || h.entry_id = p.global_key and p.item_key = 'dto.id'
+        order by h.finish_date, h.step_id
+    </select>
+    
+    <select id="listHistoryStepByOid" resultMap="listHistoryStepsAndData" parameterClass="string">
+        select h.id, h.step_id, h.action_id, h.owner, h.start_date, h.finish_date, h.due_date, h.status, h.caller, h.entry_id, 'oid_' || p.string_value as globalkey
+        from os_historystep h, os_propertyentry p
+        where p.global_key = 'oid_' || #oid# and p.item_key = 'workflow.id' and p.number_value = h.entry_id
+        order by h.finish_date, h.step_id
+    </select>
+    
+    
+</sqlMap>

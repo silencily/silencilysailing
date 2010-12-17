@@ -1,0 +1,47 @@
+<%-- 
+  @version:$Id: dataPermissionTree.jspf,v 1.1 2010/12/10 10:56:17 silencily Exp $
+  @since:$Date: 2010/12/10 10:56:17 $          
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<script type="text/javascript">
+  var parentId = '';
+  function CodeTree.initTreeList0(arr) {
+    var obj = new this.Node(0, '<c:out value="${theForm.bean.id}"/>', '<c:out value="${theForm.bean.name}"/>', 0, 0, '', '', '', ''); 
+    return obj;
+  }
+
+  var codeTree = new CodeTree.CodeTree('codeTree','<c:out value="${initParam['publicResourceServer']}"/>/image/tree/column/');
+
+  codeTree.dispPlace = 'span_menu';
+  codeTree.hostUrl   = '<c:url value="/sm/DataMemberAction.do?step=tree&parentId="/>';
+  codeTree.getDataID = '<c:out value="${theForm.bean.id}"/>';
+  codeTree.Load(0);
+  
+    codeTree.getData = function(obj)
+	{
+		var sid = obj.selfId;
+		//var str = httpGet(this.hostUrl+sid);
+		var url = this.hostUrl+sid+"&level="+obj.imgType;
+		var str = XMLHttpEngine.getResponseText(url, false);
+		if(typeof str == 'undefined')
+			str = '';
+		return str;
+	}
+  function CodeTree.getPageUrl(cid) {
+    if(this.TreeList[cid].imgType != 2)
+		return;
+    var selectedId = this.TreeList[cid].selfId;
+    var imageType = this.TreeList[cid].imgType;
+    var pat = new RegExp('([\?\&])parentId=[^\&]*');
+    for (i = 0; i < panel.dataArr.length; i++) {
+	    var url = panel.dataArr[i][2];
+	    if (pat.test(url)) {
+		    panel.dataArr[i][2]=url.replace(pat, RegExp.$1 + "parentId=" + selectedId +"&level="+imageType);
+	    }
+    } 
+    panel.click(0);
+  }
+
+  
+  
+</script>

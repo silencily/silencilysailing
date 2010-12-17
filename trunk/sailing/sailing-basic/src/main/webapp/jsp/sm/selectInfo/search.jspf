@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<%@ include file="/decorators/edit.jspf" %>
+<div class="update_subhead">
+	 <span class="switch_close" onClick="StyleControl.switchDiv(this,$('supplierQuery'))" title="伸缩节点">查询条件</span>
+</div>
+<div id="supplierQuery" style="display:none">
+<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable"style="display:">
+	<tr>
+		<td class="attribute"  id="hr_search_empCd">员工号</td>
+		<td>
+			<search:text name="empCd" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		<td class="attribute" id="hr_search_empName">姓名</td>
+		<td>
+			<search:text name="empName" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	<tr>
+		<td class="attribute">性别</td>
+		<td>
+			<search:select name="sex.code"/>
+			<ec:composite value='${theForm.conditions["sex.code"].value}' valueName = "conditions(sex.code).value" textName = "temp.conditions(sex.code).value" source = '${theForm.sysCodes["HR"]["XBIE"]}'/>	
+		</td>
+		<td class="attribute">民族</td>
+		<td>
+			<search:select name="nation.code"/>
+			<ec:composite value='${theForm.conditions["nation.code"].value}' valueName = "conditions(nation.code).value" textName = "temp.conditions(nation.code).value" source = '${theForm.sysCodes["HR"]["MINZ"]}'/>
+		</td>
+	</tr>
+	<tr>
+		<td class="attribute">身份证号码</td>
+		<td>
+			<search:text name="idCard" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+		<td class="attribute">出生地</td>
+		<td>
+			<search:text name="homePlace" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>	
+	<tr>
+		<td class="attribute">籍贯</td>
+		<td>
+			<search:text name="nativePlace" oper="like" type="java.lang.String" valueDefault='${theForm}'/>
+		</td>
+	</tr>
+	<tr>	
+		<td class="attribute">出生日期</td>
+		<td colspan="3">
+			<search:time name="birthday" pattern="yyyy-MM-dd" valueDefault="${theForm}"/>
+		</td>
+	</tr>
+</table>	
+<div class="query_button">
+	<input name="" type="button" value="" id="opera_query"  title="伸缩节点"  onClick="CurrentPage.query();"/>
+</div>
+</div>

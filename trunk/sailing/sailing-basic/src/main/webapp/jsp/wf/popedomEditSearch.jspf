@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<div class="update_subhead">
+<span title="点击伸缩节点" onClick="StyleControl.switchDiv(this,$('supplierQuery'))" class="switch_close">查询条件</span>
+</div>
+<div style="display:none" id="supplierQuery">
+<table style="display:" id="divId_flaw_search_common" class="Detail" cellspacing="0" cellpadding="0" border="0" width="100%">
+	<tr>
+			<td class="attribute">表单key</td>
+			<td>
+					<search:text 
+					name="fieldCodeEdit" 
+					oper="like" 
+					type="java.lang.String" 
+					valueDefault='${theForm}'/>
+			</td>
+			
+			<td class="attribute">表单项</td>
+			<td>
+					<search:text 
+					name="fieldNameEdit" 
+					oper="like" 
+					type="java.lang.String" 
+					valueDefault='${theForm}'/>
+			</td>
+			
+	</tr>
+	<tr>
+			<td class="attribute">流程名称</td>
+			<td>
+					<search:text 
+					name="tblWfName" 
+					oper="like" 
+					type="java.lang.String" 
+					valueDefault='${theForm}'/>
+			</td>
+			
+			<td class="attribute">业务名称</td>
+			<td>
+					<search:text 
+					name="tblWfOperName" 
+					oper="like" 
+					type="java.lang.String" 
+					valueDefault='${theForm}'/>
+			</td>
+			
+	</tr>
+</table>
+<div class="query_button">
+<input onClick="CurrentPage.query();" title="点击查询" class="opera_query" name="" value="" type="button">
+</div>
+</div>
+<script type="text/javascript">
+	if (CurrentPage == null) {
+	    var CurrentPage = {};
+	}
+	
+	CurrentPage.query= function () {
+
+		if (document.getElementsByName("paginater.page").value=='undefined' || document.getElementsByName("paginater.page") != null ) {
+	  	  document.getElementsByName("paginater.page").value = 0;
+		}
+		
+		FormUtils.post(document.forms[0], '<c:url value="/wf/PopedomEditAction.do?step=list&mainTableClassName=TblWfEditInfo"></c:url>');
+	}
+	
+</script>

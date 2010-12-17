@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="专业审核员审核(选择煤样编号)" type="Step"  x="400" y="300"/> 
+  <cell id="2" name="化验室负责人审核" type="Step"  x="550" y="300"/> 
+  <cell id="99" name="结束" type="Step"  x="700" y="300"/> 
+  <action startId="2" nextId="1" name="" type="action" points="530,315 475,315"/> 
+</layout>

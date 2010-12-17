@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<title>BeanDecorateCreator note</title>
+<style type="text/css">
+	pre {font-size:10pt; line-height: 20px}
+</style>
+</head>
+<body>
+<pre>
+这个<code>package</code>用于创建一个业务实体的代理类, 这个类增加了支持页面显示的属
+性, 方便的方法, 以避免使得具体的业务实体受到污染而变得像一个用于页面显示的<code>DTO</code>
+, 对于要用于页面显示的业务实体创建一个业务实体的子类, 并在子类中增加相关的<code>view</code>
+方法，创建的代理实现: 当执行视图子类中的方法时委托这个子类执行, 当执行实际业务实体中
+的方法时委托实际的业务实体实例执行. 具体的用例
+缺陷单业务实体并没有包括用于页面显示的下拉列表, 像专业, 缺陷级别, 消缺班组, 等等
+, 而在页面显示时需要这样的方法, 类似<code>getSpecialties()</code>, 我们可以
+public class FlawDto extends Flaw {
+   private Flaw flaw;
+   
+   public FlawDto(Flaw flaw) {
+       this.flaw = flaw;
+   }
+   
+   public ComboSupportList getSpecialties() {
+       ComboSupportList specialties = ...;
+       List selectedValues = new ArrayList();
+       selectedValues.add(<b>getFlawSpecialty().getCode()</b>);
+       specialties.setSelectedValues(selectedValues);
+       return specialties;
+   }
+   ...
+}
+,注意加重的部分, 是对业务实体<code>Flaw</code>本身的调用, 另外当页面获得<code>Flaw</code>
+本身的属性时也是对<code>Flaw</code>实例的调用, 只有页面调用这个方法时才调用这个用于视图
+的子类的实例. 这个模式有效地分离业务本身的逻辑和用于显示的逻辑, 使我们可以更加关注业务本身
+或展示
+<b>注意命名规范:</b>例如业务实体是<code>Flaw</code>, 支持视图的<code>dto</code>
+类名是<code>FlawDto</code>, 位于<code>Flaw</code>包下面的<code>dto</code>包中
+<code>com.coheg.flaw.entity.Flaw</code>
+<code>com.coheg.flaw.enetity.dto.FlawDto</code>
+, 只要满足这种模式架构可以在需要时自动创建这个<code>decorator</code>
+</pre>
+</body>
+</html>

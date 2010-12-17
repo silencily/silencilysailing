@@ -1,0 +1,40 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+
+<xwork>
+
+	<package name="application" extends="default" namespace="/application">	
+		
+		<!-- Application Actions -->
+		<action name="listApplication" class="com.coheg.security.app.application.action.ListApplicationAction">
+			<interceptor-ref name="noneTransactionStack"/>
+			<result name="success">/jsp/application/applicationList.jsp</result>	
+        </action>
+		
+		<action name="logo" class="com.coheg.security.app.application.action.ListApplicationAction">
+			<result name="success">/coheg/default.jsp</result>	
+        </action>
+		
+		<action name="deleteApplication" class="com.coheg.security.app.application.action.DeleteApplicationAction">
+			<result name="input">/jsp/application/applicationList.jsp</result>	
+			<result name="success">/jsp/application/applicationList.jsp</result>
+        </action>
+		
+		<action name="loadApplication" class="com.coheg.security.app.application.action.SaveApplicationAction">
+			<interceptor-ref name="noneTransactionStack"/>
+			<result name="input">/jsp/application/applicationInfo.jsp</result>
+			<result name="success">/jsp/application/applicationInfo.jsp</result>	
+        </action>
+		
+		<action name="addApplication" class="com.coheg.security.app.application.action.SaveApplicationAction" method="doAdd">
+			<result name="input">/jsp/application/applicationInfo.jsp</result>
+			<result name="success" type="redirect">/application/loadApplication!doDefault.action?operate=operateAdd</result>	
+        </action>
+		
+		<action name="editApplication" class="com.coheg.security.app.application.action.SaveApplicationAction" method="doEdit">
+			<result name="input">/jsp/application/applicationInfo.jsp</result>
+			<result name="success">/jsp/application/applicationInfo.jsp</result>	
+        </action>
+				
+    </package>
+	
+</xwork>

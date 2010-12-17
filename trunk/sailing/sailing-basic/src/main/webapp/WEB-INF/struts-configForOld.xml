@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>  
+  <controller inputForward="true" processorClass="com.coheg.web.CustomRequestProcessorTemplate" />  
+  <plug-in className="com.qware.web.InitializingPlugInConver" />
+  <plug-in className="com.qware.am.web.AppInitPlugin" />
+</struts-config>

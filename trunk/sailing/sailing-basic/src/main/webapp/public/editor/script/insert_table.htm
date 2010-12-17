@@ -1,0 +1,152 @@
+<HTML>
+<HEAD>
+<TITLE>插入表格</TITLE>
+<META content="text/html; charset=GBK" http-equiv=Content-Type>
+<SCRIPT language=javascript>
+
+var CurrentPage = {};
+CurrentPage.oControl = null;
+CurrentPage.pageTitle = "在选中的位置插入一个新表格"
+
+//try{
+	CurrentPage.oSelection = self.dialogArguments.frames["HtmlEditor"].document.selection.createRange();
+	CurrentPage.sRangeType = self.dialogArguments.frames["HtmlEditor"].document.selection.type;
+//}catch(e){}
+
+if (CurrentPage.sRangeType == "Control") {
+		if (CurrentPage.oSelection.item(0).tagName == "TABLE"){
+			CurrentPage.oControl = CurrentPage.oSelection.item(0);
+			CurrentPage.pageTitle = "修改选中的表格";
+		}
+}
+document.title = "表格设置（" + CurrentPage.pageTitle + "）";
+
+function initPage(){
+	if(CurrentPage.oControl){
+		var obj = CurrentPage.oControl;			
+		document.all.Border.value = obj.border;
+		document.all.Rows.value = obj.rows.length;
+		document.all.Cells.value = obj.rows[0].cells.length;
+		if((obj.width+"").indexOf("%")>0){
+			var arr = (obj.width+"").split("%");
+			document.all.TabW.value = arr[0];
+		}else{
+			document.all.TabW.value = obj.width;
+			document.all.TabWkind.selectedIndex = 1;
+		}
+	}
+}
+window.onload = initPage;
+
+//返回值
+function getReturnTalbe(form){
+	if(!passCheck(form)) 
+		return false;
+	if(CurrentPage.oControl){
+		var obj = CurrentPage.oControl;			
+		obj.border = document.all.Border.value ;
+		obj.width = document.all.TabW.value + document.all.TabWkind.value;
+		//document.all.Rows.value = obj.rows.length;
+		//document.all.Cells.value = obj.rows[0].cells.length;
+	}else{
+		var str="<table  border='"+document.all.Border.value+"' width='"+document.all.TabW.value
+			+document.all.TabWkind.value+"' cellspacing='"+document.all.CellSpacing.value
+			+"' cellpadding='"+document.all.CellPadding.value+"'>";
+		 for(i=1;i<=document.all.Rows.value;i++){
+				str += "<tr>";
+				for(j=1;j<=document.all.Cells.value;j++){
+				   str += "<td></td>";
+				}
+				str += "</tr>";
+		}
+		str += "</table>";
+		//window.opener.insert(string);
+		window.returnValue = str;
+	}
+    window.close()
+ }
+//验证
+function passCheck(form){
+   for(j=0;j<form.length;j++){
+      if(form[j].type=="text"){
+	     var msg="";
+		 if(isNaN(form[j].value))msg="鼠标指定处只能输入数字！"
+		 if (form[j].name=="TabW"){
+		   if(form[j].value<=0)msg="请在鼠标指定处输入大于0的数";
+		 }
+         else if (form[j].name=="Border"){
+		   if(parseInt(form[j].value)<0)msg="请在鼠标指定处输入大于等于0的数";
+		 }
+         else if(parseInt(form[j].value)<=0)msg="请在鼠标指定处输入大于0的整数";
+		 if (msg!=""){
+			 alert(msg);
+             form[j].focus();
+			 return false;
+		 }
+	  }
+   }
+   return true;
+}
+function onClosing(){
+	window.close();
+}
+</SCRIPT>
+<style type="text/css">
+<!--
+td {
+	font-size: 10pt;
+}
+-->
+</style>
+<body bgcolor="#D4D0C8" style="border: 1px buttonhighlight;">
+<table width="100%" height="100%" border="0" cellpadding="5" cellspacing="10">
+ <FORM> <tr> 
+    <td align="center">
+        <FIELDSET>
+        <LEGEND>表格属性</LEGEND>
+        <TABLE border=0 borderColor=#cccccc cellPadding=0 cellSpacing=5 
+style="BORDER-COLLAPSE: collapse">
+          <TBODY>
+            <TR> 
+              <TD height=20>行数</TD>
+              <TD><INPUT id=Rows maxLength=10 name=Rows size=6 value=2></TD>
+              <TD>单元格填充</TD>
+              <TD><INPUT id=CellPadding maxLength=10 name=CellPadding size=6 value=1></TD>
+            </TR>
+            <TR> 
+              <TD height=20>列数</TD>
+              <TD><INPUT id=Cells maxLength=10 name=Cells size=6 value=2></TD>
+              <TD>单元格间距</TD>
+              <TD><INPUT id=CellSpacing maxLength=10 size=6 value=1></TD>
+            </TR>
+            <TR> 
+              <TD>宽度</TD>
+              <TD height=20> <INPUT id=TabW maxLength=10 name=TabW size=6 value=100> </TD>
+              <TD> 
+                <select name="TabWkind" id="TabWkind">
+                  <option value="%" selected>百分比</option>
+                  <option value="px">像素</option>
+                </select></TD>
+              <TD>  </TD>
+            </TR>
+            <TR>
+              <TD>边框</TD>
+              <TD height=20><INPUT id="Border" maxLength=10 name="Border" size=6 value=1></TD>
+              <TD align="right">&nbsp;</TD>
+              <TD>&nbsp;</TD>
+            </TR>
+          </TBODY>
+        </TABLE>
+        </FIELDSET>
+        <br>
+        <CENTER>
+        </CENTER>
+      </td>
+      <td width="50" align="center" valign="top"><br>
+        <INPUT name="button" type=button onclick=getReturnTalbe(this.form) value=" 确定 ">
+        <br>
+        <INPUT name="button" type=button onclick=onClosing() value=" 取消 ">
+      </td>
+  </tr></FORM>
+</table>
+</BODY></HTML>

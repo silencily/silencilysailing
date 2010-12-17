@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "../spring-beans.dtd" >
+<beans>
+
+	<bean class="net.silencily.sailing.framework.core.ServiceInfo">
+		<property name="name" value="sm" ></property>
+		<property name="description" value="系统管理" />
+	</bean>
+	
+	<!-- 系统日志管理 -->
+	<bean id="sm.logManageService"
+		class="net.silencily.sailing.basic.sm.log.service.impl.LogManageServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 系统参数管理 -->
+	<bean id="sm.parameterManageService"
+		class="net.silencily.sailing.basic.sm.perameter.service.impl.ParameterManageServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	
+		<!-- 组织机构管理 -->
+	<bean id="sm.deptService"
+		class="net.silencily.sailing.basic.sm.dept.service.impl.TblCmnDeptServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+		<property name="root">
+			<bean class="net.silencily.sailing.basic.sm.domain.TblCmnDept">
+				<property name="id" value="root" />
+				<property name="deptCd" value="root" />
+				<property name="deptName" value="组织结构管理" />
+				<property name="deptState" value="1" />
+			</bean>
+		</property>
+	</bean>
+	
+   <!-- 组织机构管理状态变更 -->
+	<bean id="sm.deptStatusService"
+		class="net.silencily.sailing.basic.sm.dept.service.impl.TblCmnDeptStatusRecServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="cmn.entry"
+		class="net.silencily.sailing.basic.sm.datapermission.service.impl.TblDataPermissionServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 组织机构管理上级部门变更  -->
+	<bean id="sm.deptParentService"
+		class="net.silencily.sailing.basic.sm.dept.service.impl.TblCmnDeptPareRecServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 角色管理 -->
+	<bean id="sm.roleService"
+		class="net.silencily.sailing.basic.sm.role.service.impl.RoleServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+		<property name="initRoot">
+			<bean class="net.silencily.sailing.basic.sm.domain.TblCmnRoleOrg">
+				<property name="id" value="root" />
+				<property name="note" value="root" />
+				<property name="displayName" value="角色管理" />
+				<property name="displayOrder" value="1" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 权限管理 -->
+	<bean id="sm.permissionService"
+		class="net.silencily.sailing.basic.sm.permission.service.impl.PermissionServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+		<property name="initRoot">
+			<bean class="net.silencily.sailing.basic.sm.domain.TblCmnPermission">
+				<property name="id" value="root" />
+				<property name="displayname" value="权限管理" />
+				<property name="nodetype" value="0" />
+				<property name="displayOrder" value="0" />
+				<property name="note" value="权限树根节点" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 用户管理 -->
+	<bean id="sm.userManageService"
+		class="net.silencily.sailing.basic.sm.user.service.impl.UserManageServiceImpl">
+		<property name="hibernateTemplate">
+			<bean class="net.silencily.sailing.container.ServiceProvider"
+				factory-method="getService">
+				<constructor-arg index="0"
+					value="common.hibernateTemplate" />
+			</bean>
+		</property>
+	</bean>
+</beans>

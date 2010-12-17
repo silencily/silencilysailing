@@ -1,0 +1,150 @@
+<%-- 
+  @version:$Id: select_roletree.jspf,v 1.1 2010/12/10 10:56:27 silencily Exp $
+  @since:$Date: 2010/12/10 10:56:27 $          
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<script type="text/javascript">
+  	var parentId = '';
+  	function CodeTree.initTreeList0(arr) {
+    var obj = new this.Node(0, '<c:out value="${theForm.orgBean.id}"/>', '<c:out value="${theForm.orgBean.displayName}"/>', 0, '', '', '', '0', ''); 
+    return obj;
+  }
+
+  var codeTree = new CodeTree.CodeTree('codeTree','<c:out value="${initParam['publicResourceServer']}"/>/image/tree/permission/');
+
+function viewhiddenTreeListDiv() {
+	var objDiv = document.getElementById("codeTreeListDiv");
+	var objImg = document.getElementById("imgId_0");
+	var objpicImg = document.getElementById("pic_imgId_0");
+	//alert(objImg.src+"==="+this.closeImg1.src);
+	if(objDiv.style.display=="block"){
+		objImg.src = this.closeImg1.src;
+		objDiv.style.display="none";
+		objpicImg.src = this.picArray[0].src;
+	}else{
+		objImg.src = this.openImg1.src;
+		objDiv.style.display="block";
+		objpicImg.src = this.picArray[0].src;
+	}
+	//alert("test");
+}
+  //--实时加载树子节点
+//--Display tree children
+codeTree.Display = function(cid,ccid)
+{	
+	var sid = this.TreeList[cid].selfId+'';
+	var menu_array = this.TreeList[cid].children;
+	//alert("cid : "+cid+" sid : "+sid+" ccid : "+ccid)
+	var init_num=0;
+	var init_txt=""+
+	"<div id='codeTreeListDiv' style='display:block'><table width='100%' border='0' cellpadding='0'  cellspacing='0' id='tabId_"+this.name+"_"+sid+"' class='css_menu_depart'>";
+	var temp_array=new Array();
+	var img_str='';
+	var img_str1=this.openImg.src;
+	var menu_bgimage='';
+	var transimage  = '<img src="'+ this.transImg.src +'" width="15">';
+	for(var i=0;i<menu_array.length;i++)
+	{		
+		var t        = ccid+i
+		var click_css='';
+		var click_str='';
+		var child_str=''
+
+		if(sid!=0 && sid != this.getDataID)
+			menu_bgimage=' background="'+ this.bgImg.src+'"';
+		if(ccid==0 || this.TreeList[this.currentArrID].islast)
+		{
+			menu_bgimage='';
+			img_str1=this.openImg1.src;
+		}
+		var temp = new Array();
+		temp[0]  = menu_array[i].selfId;
+		temp[1]  = menu_array[i].nodeName;
+		temp[5]  = menu_array[i].imgType;
+		
+		switch(this.TreeType){
+			case 0:
+				child_str += '<a name="'+this.TreeName+'_mao_'+t+'" href="javascript:'+this.TreeName+'.NodeClick(\''+t+'\');'+this.TreeName+'.getUrl(\''+t+'\');" ><span id="'+this.TreeName+'_spanId_'+temp[0]+'"';
+				if(menu_array[i].noSelect)
+					child_str += ' class="'+this.noSelectCss+'" ';
+				child_str += '>';
+				break;
+			default:
+				if(!menu_array[i].noSelect && typeof menu_array[i].noSelect != 'undefined'){
+					child_str += '<input type="checkbox" value="'+t+'" id="'+this.TreeName+'_box_'+temp[0]+'" name="'+this.TreeName+'_checkbox"';
+					child_str += ' onclick="'+this.TreeName+'.BoxClick('+t+');'+this.TreeName+'.setFather('+t+');"';
+					//if(this.TreeType == 1)						
+					//else
+						//child_str += ' onclick="'+this.TreeName+'.selectAll('+t+')"';
+					if(this.InitString!='' && this.InitString.indexOf(','+temp[0]+',')!=-1 )//|| (this.TreeType ==2 && this.getObj('box',sid)&&this.getObj('box',sid).checked)				
+					{				
+						child_str      += ' checked >';
+						click_css       = this.focusCss ;
+						this.SelectId   = t;
+						this.returnList[this.returnList.length] = this.TreeList[t];
+						this.returnSelect.push(this.TreeList[t]);
+					}else
+						child_str += '>';
+				}
+				child_str     += '<a name="'+this.TreeName+'_mao_'+t+'" href="#" onclick="'+this.TreeName+'.NodeClick(\''+t+'\');return false" ><span id="'+this.TreeName+'_spanId_'+temp[0]+'" class="'+click_css+'">';
+				break;
+			//case 2:
+				//child_str += '<input type="checkbox" value="'+i+'" id="'+this.TreeName+'_box_'+i+'">'
+				//break;
+			//default:
+				//child_str +
+				//break;
+		}
+		child_str += temp[1]+'</span></a>';
+
+		if( i+1 == menu_array.length)
+			img_str = this.closeImg1.src;
+		else
+			img_str = this.closeImg.src;
+
+		if(this.TreeList[ccid+i].nodeType == this.fatherFlag && this.TreeList[ccid+i].imgType!="2")////\''+sid+'\',\''+temp[0]+'\',   '+this.TreeName+'.BoxClick(\''+t+'\');
+			//click_str = ' onclick="switchImg(document.getElementById(\'pic_imgId_'+temp[0]+'\'),\''+this.picArray[1].src+'\',\''+this.picArray[2].src+'\');'+this.TreeName+'.Load(\''+t+'\');" style="cursor:hand" title="伸缩节点" ' 
+			click_str = 'onclick="'+this.TreeName+'.Load(\''+t+'\');" style="cursor:hand" title="伸缩节点"'
+		else
+		{
+			click_str = '';
+			if(i+1 == menu_array.length)
+				img_str = this.nochildImg1.src;				
+			else
+				img_str = this.nochildImg.src;
+		}
+		img_str = '<img src="'+img_str;
+		img_str += ' "  align="absmiddle"  id="imgId_'+temp[0]+'" '+click_str+' >'; 
+		/*----*/
+		img_str += this.selectImage(temp[5])
+		/*----*/	
+		//alert(cid+"/"+this.TreeList[cid].fatherId+"/"+TreeList[cid].selfId+"/"+this.TreeList[cid].nodeType+"/"+this.TreeList[cid].nodeName+"/"+this.TreeList[cid].children);
+		//是否为叶子节点
+		//if(this.TreeList[ccid+i].imgType == "1" )////\''+sid+'\',\''+temp[0]+'\',   '+this.TreeName+'.BoxClick(\''+t+'\');
+		//	img_str += '<img src=" '+this.picArray[1].src+'" id="pic_imgId_'+temp[0]+'" align="absmiddle" >';
+		//else
+		//{
+		//	img_str += '<img src=" '+this.picArray[3].src+'" id="pic_imgId_0" align="absmiddle" >';
+		//}
+	
+		
+		init_txt+='<tr id="trId_child_'+temp[0]+'"><td '+menu_bgimage+' width="15">'+transimage+'</td>\n<td nowrap id="tdId_child_'+temp[0]+'" >\n'+img_str+'\n'+child_str+'\n</td></tr>';
+		init_txt+='<tr id="trId_'+temp[0]+'" style="display:none"><td '+menu_bgimage+' width="15">'+transimage+'</td><td nowrap id="tdId_'+temp[0]+'"></td></tr>';
+			
+	}
+	init_txt+="</talbe></div>"
+	if(sid != 'undefined'){
+		if( sid != this.InitID && sid != this.getDataID){		
+			document.getElementById("imgId_"+sid).src= img_str1;
+		}
+		document.getElementById("trId_"+sid).style.display = "";
+		document.getElementById("tdId_"+sid).innerHTML     = init_txt;
+	}
+}
+
+  codeTree.dispPlace = 'span_menu';
+  codeTree.TreeType = 1 
+  codeTree.hostUrl   = '<c:url value="/sm/RoleAction.do?step=tree&treeFlg=0&parentCode="/>';
+  codeTree.getDataID = '<c:out value="${theForm.orgBean.id}"/>';
+  codeTree.Load(0);
+</script>

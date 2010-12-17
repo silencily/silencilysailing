@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<%--
+    @version $Id: userListSearch.jspf,v 1.1 2010/12/10 10:56:48 silencily Exp $
+    @since 2006-08-20
+    @note 技术监督报表查询页面
+--%>
+<script type="text/javascript">
+if (CurrentPage == null) {
+    var CurrentPage = {};
+}    
+    
+CurrentPage.query = function() {
+	if (document.getElementsByName("paginater.page") != null) {
+	    document.getElementsByName("paginater.page").value = 0;
+	}
+	FormUtils.post(document.forms[0], '<c:url value="/common/ui/user.do?step=list" />');
+}
+
+</script>
+
+<div class="update_subhead" >
+    <span class="switch_close" onClick="StyleControl.switchDiv(this, $('userQuery'))" title="点击展开表格">点开这里输入查询条件</span>
+</div>
+
+<div id="userQuery" style="display:none">
+	<table width="100%"  border="0" cellpadding="0" cellspacing="0" class="Detail">
+	    <tr>
+	        <td class="attribute" nowrap="nowrap">中文名</td>
+	        <td nowrap="nowrap">
+	            <input name="conditions(chineseName).name" type="hidden" value="chineseName"/>
+	            <input name="conditions(chineseName).operator" type="hidden" value="like"/>
+	            <input name="conditions(chineseName).type" type="hidden" value="java.lang.String"/>
+	            <input name="conditions(chineseName).value" value="<c:out value='${theForm.conditions["chineseName"].value}'/>" />
+	        </td>
+	        <td class="attribute" nowrap="nowrap">用户账号</td>
+	        <td nowrap="nowrap">
+	            <input name="conditions(username).name" type="hidden" value="username"/>
+	            <input name="conditions(username).operator" type="hidden" value="like"/>
+	            <input name="conditions(username).type" type="hidden" value="java.lang.String"/>
+	            <input name="conditions(username).value" value="<c:out value='${theForm.conditions["username"].value}'/>" />
+	        </td>
+	    </tr>
+	</table>
+
+    <div class="query_button">
+        <input type="button" value="" name="" class="opera_query"  title="点击这里开始搜索" onClick="CurrentPage.query();"/>
+    </div>
+</div>
+

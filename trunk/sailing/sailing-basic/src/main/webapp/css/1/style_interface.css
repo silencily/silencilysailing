@@ -1,0 +1,158 @@
+
+/* 主界面 css */
+
+/* 头部css */
+
+.top_message{
+	float:right;
+	/*position:relative; 
+	right:200px;*/
+	padding-top:5px;
+	padding-right:10px;
+	height:25px;
+	overflow:hidden;
+	filter:revealTrans(duration=3,transition=0) blendTrans(duration=23);
+}
+.top_message a{
+	color:#fff;
+}
+.top_help{
+	float:right;
+	margin-top:4px;
+	height:25px;
+	width:46px;
+	background-image:url(../image/common/get_help.gif);	
+	background-repeat : no-repeat;
+	cursor:pointer
+}
+.top_logo{
+	height:30px;
+	background:#fff;
+	background-image:url(../image/skin/1/top_logo.gif);	
+	background-repeat : repeat-x;
+	padding:0px;	
+	margin:0px;	
+}
+.top_opera{
+	height:30px;
+	background-image:url(../image/skin/1/top_opera.gif);	
+	background-repeat : repeat-x;
+	padding:0px;	
+	padding-top:4px;
+	margin:0px;
+}
+.top_opera_begin{
+		float:left;
+		width:5px;
+}
+.top_opera_end{
+		float:right;
+		width:15px;
+}
+.top_userInfo{
+	float:left;
+	padding-left:0px;
+	padding-bottom:5px;
+	color:#fff;
+}
+.top_opera_menu{
+	float:right;
+	padding-right:0px;
+	padding-bottom:5px;
+}
+.top_opera_menu img{
+	margin-left:8px;
+}
+
+
+.explorer_bg{
+	height:35px;
+	text-align:right;
+	padding-top:8px;
+	background-image:url(../image/skin/1/main_explorer_bg.jpg);
+	background-repeat:repeat-x	;
+	border-bottom:1px solid #666;
+}
+
+.frame_midden{
+	background-image:url(../image/skin/1/frame_mid_bg.gif);
+	background-repeat : repeat-y;	
+	height:700px;
+	width:8px;
+	cursor:e-resize;
+	margin:0px;
+}
+.frame_midden_top{
+	background-image:url(../image/skin/1/frame_mid_top.gif);
+	background-repeat : no-repeat;
+	height:8px;
+	width:8px;	
+}
+.frame_submenu{
+	background-image:url(../image/skin/1/frame_submenu_bg.gif);
+	background-repeat : repeat-x;	
+}
+
+
+/* 左侧菜单标题*/
+.menu_left_title {
+	padding-left:5px;
+	color:#fff;
+	width:80%;
+	overflow:hidden;
+	float:left;
+}
+.menu_imgTop{
+	padding-left:20px;
+	background-image:url(../image/skin/1/go_top.gif);
+	background-repeat:no-repeat	;
+	float:right;
+}
+.menu_imgDown{
+	padding-left:20px;
+	background-image:url(../image/skin/1/go_down.gif);
+	background-repeat:no-repeat	;
+	float:right;
+}
+.menu_imgLeft{
+	padding-left:20px;
+	background-image:url(../image/skin/1/go_left.gif);
+	background-repeat:no-repeat	;
+	float:right;
+}
+.menu_left_title_bg {
+	height:22px;
+	vertical-align:bottom;
+	background-image:url(../image/skin/1/left_title.gif);	
+	cursor:pointer
+}
+
+.menu_bg {
+	background:#E7ECFA;
+}
+table.leftMenu td{
+	color:#333;
+	border:0px solid #ffffff;
+	padding:0px;
+}
+table.leftMenu {
+	border-collapse:collapse;
+}
+.leftMenu_bg{
+	background:#3C62D2;	
+}
+table.menu_list{
+	padding:0 2px 0 2px;	
+}
+table.menu_list td {
+	padding-left: 20px;
+	border : 0;
+	height:25px;
+	/*border-bottom:1px dotted  #bbb;*/
+}
+div.menu_tree td{
+	border : 0;
+}
+
+
+/* */

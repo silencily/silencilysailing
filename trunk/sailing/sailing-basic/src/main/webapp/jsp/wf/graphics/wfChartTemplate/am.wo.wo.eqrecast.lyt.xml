@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="开始" type="Step"  x="100" y="350"/> 
+  <cell id="2" name="专工审核" type="Step"  x="300" y="150"/> 
+  <cell id="3" name="部门领导" type="Step"  x="300" y="350"/> 
+  <cell id="4" name="生技部门专工审核" type="Step"  x="500" y="150"/>  
+  <cell id="5" name="生技部门领导审核" type="Step"  x="500" y="350"/> 
+  <cell id="6" name="总工审核" type="Step"  x="700" y="350"/> 
+  <cell id="7" name="申请人" type="Step"  x="700" y="150"/> 
+  <cell id="8" name="部门领导审批" type="Step"  x="900" y="350"/>  
+  <cell id="99" name="结束" type="Step"  x="1100" y="350"/>  
+  <action startId="1" nextId="4" name="" type="action" points="130,330 130,110 530,110 530,130"/> 
+  <action startId="1" nextId="5" name="" type="action" points="140,390 140,420 530,420 530,390"/> 
+  <action startId="1" nextId="6" name="" type="action" points="130,390 130,440 730,440 730,390"/> 
+  <action startId="3" nextId="6" name="" type="action" points="330,390 330,430 720,430 720,390"/> 
+  <action startId="5" nextId="1" name="" type="action" points="540,390 540,450 120,450 120,390"/> 
+  <action startId="6" nextId="1" name="" type="action" points="740,390 740,460 110,460 110,390"/>
+  <action startId="3" nextId="1" name="" type="action" points="280,365 175,365"/>
+  <action startId="8" nextId="7" name="" type="action" points="880,330 740,190"/>
+</layout>

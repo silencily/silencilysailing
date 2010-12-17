@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<table-info>
+	<task>
+		<startTime>00:00:00</startTime>
+		<taskClass>com.qware.am.web.WoSchedulerTask</taskClass>
+	</task>
+</table-info>

@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+
+<div class="update_subhead">
+	<span class="switch_open"
+		title="">当前角色信息</span>
+</div>
+<div id="supplierQuery" style="display: none">
+	<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable" style="display: ">
+		<tr>
+		<td  class="attribute" >角色标识</td>
+		<td >
+			<search:select name="station.code"/><ec:composite value='${theForm.conditions["station.code"].value}' valueName = "conditions(station.code).value" textName = "temp.conditions(station.code).value" source = '${theForm.sysCodes["HR"]["GWEI"]}' />	
+		</td>
+		<td  class="attribute" >角色名称</td>
+		<td >
+			<search:select name="stationGrade.code"/><ec:composite value='${theForm.conditions["stationGrade.code"].value}' valueName = "conditions(stationGrade.code).value" textName = "temp.conditions(stationGrade.code).value" source = '${theForm.sysCodes["HR"]["GJI"]}' />	
+		</td>
+	</table>
+</div>

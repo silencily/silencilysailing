@@ -1,0 +1,72 @@
+.editor {
+	BORDER-RIGHT: #bbe9ff 1px solid; BORDER-TOP: #bbe9ff 1px solid; BACKGROUND: #efefef; BORDER-LEFT: #bbe9ff 1px solid; BORDER-BOTTOM: #a4b6d7 1px solid
+}
+.editor_line {
+	BORDER-TOP: #a4b6d7 1px solid
+}
+.editor_switcher {
+	BACKGROUND: #efefef; MARGIN-LEFT: 10px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #a4b6d7 1px solid; POSITION: relative; TOP: 1px
+}
+.editor_switcher_highlight {
+	FONT-WEIGHT: bold; BACKGROUND: #f9f9f9; MARGIN-LEFT: 10px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #f9f9f9 1px solid; POSITION: relative; TOP: 1px
+}
+.editor_text {
+	BORDER-RIGHT: #a4b6d7 1px solid; BORDER-TOP: 0px; BACKGROUND: #f9f9f9; FONT: 12px Tahoma, Verdana; BORDER-LEFT: #a4b6d7 1px solid; BORDER-BOTTOM: #a4b6d7 1px solid
+}
+.editor_text TEXTAREA {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 4px; BORDER-TOP: 0px; PADDING-LEFT: 4px; BACKGROUND: none transparent scroll repeat 0% 0%; PADDING-BOTTOM: 4px; BEHAVIOR: url(#default#userdata); OVERFLOW: auto; BORDER-LEFT: 0px; WORD-BREAK: break-all; PADDING-TOP: 4px; BORDER-BOTTOM: 0px
+}
+.editor_button {
+	BORDER-RIGHT: #bbe9ff 1px solid; BORDER-TOP: #a4b6d7 1px solid; BACKGROUND: #efefef; MARGIN-BOTTOM: 6px; BORDER-LEFT: #bbe9ff 1px solid; BORDER-BOTTOM: #bbe9ff 1px solid; POSITION: relative; TOP: -1px
+}
+.editor_textexpand {
+	BORDER-TOP: 0px; FLOAT: left; POSITION: relative; TOP: -3px
+}
+.editor_buttonnormal {
+	BORDER-RIGHT: medium none; PADDING-RIGHT: 1px; BORDER-TOP: medium none; PADDING-LEFT: 1px; BACKGROUND: #efefef; PADDING-BOTTOM: 1px; BORDER-LEFT: medium none; COLOR: #000000; PADDING-TOP: 1px; BORDER-BOTTOM: medium none
+}
+.editor_buttondown {
+	BORDER-RIGHT: #a4b6d7 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #a4b6d7 1px solid; PADDING-LEFT: 0px; BACKGROUND: #efefef; PADDING-BOTTOM: 0px; BORDER-LEFT: #a4b6d7 1px solid; COLOR: #000000; PADDING-TOP: 0px; BORDER-BOTTOM: #a4b6d7 1px solid
+}
+.editor_buttonhover {
+	BORDER-RIGHT: #a4b6d7 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #a4b6d7 1px solid; PADDING-LEFT: 0px; BACKGROUND: #efefef; PADDING-BOTTOM: 0px; BORDER-LEFT: #a4b6d7 1px solid; COLOR: #000000; PADDING-TOP: 0px; BORDER-BOTTOM: #a4b6d7 1px solid
+}
+.editor_buttonselected {
+	BORDER-RIGHT: #a4b6d7 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #a4b6d7 1px solid; PADDING-LEFT: 0px; BACKGROUND: #efefef; PADDING-BOTTOM: 0px; BORDER-LEFT: #a4b6d7 1px solid; COLOR: #000000; PADDING-TOP: 0px; BORDER-BOTTOM: #a4b6d7 1px solid
+}
+.editor_menunormal {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; BACKGROUND: #ffffff; PADDING-BOTTOM: 0px; FONT: 11px tahoma; OVERFLOW: hidden; COLOR: #000000; PADDING-TOP: 0px; WHITE-SPACE: nowrap; HEIGHT: 18px
+}
+.editor_menuhover {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; BACKGROUND: #ffffff; PADDING-BOTTOM: 0px; FONT: 11px tahoma; OVERFLOW: hidden; COLOR: #000000; PADDING-TOP: 0px; WHITE-SPACE: nowrap; HEIGHT: 18px
+}
+.editor_menunormal {
+	BORDER-RIGHT: #ffffff 1px solid
+}
+.editor_menuhover {
+	BORDER-RIGHT: #a4b6d7 1px solid
+}
+.editor_menuhover DIV {
+	BACKGROUND: #ffffff; COLOR: #000000
+}
+.editor_menunormal DIV {
+	BACKGROUND: #ffffff; COLOR: #000000
+}
+.editor_colormenunormal {
+	BORDER-RIGHT: #ffffff 1px solid
+}
+.editor_colormenuhover {
+	BORDER-RIGHT: #a4b6d7 1px solid
+}
+.editor_colornormal {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 1px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+.editor_colorhover {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 1px; BACKGROUND: #a4b6d7; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; WHITE-SPACE: nowrap
+}
+.editor_colornormal DIV {
+	BORDER-RIGHT: #225588 1px solid; BORDER-TOP: #225588 1px solid; BORDER-LEFT: #225588 1px solid; WIDTH: 10px; BORDER-BOTTOM: #225588 1px solid; HEIGHT: 10px
+}
+.editor_colorhover DIV {
+	BORDER-RIGHT: #a4b6d7 1px solid; BORDER-TOP: #a4b6d7 1px solid; BORDER-LEFT: #a4b6d7 1px solid; WIDTH: 10px; BORDER-BOTTOM: #a4b6d7 1px solid; HEIGHT: 10px
+}

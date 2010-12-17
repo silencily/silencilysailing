@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<bean id="ehcache.springEhCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
+	
+	<bean id="ehcache.cacheTemplate" class="org.springframework.cache.ehcache.EhCacheFactoryBean" abstract="true">
+		<property name="cacheManager">
+			<ref local="ehcache.springEhCacheManager" />
+		</property>
+		<property name="eternal">
+			<value>true</value>
+		</property>
+	</bean>
+		
+</beans>

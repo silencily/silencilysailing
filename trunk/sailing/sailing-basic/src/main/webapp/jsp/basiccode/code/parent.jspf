@@ -1,0 +1,27 @@
+<%--
+    @version:$Id: parent.jspf,v 1.1 2010/12/10 10:56:44 silencily Exp $
+    @since $Date: 2010/12/10 10:56:44 $
+--%>
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<div class="update_subhead">
+	 <span class="switch_open" onclick="StyleControl.switchDiv(this,parenttable)" title="伸缩节点">所属类别信息</span>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" class="Detail" id="parenttable">
+	<input type="hidden" name="parent" value="<c:out value='${parent.id}'/>" />
+	<input type="hidden" name="parentLayer" value="<c:out value='${parent.layerNum}'/>" />
+	<input type="hidden" name="dummy.bean.parent.code" value="<c:out value='${parent.typeCode}'/>"/>
+	<tr>
+		<td class="attribute">名称</td>
+		<td><input name="dummy.bean.parent.name" value="<c:out value='${parent.name}'/>" readonly="readonly"/></td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td class="attribute">描述</td>
+		<td colspan="3">
+			<input name="dummy.bean.parent.description" style="width:440px" value="<c:out value='${parent.codeDesc}'/>" class="input_long" readonly="readonly"/>
+			<span title="<c:out value='${parent.codeDesc}' escapeXml='true'/>">
+				<input type="button" id="edit_longText" onClick="definedWin.openLongTextWin(document.getElementsByName('dummy.bean.parent.description')[0],'',true);"/>
+			</span>
+		</td>
+	</tr>
+</table>

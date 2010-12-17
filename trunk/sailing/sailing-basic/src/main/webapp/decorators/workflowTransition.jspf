@@ -1,0 +1,278 @@
+<script type="text/javascript">
+if (Workflow == null) {
+	var Workflow = {};
+}
+workflowSelectActionCallback = function(actionId, nextStepPointType) {
+
+}
+function showSigner(url) {
+	window.open(url,null,
+		"height=600,width=850,status=yes,toolbar=no,menubar=no,location=no,resizable=no,top=150,left=250");	
+}
+
+function openOpinionEditWindow(opinion) {
+	
+	definedWin.openLongTextWin(opinion);
+}
+</script>
+<%
+	com.qware.wf.WorkflowInfo info = (com.qware.wf.WorkflowInfo)request.getAttribute("workflow.workflowInfo");
+	com.qware.wf.validate.TransitionFilter.filterActions(pageContext, info);
+%>
+<div class="update_subhead"><span class=" switch_open"
+	onClick="StyleControl.switchDiv(this, $('publicWorkflowTransitionTable'))"
+	title="点击收缩表格">工作流审批</span></div>
+<%
+//把taskId,urlKey放在session中yangxl08-6-13
+	String taskId = request.getParameter("taskId");
+	String urlKey = request.getParameter("urlKey");
+	String step = request.getParameter("step");//获得step yangxl 2008-7-17
+	if(step!=null){
+		step = step.trim();
+	}
+	
+%>
+<input type="hidden" id="flg" name="flg" value "true" />
+<input type="hidden" name="workflowStatus"
+	value="${requestScope['workflow.objectName'].workflowStatus}" />
+<input type="hidden"
+	name="<c:out value = "${requestScope['workflow.objectName']}" />.taskId"
+	value="<%= taskId%>" />
+<input type="hidden" id="urlKey" name="urlKey" value="<%= urlKey%>" />
+<input type="hidden" value="" name="nextStepSpecialObj" />
+<input type="hidden" value="" name="actionName" />
+
+<table border="0" cellpadding="0" cellspacing="0" class="Update"
+	id="publicWorkflowTransitionTable">
+	<tr>
+		<td class="text">流程状态</td>
+		<td colspan="3"><c:set var="dtoClassName"
+			value="${requestScope['workflow.workflowInfo']}" scope="request" /> <c:set
+			var="oid" value="${requestScope['workflow.workflowInfo'].id}"
+			scope="request" /> 
+			<!-- 流程状态显示 yangxl 2008-7-17 start -->
+			<span class="font_master">
+				<c:set var ="statusNames" value="${requestScope['workflow.workflowInfo'].workflowStatusName}" scope="request"/>
+				<%if(!step.equals("doTransition")){ %>
+				<c:out value="${requestScope['workflow.workflowInfo'].workflowStatusName}" />
+				<%}else{ %>
+					已完成 
+				<%} %>
+			</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- 流程状态显示 yangxl 2008-7-17 end -->
+		<%
+			String flowView = (String)request.getAttribute("flowView");
+			
+			if (!"hidden".equals(flowView)) {
+		%>
+		<a target="_blank"
+			href='<%=request.getContextPath()%>/wf/GraphicsAction.do?step=wfinfo&oid=<%=request.getAttribute("oid").toString() %>&dtoClassName=<%=request.getAttribute("dtoClassName").getClass().getName() %>' />
+		[查看工作流图形]</a>
+		<%
+			}
+		%>
+		</td>
+	</tr>
+
+
+	<tr>
+		<td class="text">当前步骤</td>
+		<td colspan="3"><span class="font_master">
+		<c:set var="stObject" value="${requestScope['workflow.workflowInfo'].currentStep.specialObject}" scope="request" />
+		<c:set var="stid" value="${requestScope['workflow.workflowInfo'].currentStep.id}" scope="request" />
+		<%
+			String stObjectNames = com.qware.am.wo.wo.WoCommon.Inherit((String) request.getAttribute("stObject"),"0"); 
+			String stoid = request.getAttribute("oid").toString();
+			String stdtoClassNames = request.getAttribute("dtoClassName").getClass().getName();
+			String stidd = (String) request.getAttribute("stid");
+			if(stObjectNames!=null){
+				String stdtoClassName = stdtoClassNames.substring(0,stdtoClassNames.indexOf("$"));
+				com.qware.wf.entry.WorkflowRelation wr = new com.qware.wf.entry.WorkflowRelation();
+				com.qware.wf.util.WfUtils wu = new com.qware.wf.util.WfUtils();
+				wr.setSuperOid(stoid);
+				wr.setSuperClass(stdtoClassName);
+				wr.setStepId(stidd);
+				String status = wu.getSubwfInfoStatus(wr);
+				if(status.equals("0") && stObjectNames!=null){%>
+					<%=stObjectNames %>
+				<% }else{%>
+					<c:out value="${requestScope['workflow.workflowInfo'].currentStep.name}" />
+				<%} %>
+		<%}else{ %>
+			<c:out value="${requestScope['workflow.workflowInfo'].currentStep.name}" />
+		<%} %>
+		</span>&nbsp; <c:forEach var="stepMetaData"
+			items="${requestScope['workflow.workflowInfo'].currentStep.metadata}">
+			<input type="hidden"
+				name="workflow.step[<c:out value = "${requestScope['workflow.workflowInfo'].currentStep.id}" />].metadata.<c:out value = "${stepMetaData.key}" />"
+				value="<c:out value = "${stepMetaData.value}" />" />
+		</c:forEach> <c:if
+			test="${'finish' != requestScope['workflow.workflowInfo'].workflowStatus && 'killed' != requestScope['workflow.workflowInfo'].workflowStatus}">
+			<%if (!"hidden".equals(flowView)) { %>
+			<a
+				href="javascript:showSigner('<%=request.getContextPath()%>/decorators/workflowSignerDisplay.jsp?taskId=<%= taskId%>&oid=<c:out value = "${requestScope['workflow.workflowInfo'].id}" />&currStepId=<c:out value = "${requestScope['workflow.workflowInfo'].currentStep.id}" />&workflowName=<c:out value = "${requestScope['workflow.workflowInfo'].workflowName}" />')" />
+			[查看待办人列表]</a>
+			<%} %>
+		</c:if></td>
+	</tr>
+
+
+	<c:set var="hasAvailableActions"
+		value="${not empty requestScope['workflow.workflowInfo'].currentStep.availableActions[0]}"
+		scope="page" />
+
+	<%
+	int flag = 0;
+	%>
+	<c:forEach var="action"
+		items="${requestScope['workflow.workflowInfo'].currentStep.availableActions}"
+		varStatus="status">
+		<c:set var="operateName" value="${action.name}" scope="request" />
+		<%
+					if (com.qware.wf.util.WfCommonTools.operateFilter(urlKey,
+					(String) request.getAttribute("operateName"))) {
+				flag++;
+			}
+		%>
+	</c:forEach>
+	<%
+				if (("system".equals(urlKey) || "alreadyList".equals(urlKey) || "waitList"
+				.equals(urlKey))
+				&& flag > 0) {
+	%>
+	<c:if test="${step != 'doTransition'}">
+	<c:choose>
+		<c:when test="${pageScope['hasAvailableActions']}">
+			<tr>
+				<td class="text" rowspan="2">请选择操作</td>
+				<td colspan="3"><c:forEach var="action"
+					items="${requestScope['workflow.workflowInfo'].currentStep.availableActions}"
+					varStatus="status">
+					<c:set var="operateName" value="${action.name}" scope="request" />
+					<%
+							if (com.qware.wf.util.WfCommonTools.operateFilter(urlKey,
+							(String) request.getAttribute("operateName"))) {
+					%>
+					<c:if test="${empty action.metadata['invisible']}">
+						<c:choose>
+							<c:when test="${'退回' == action.name }">
+								<input type="radio"
+									name="<c:out value = "${requestScope['workflow.objectName']}" />.actionId"
+									value="<c:out value = "${action.id}" />"
+									onClick="workflowSelectActionCallback('<c:out value = "${action.id}" />','<c:out value = "${action.nextStep.id}" />','nothing','<c:out value = "${action.nextStep.specialObject}" />','<c:out value = "${action.name}" />',this)">&nbsp;<c:out
+									value="${action.name}" /> [ 下一步 ] --> <c:out
+									value="${action.nextStep.name}" default="完成" />
+								<br>
+							</c:when>
+							<c:when test="${'取消本流程' == action.name }">
+								<input type="radio"
+									name="<c:out value = "${requestScope['workflow.objectName']}" />.actionId"
+									value="<c:out value = "${action.id}" />"
+									onClick="workflowSelectActionCallback('<c:out value = "${action.id}" />','<c:out value = "${action.nextStep.id}" />','nothing','<c:out value = "${action.nextStep.specialObject}" />','<c:out value = "${action.name}" />',this)">&nbsp;<c:out
+									value="${action.name}" /> [ 下一步 ] --> <c:out
+									value="${action.nextStep.name}" default="完成" />
+								<br>
+							</c:when>
+							<c:otherwise>
+								<%
+									String operate = (String) request.getAttribute("operateName");
+								
+									if (operate.indexOf("取回") != -1) {
+								%>
+										<input type="radio"
+											name="<c:out value = "${requestScope['workflow.objectName']}" />.actionId"
+											value="<c:out value = "${action.id}" />" 
+											onClick="workflowSelectActionCallback('<c:out value = "${action.id}" />','<c:out value = "${action.nextStep.id}" />','nothing','<c:out value = "${action.nextStep.specialObject}" />','<c:out value = "${action.name}" />',this)">&nbsp;
+											<c:out value="${action.name}" /> [ 下一步 ] --> <c:out
+											value="${action.nextStep.name}" default="完成" />
+										<br>
+								<%  } else { %>
+										<input type="radio"
+											name="<c:out value = "${requestScope['workflow.objectName']}" />.actionId"
+											value="<c:out value = "${action.id}" />"
+											onClick="workflowSelectActionCallback('<c:out value = "${action.id}" />','<c:out value = "${action.nextStep.id}" />','<c:out value = "${action.nextStep.pointType}" />','<c:out value = "${action.nextStep.specialObject}" />','<c:out value = "${action.name}" />',this)">&nbsp;<c:out
+											value="${action.name}" /> [ 下一步 ] --> 
+											<c:set var="speObject" value="${requestScope['workflow.workflowInfo'].currentStep.specialObject}" scope="request" />
+											<c:set var="speNextObject" value="${action.name}" scope="request" />
+											<%
+												String specialObjectName = com.qware.am.wo.wo.WoCommon.Inherit((String) request.getAttribute("speObject"),"0");
+												String actionNextStepName = (String)request.getAttribute("speNextObject");
+												String nextStepName = null;
+												if(specialObjectName!=null){
+													nextStepName = actionNextStepName.substring(actionNextStepName.indexOf("到")+1,actionNextStepName.indexOf("审"));
+												}
+												if(specialObjectName!=null && specialObjectName.equals(nextStepName)){
+											 %>
+											 	<%=specialObjectName%>
+											 <%}else { %>
+												<c:out value="${action.nextStep.name}" default="完成" />
+											 <%}%>
+										<br>
+								<%  } %>
+															
+							</c:otherwise>
+						</c:choose>
+						<div style="display:none"
+							id="divId_selectedSigners_<c:out value = "${action.id}" />_msg">已选择的待办人:
+						<table border="0" cellpadding="0" cellspacing="0" class="Listing"
+							id="divId_selectedSigners_<c:out value = "${action.id}" />">
+							<thead>
+								<tr>
+									<td>员工编号</td>
+									<td>姓名</td>
+									<td>职务</td>
+									<td>所属部门</td>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						</div>
+						<c:forEach var="actionMetadata" items="${action.metadata}">
+							 <input type="hidden"
+								name="workflow.action[<c:out value = "${action.id}" />].metadata.<c:out value = "${actionMetadata.key}" />"
+								value="<c:out value = "${actionMetadata.value}" />" />
+						</c:forEach>
+					</c:if>
+					<%
+					}
+					%>
+				</c:forEach> 请输入您的意见 
+<!--					<input type="text"-->
+<!--					name="<c:out value = "${requestScope['workflow.objectName']}" />.currentStep.opinion"-->
+<!--					value="<c:out value = "${requestScope['workflow.workflowInfo'].currentStep.opinion}" />"-->
+<!--					style="width:300px" />-->
+					<textarea type="text"
+					name="<c:out value = "${requestScope['workflow.objectName']}" />.currentStep.opinion"
+					value="<c:out value = "${requestScope['workflow.workflowInfo'].currentStep.opinion}" />"
+					style="width:300px;height:15px;overflow:hidden" ></textarea>
+					<input type="button" id="edit_longText"
+					onclick="definedWin.openLongTextWin($('<c:out value = "${requestScope['workflow.objectName']}" />.currentStep.opinion'));" />
+				</td>
+			</tr>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td class="text">请选择操作</td>
+				<td height="35"><span class="font_master">无可用操作</span></td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
+	</c:if>
+	<c:if test="${step == 'doTransition'}">
+			<tr>
+				<td class="text">请选择操作</td>
+				<td height="35"><span class="font_master">无可用操作</span></td>
+			</tr>
+	</c:if>
+	<%
+	} else {
+	%>
+	<tr>
+		<td class="text">请选择操作</td>
+		<td height="35"><span class="font_master">无可用操作</span></td>
+	</tr>
+	<%
+	}
+	%>
+</table>

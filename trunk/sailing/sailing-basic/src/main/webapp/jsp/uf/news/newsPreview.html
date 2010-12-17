@@ -1,0 +1,107 @@
+<%@ page language="java" contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<style type=text/css>
+<!--
+.closewin{	
+	background-color:#ffffff;
+	width:45px;
+	height:16px;
+    border:0px solid #fff;
+	cursor:pointer;
+}
+
+-->
+</style><SCRIPT src="../../jsp/uf/news/texteditor/common.js" type=text/javascript></SCRIPT>
+<SCRIPT src="../../jsp/uf/news/texteditor/bbcode.js" type=text/javascript></SCRIPT>
+<SCRIPT src="../../jsp/uf/news/texteditor/editor.js" type=text/javascript></SCRIPT>
+<script language=javascript type=text/javascript>
+<!--
+var newTitle = window.opener.document.getElementsByName("bean.title")[0].value;
+var newAuthor = window.opener.document.getElementsByName("bean.author")[0].value;
+var newSource = window.opener.document.getElementsByName("bean.source")[0].value;
+var selectColumn = window.opener.document.getElementsByName("tblUfColumnid")[0];
+var newColumn = window.opener.document.getElementsByName("temp.bean.tblUfColumn.id")[0].value;
+//var selectImptlvl = window.opener.document.getElementsByName("bean.imptLvl")[0];
+//var newImptlvl = selectImptlvl.options[selectImptlvl.selectedIndex].text; 
+var newContent = window.opener.document.getElementsByName("bean.content")[0].value;
+var newPublisher = "";//window.opener.document.getElementsByName("preview.publisherId")[0].value;
+var newPublishTime = window.opener.document.getElementsByName("preview.publishTime")[0].value;
+//alert(newContent);
+//newContent=bbcode2html(newContent);
+//newContent=newContent.replace(/\[/g,"<");
+//newContent=newContent.replace(/\]/g,">");
+//alert(newContent);
+//var newFeedbak;
+//if (window.opener.document.getElementsByName("checkFlg")[0].checked){
+//   newFeedbak = "是";
+//}else{
+//   newFeedbak = "否";
+//}
+document.write('<html><head>');
+document.write('<meta http-equiv=Content-Type content="text/html; charset=gb2312" />');
+document.write('<title>' + newTitle + '---Preview</title></head>');
+window.status = newTitle + '---Preview';
+document.write('<body>');
+document.write('<br>');
+document.write('<p><center><h1>' + newTitle + '</h1></center></p>');
+document.write('<center>所属栏目：' + newColumn + '&nbsp;');
+document.write('发布人：' + newPublisher + '&nbsp;');
+document.write('发布时间：' + newPublishTime + '&nbsp;');
+if (newAuthor != '') {
+	document.write('作者：' + newAuthor + '&nbsp;');
+}
+if (newSource != '') {
+	document.write('来源：' + newSource + '&nbsp;');
+}
+document.write('</center>');
+document.write('<hr>');
+document.write(newContent);
+document.write('</body>');
+document.write('</html>');
+window.focus();
+
+var timerID = null;
+var timerRunning = false;
+chin=new Array("日","一","二","三","四","五","六")
+function stopclock (){
+	if(timerRunning)
+		clearTimeout(timerID);
+	timerRunning = false;
+}
+function showtime () {
+	var now = new Date();
+	var hours = now.getHours();
+	var minutes = now.getMinutes();
+	var seconds = now.getSeconds()
+	var day=now.getDay()
+	var date=now.getDate()
+	var month=now.getMonth()
+	var year=now.getYear()
+	var second=now.getSeconds()
+	var riqi=(month+1)+"月"+date+"日"
+	var xingqi="星期"+chin[day]
+	var nian=(year)+"年"
+	var timeValue = "" 
+	timeValue +="现在时间是："
+	timeValue +=nian
+	timeValue +=" "
+	timeValue +=riqi+" "
+	timeValue +=" "
+	timeValue += (hours >= 12) ? "下午" : "上午"
+	timeValue +=" "
+	timeValue +=((hours >12) ? hours -12 :hours)
+	timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+	timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+	timeValue +=" "
+	timeValue +=xingqi+" "
+	window.status = newTitle + '---Preview---' + timeValue;
+	document.title = window.status;
+	timerID = setTimeout("showtime()",1000);
+	timerRunning = true;
+}
+function startclock () {
+	stopclock();
+	showtime();
+}
+startclock();
+-->
+</script>

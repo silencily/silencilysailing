@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="gb2312"?>
+<layout>
+  <cell id="1" name="工作负责人开票" type="Step"  x="100" y="100"/> 
+  
+  <cell id="2" name="签发人审核签名" type="Step"  x="250" y="100"/> 
+  
+  <cell id="3" name="接票人审核签名" type="Step"  x="400" y="100"/> 
+  
+  <cell id="4" name="许可人补充安全措施" type="Step"  x="550" y="100"/>  
+  
+  <cell id="5" name="值班负责人" type="Step"  x="700" y="100"/> 
+  
+  <cell id="6" name="值长批准工作时间" type="Step"  x="850" y="100"/> 
+  
+  <cell id="7" name="开工许可人签字" type="Step"  x="1000" y="100"/> 
+  
+  <cell id="8" name="开工工作负责人签字" type="Step"  x="1000" y="300"/>  
+  
+  <cell id="9" name="完工负责人签名" type="Step"  x="850" y="300"/> 
+  
+  <cell id="10" name="完工值班负责人" type="Step"  x="700" y="300"/> 
+  
+  <cell id="11" name="完工许可人签名" type="Step"  x="550" y="300"/> 
+  
+  <cell id="12" name="负责人变更-工作票签发人" type="Step"  x="400" y="300"/>  
+  
+  <cell id="13" name="负责人变更-值长或值班负责人签字" type="Step"  x="250" y="300"/> 
+  
+  <cell id="14" name="延期-工作负责人签字" type="Step"  x="100" y="300"/> 
+  
+  <cell id="15" name="延期-值长或值班负责人签字" type="Step"  x="100" y="500"/> 
+  
+  <cell id="16" name="许可人加盖执行章" type="Step"  x="550" y="500"/>  
+  
+  <cell id="17" name="负责人汇报工作" type="Step"  x="700" y="500"/> 
+  
+  <cell id="18" name="签发人终结工作" type="Step"  x="850" y="500"/> 
+  
+  <cell id="99" name="结束" type="Step"  x="1000" y="500"/> 
+   
+  <action startId="3" nextId="1" name="" type="action" points="430,85 430,60 140,60 140,85"/>
+  
+  <action startId="2" nextId="1" name="" type="action" points="230,115 175,115"/>
+  
+  <action startId="4" nextId="1" name="" type="action" points="580,85 580,40 130,40 130,85"/> 
+  
+  <action startId="5" nextId="1" name="" type="action" points="720,135 720,175 130,175 130,140"/>
+  
+  <action startId="6" nextId="1" name="" type="action" points="880,135 880,160 140,160 140,140"/>
+  
+  <action startId="7" nextId="6" name="" type="action" points="980,115 925,115"/>
+  
+  <action startId="6" nextId="8" name="" type="action" points="890,135 890,200 1015,200 1015,280"/>
+  
+  <action startId="8" nextId="6" name="" type="action" points="1075,305 1100,305 1100,60 880,60 880,80"/>
+  
+  <action startId="9" nextId="12" name="" type="action" points="880,280 880,250 430,250 430,280"/>
+  
+  <action startId="9" nextId="14" name="" type="action" points="870,280 870,240 130,240 130,280"/>
+  
+  <action startId="10" nextId="9" name="" type="action" points="775,315 830,315"/>
+  
+  <action startId="11" nextId="9" name="" type="action" points="590,340 590,370 860,370 860,340"/>
+  
+  <action startId="12" nextId="9" name="" type="action" points="420,280 420,260 890,260 890,280"/>
+  
+  <action startId="13" nextId="9" name="" type="action" points="280,340 280,360 870,360 870,340"/>
+  
+  <action startId="14" nextId="9" name="" type="action" points="140,340 140,380 880,380 880,340"/>
+  
+  <action startId="13" nextId="12" name="" type="action" points="325,315 380,315"/>
+  
+  <action startId="15" nextId="9" name="" type="action" points="140,480 140,400 890,400 890,340"/>
+  
+  <action startId="15" nextId="14" name="" type="action" points="110,480 110,340"/>
+  
+  <action startId="18" nextId="17" name="" type="action" points="830,515 775,515"/>
+  
+</layout>

@@ -1,0 +1,38 @@
+<!-- start inserted by wangcc 20080305 -->
+<script language="javascript">
+var stringUtils = {};
+stringUtils.isBlank = function(str){
+   if ((str == null)||(str=="")||(str.length == 0)){
+      return true;
+   }
+   return false;
+}
+stringUtils.isNotBlank = function(str){
+   return (!stringUtils.isBlank(str)); 
+}
+function   getUrlParameter(asName){   
+var   lsURL=window.location.href;
+   loU   =   lsURL.split("?");   
+   if   (loU.length>1){   
+       var   loallPm   =   loU[1].split("&");  
+       for   (var   i=0;   i<loallPm.length;   i++){   
+          var   loPm   =   loallPm[i].split("=");   
+          if   (loPm[0]==asName){   
+             if   (loPm.length>1){   
+                  return   loPm[1];   
+             }else{   
+                  return   "";   
+             }   
+          }   
+        }   
+    }   
+    return   null;   
+ } 	  
+ /*
+var woid = getUrlParameter("woid");
+if (stringUtils.isNotBlank(woid)){
+    document.getElementsByName("oid")[0].value = woid;
+}	
+*/  
+</script>
+<!-- end inserted by wangcc 20080306 -->

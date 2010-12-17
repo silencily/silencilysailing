@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="security_user" name="net.silencily.sailing.security.entity.User">
+    <id length="32" unsaved-value="null" name="id">
+      <generator class="uuid.hex"/>
+    </id>
+    <version unsaved-value="null" name="version"/>
+    <property name="username" length="50" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType" unique="true"/>
+    <property name="password" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType"/>
+    <property name="accountNonExpired"/>
+    <property name="accountNonLocked"/>
+    <property name="credentialsNonExpired" column="credentialsNonExpired"/>
+    <property name="enabled"/>
+    <property name="chineseName" length="100" type="net.silencily.sailing.framework.persistent.hibernate3.type.CStringType" column="chinese_name"/>
+    <set table="security_user_role" lazy="true" inverse="false" cascade="save-update" name="roles">
+      <key column="user_id"/>
+      <many-to-many column="role_id" class="net.silencily.sailing.security.entity.Role"/>
+    </set>
+    <set table="security_user_prop" lazy="true" inverse="false" cascade="all" name="userProps">
+      <key column="user_id"/>
+      <one-to-many class="net.silencily.sailing.security.entity.UserProp"/>
+    </set>
+    <many-to-one column="organizationId" name="organization"/>
+  </class>
+</hibernate-mapping>
