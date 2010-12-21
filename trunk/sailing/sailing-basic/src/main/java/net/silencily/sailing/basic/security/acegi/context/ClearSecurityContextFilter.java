@@ -1,7 +1,7 @@
 /*
- * Copyright 2005-2010 the original author or authors.
+ * Copyright 2010-2011 the original author or authors.
  * 
- *      http://www.coheg.com.cn
+ *      http://www.silencily.net
  *
  * Project security
  */
