@@ -1,0 +1,1 @@
+SilencilySailing is the first customized code project of silencily,so named sailing.It's a web framework including basic system management.It's implemented in MVC model,dependent on struts,spring,hibernate,osworkflow and others.Enterprises can construct business webapp belong themselves easily and quickly by SilencilySailing.
